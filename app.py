@@ -3,16 +3,22 @@ import pandas as pd
 import plotly.express as px
 
 # Título del dashboard
-st.title("Dashboard con carga de archivos")
+st.title("Dashboard con múltiples visualizaciones")
 
-# Cargar archivo CSV
-uploaded_file = st.file_uploader("Sube un archivo CSV", type=["csv"])
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-    st.write("Vista previa de los datos:")
-    st.write(df.head())
+# Cargar datos
+df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/tips.csv")
 
-    # Gráfico de dispersión
-    st.header("Gráfico de dispersión")
-    fig = px.scatter(df, x=df.columns[0], y=df.columns[1])
-    st.plotly_chart(fig)
+# Gráfico de barras
+st.header("Gráfico de barras")
+fig1 = px.bar(df, x="day", y="total_bill", color="sex", barmode="group")
+st.plotly_chart(fig1)
+
+# Gráfico de líneas
+st.header("Gráfico de líneas")
+fig2 = px.line(df, x="day", y="total_bill", color="sex")
+st.plotly_chart(fig2)
+
+# Histograma
+st.header("Histograma")
+fig3 = px.histogram(df, x="total_bill", color="sex")
+st.plotly_chart(fig3)
