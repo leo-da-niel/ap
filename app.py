@@ -3,17 +3,16 @@ import pandas as pd
 import plotly.express as px
 
 # Título del dashboard
-st.title("Dashboard básico con Streamlit")
+st.title("Dashboard con carga de archivos")
 
-# Cargar datos
-df = pd.read_csv("https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv")
+# Cargar archivo CSV
+uploaded_file = st.file_uploader("Sube un archivo CSV", type=["csv"])
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+    st.write("Vista previa de los datos:")
+    st.write(df.head())
 
-# Selector de año
-year = st.slider("Selecciona un año", int(df['year'].min()), int(df['year'].max()))
-
-# Filtrar datos por año
-filtered_df = df[df['year'] == year]
-
-# Gráfico de dispersión interactivo
-fig = px.scatter(filtered_df, x="gdpPercap", y="lifeExp", size="pop", color="continent", hover_name="country")
-st.plotly_chart(fig)
+    # Gráfico de dispersión
+    st.header("Gráfico de dispersión")
+    fig = px.scatter(df, x=df.columns[0], y=df.columns[1])
+    st.plotly_chart(fig)
