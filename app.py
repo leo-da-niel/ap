@@ -69,10 +69,10 @@ tab1, tab2, tab3 = st.tabs(["Resumen de licitación", "Oferta", "Demanda"])
 
 # Pestaña 1: Resumen de licitación
 with tab1:
-    selected_status = st.selectbox("Ingrese el estatus", list(status_options.keys()))
+    selected_status = st.selectbox("Ingrese el estatus", list(status_options.keys()), key="resumen_status")
     stat = status_options[selected_status]
 
-    selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()))
+    selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="resumen_type")
     ty = type_options[selected_type]
 
     # Crear un contenedor para el recuadro
@@ -88,7 +88,7 @@ with tab1:
         col6.metric("SIN OFERTA%", f"{so}")
         col7.metric("SIMULTÁNEAS", f"{absim}")
 
-    clave_input = st.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
+    clave_input = st.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()), key="resumen_clave")
     cl = [s.strip() for s in clave_input.split(',')]
 
     # Mostrar gráficos 
@@ -100,13 +100,13 @@ with tab1:
 
 # Pestaña 2: Oferta
 with tab2:
-    clave_input = st.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
+    clave_input = st.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()), key="oferta_clave")
     cl = [s.strip() for s in clave_input.split(',')]
 
-    selected_proveedor = st.selectbox("Ingrese el proveedor", list(proveedor_options.keys()))
+    selected_proveedor = st.selectbox("Ingrese el proveedor", list(proveedor_options.keys()), key="oferta_proveedor")
     prov = proveedor_options[selected_proveedor]
 
-    selected_status = st.selectbox("Ingrese el estatus", list(status_options.keys()))
+    selected_status = st.selectbox("Ingrese el estatus", list(status_options.keys()), key="oferta_status")
     stat = status_options[selected_status]
 
     # Mostrar gráficos específicos de la oferta
@@ -115,30 +115,28 @@ with tab2:
 
 # Pestaña 3: Demanda
 with tab3:
-
-    selected_instituto = st.sidebar.selectbox("Ingrese el Instituto:", list(instituto_options.keys()))
+    selected_instituto = st.selectbox("Ingrese el Instituto:", list(instituto_options.keys()), key="demanda_instituto")
     inst = instituto_options[selected_instituto]
 
-    clave_input = st.sidebar.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
+    clave_input = st.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()), key="demanda_clave")
     cl = [s.strip() for s in clave_input.split(',')]
-    
-    selected_status = st.selectbox("Ingrese el estatus", list(status_options.keys()))
+
+    selected_status = st.selectbox("Ingrese el estatus", list(status_options.keys()), key="demanda_status")
     stat = status_options[selected_status]
 
-    selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()))
+    selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="demanda_type")
     ty = type_options[selected_type]
 
     # Mostrar gráficos específicos de la demanda
     st.plotly_chart(fig_histogram_demanda, key="demanda_histogram_demanda")
     st.plotly_chart(fig_pie_demanda, key="demanda_pie_demanda")
 
-    
     col4, col5, col6, col7 = st.columns(4)
     col4.metric("ADJUDICADAS", f"{adj}")
     col5.metric("SIN OFERTA%", f"{so}")
     col6.metric("DESIERTAS", f"{des}")
     col7.metric("SIMULTÁNEAS", f"{absim}")
-    
+
     # Mostrar gráficos interactivos
     st.plotly_chart(fig_histogram_demanda, key="demanda_histogram")
     st.plotly_chart(fig_pie_demanda, key="demanda_pie")
