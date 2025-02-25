@@ -30,15 +30,13 @@ st.set_page_config(page_title="Dashboard", layout="wide")
 # Incluir imagen como encabezado
 st.image("header.png", use_container_width=True)
 
-
-# Entrada de símbolos y pesos
+# Opciones
 clave_options = {
     "a": "a",
     "b": "b",
     "c": "c",
     "d": "d"
 }
-
 
 instituto_options = {
     "imss": "imss",
@@ -61,25 +59,21 @@ status_options = {
     "Sin Oferta": "sin oferta"
 }
 
-
 type_options = {
     "Medicamento": "Medicamento",
     "Material de Curación": "Material de Curación"
 }
-
 
 # Pestañas
 tab1, tab2, tab3 = st.tabs(["Resumen de licitación", "Oferta", "Demanda"])
 
 # Pestaña 1: Resumen de licitación
 with tab1:
-
-    selected_status = st.sidebar.selectbox("Ingrese el estatus", list(status_options.keys()))
+    selected_status = st.selectbox("Ingrese el estatus", list(status_options.keys()))
     stat = status_options[selected_status]
 
-    selected_type = st.sidebar.selectbox("Ingrese el tipo de clave", list(type_options.keys()))
+    selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()))
     ty = type_options[selected_type]
-
 
     # Crear un contenedor para el recuadro
     with st.container():
@@ -94,7 +88,7 @@ with tab1:
         col6.metric("SIN OFERTA%", f"{so}")
         col7.metric("SIMULTÁNEAS", f"{absim}")
 
-    clave_input = st.sidebar.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
+    clave_input = st.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
     cl = [s.strip() for s in clave_input.split(',')]
 
     # Mostrar gráficos 
@@ -106,46 +100,37 @@ with tab1:
 
 # Pestaña 2: Oferta
 with tab2:
-    clave_input = st.sidebar.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
+    clave_input = st.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
     cl = [s.strip() for s in clave_input.split(',')]
 
-    selected_proveedor = st.sidebar.selectbox("Ingrese el proveedor", list(proveedor_options.keys()))
+    selected_proveedor = st.selectbox("Ingrese el proveedor", list(proveedor_options.keys()))
     prov = proveedor_options[selected_proveedor]
 
-    selected_status = st.sidebar.selectbox("Ingrese el estatus", list(status_options.keys()))
+    selected_status = st.selectbox("Ingrese el estatus", list(status_options.keys()))
     stat = status_options[selected_status]
 
-    selected_type = st.sidebar.selectbox("Ingrese el tipo de clave", list(type_options.keys()))
-    ty = type_options[selected_type]
-
-    
-    col1, col2, col3 = st.columns(3)
-    col1.metric("TOTAL DE PROPUESTAS", f"{prop}")
-    col2.metric("OFERTAS PARA ANÁLISIS", f"{of}")
-    col3.metric("PROPUESTAS EFECTIVAS", f"{efect}")
-    
-    st.header("Oferta")
-    st.write(oferta.head())
-    
-    # Mostrar gráficos interactivos
-    st.plotly_chart(fig_histogram_oferta, key="oferta_histogram")
-    st.plotly_chart(fig_pie_oferta, key="oferta_pie")
-    st.plotly_chart(fig_hist_of_ad, key="oferta_hist_of_ad")
+    # Mostrar gráficos específicos de la oferta
+    st.plotly_chart(fig_histogram_oferta, key="oferta_histogram_oferta")
+    st.plotly_chart(fig_pie_oferta, key="oferta_pie_oferta")
 
 # Pestaña 3: Demanda
 with tab3:
 
-    clave_input = st.sidebar.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
-    cl = [s.strip() for s in clave_input.split(',')]
-    
     selected_instituto = st.sidebar.selectbox("Ingrese el Instituto:", list(instituto_options.keys()))
     inst = instituto_options[selected_instituto]
 
-    selected_status = st.sidebar.selectbox("Ingrese el estatus", list(status_options.keys()))
+    clave_input = st.sidebar.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
+    cl = [s.strip() for s in clave_input.split(',')]
+    
+    selected_status = st.selectbox("Ingrese el estatus", list(status_options.keys()))
     stat = status_options[selected_status]
 
-    selected_type = st.sidebar.selectbox("Ingrese el tipo de clave", list(type_options.keys()))
+    selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()))
     ty = type_options[selected_type]
+
+    # Mostrar gráficos específicos de la demanda
+    st.plotly_chart(fig_histogram_demanda, key="demanda_histogram_demanda")
+    st.plotly_chart(fig_pie_demanda, key="demanda_pie_demanda")
 
     
     col4, col5, col6, col7 = st.columns(4)
