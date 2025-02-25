@@ -73,8 +73,6 @@ tab1, tab2, tab3 = st.tabs(["Resumen de licitación", "Oferta", "Demanda"])
 
 # Pestaña 1: Resumen de licitación
 with tab1:
-    st.header("Resumen de licitación")
-    selected_asset = st.selectbox("Seleccione un activo para analizar:", simbolos)
 
     selected_status = st.sidebar.selectbox("Ingrese el estatus", list(status_options.keys()))
     stat = status_options[selected_status]
