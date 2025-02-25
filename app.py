@@ -81,7 +81,7 @@ tab1, tab2, tab3 = st.tabs(["Resumen de licitación", "Oferta", "Demanda"])
 # Pestaña 1: Resumen de licitación
 with tab1:
     st.header("Resumen de licitación")
-
+    selected_asset = st.selectbox("Seleccione un activo para analizar:", simbolos)
     # Crear un contenedor para el recuadro
     with st.container():
         col1, col2, col3, col4 = st.columns(4)
