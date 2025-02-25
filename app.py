@@ -30,7 +30,7 @@ st.set_page_config(page_title="Dashboard", layout="wide")
 # Incluir imagen como encabezado
 st.image("header.png", use_container_width=True)
 
-st.sidebar.title("Ingrese la Clave, Instituto o Proveedor")
+
 # Entrada de símbolos y pesos
 clave_options = {
     "a": "a",
@@ -38,8 +38,7 @@ clave_options = {
     "c": "c",
     "d": "d"
 }
-clave_input = st.sidebar.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
-cl = [s.strip() for s in clave_input.split(',')]
+
 
 instituto_options = {
     "imss": "imss",
@@ -47,8 +46,6 @@ instituto_options = {
     "issste": "issste",
     "pemex": "pemex"
 }
-selected_instituto = st.sidebar.selectbox("Ingrese el Instituto:", list(instituto_options.keys()))
-inst = instituto_options[selected_instituto]
 
 proveedor_options = {
     "w": "w",
@@ -56,8 +53,6 @@ proveedor_options = {
     "y": "y",
     "z": "z"
 }
-selected_proveedor = st.sidebar.selectbox("Ingrese el proveedor", list(proveedor_options.keys()))
-prov = proveedor_options[selected_proveedor]
 
 status_options = {
     "Desiertas": "desierta",
@@ -65,15 +60,13 @@ status_options = {
     "Abastecimiento Simultáneo": "simultáneo",
     "Sin Oferta": "sin oferta"
 }
-selected_status = st.sidebar.selectbox("Ingrese el estatus", list(status_options.keys()))
-stat = status_options[selected_status]
+
 
 type_options = {
     "Medicamento": "Medicamento",
     "Material de Curación": "Material de Curación"
 }
-selected_type = st.sidebar.selectbox("Ingrese el tipo de clave", list(type_options.keys()))
-ty = type_options[selected_type]
+
 
 # Pestañas
 tab1, tab2, tab3 = st.tabs(["Resumen de licitación", "Oferta", "Demanda"])
@@ -82,6 +75,14 @@ tab1, tab2, tab3 = st.tabs(["Resumen de licitación", "Oferta", "Demanda"])
 with tab1:
     st.header("Resumen de licitación")
     selected_asset = st.selectbox("Seleccione un activo para analizar:", simbolos)
+
+    selected_status = st.sidebar.selectbox("Ingrese el estatus", list(status_options.keys()))
+    stat = status_options[selected_status]
+
+    selected_type = st.sidebar.selectbox("Ingrese el tipo de clave", list(type_options.keys()))
+    ty = type_options[selected_type]
+
+
     # Crear un contenedor para el recuadro
     with st.container():
         col1, col2, col3, col4 = st.columns(4)
@@ -95,13 +96,8 @@ with tab1:
         col6.metric("SIN OFERTA%", f"{so}")
         col7.metric("SIMULTÁNEAS", f"{absim}")
 
-    # Crear un DataFrame con la información
-    resumen_data = {
-        "Métrica": ["TOTAL DE PROPUESTAS", "OFERTAS PARA ANÁLISIS", "ADJUDICADAS", "DESIERTAS", "PROPUESTAS EFECTIVAS", "SIN OFERTA%", "SIMULTÁNEAS"],
-        "Valor": [prop, of, adj, des, efect, so, absim]
-    }
-    resumen_df = pd.DataFrame(resumen_data)
-    st.dataframe(resumen_df.style.format({"Valor": "{:.0f}"}))
+    clave_input = st.sidebar.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
+    cl = [s.strip() for s in clave_input.split(',')]
 
     # Mostrar gráficos 
     st.plotly_chart(fig_histogram_oferta, key="resumen_histogram_oferta")
@@ -112,6 +108,19 @@ with tab1:
 
 # Pestaña 2: Oferta
 with tab2:
+    clave_input = st.sidebar.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
+    cl = [s.strip() for s in clave_input.split(',')]
+
+    selected_proveedor = st.sidebar.selectbox("Ingrese el proveedor", list(proveedor_options.keys()))
+    prov = proveedor_options[selected_proveedor]
+
+    selected_status = st.sidebar.selectbox("Ingrese el estatus", list(status_options.keys()))
+    stat = status_options[selected_status]
+
+    selected_type = st.sidebar.selectbox("Ingrese el tipo de clave", list(type_options.keys()))
+    ty = type_options[selected_type]
+
+    
     col1, col2, col3 = st.columns(3)
     col1.metric("TOTAL DE PROPUESTAS", f"{prop}")
     col2.metric("OFERTAS PARA ANÁLISIS", f"{of}")
@@ -127,6 +136,20 @@ with tab2:
 
 # Pestaña 3: Demanda
 with tab3:
+
+    clave_input = st.sidebar.selectbox("Ingrese la clave o claves separadas por coma", list(clave_options.keys()))
+    cl = [s.strip() for s in clave_input.split(',')]
+    
+    selected_instituto = st.sidebar.selectbox("Ingrese el Instituto:", list(instituto_options.keys()))
+    inst = instituto_options[selected_instituto]
+
+    selected_status = st.sidebar.selectbox("Ingrese el estatus", list(status_options.keys()))
+    stat = status_options[selected_status]
+
+    selected_type = st.sidebar.selectbox("Ingrese el tipo de clave", list(type_options.keys()))
+    ty = type_options[selected_type]
+
+    
     col4, col5, col6, col7 = st.columns(4)
     col4.metric("ADJUDICADAS", f"{adj}")
     col5.metric("SIN OFERTA%", f"{so}")
