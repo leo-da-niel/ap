@@ -5,6 +5,7 @@ import plotly.express as px  # Importar plotly para los gráficos interactivos
 # Leer datos
 oferta = pd.read_csv("dash.csv", encoding='latin-1', index_col='propuesta')
 demanda = pd.read_csv("board.csv", encoding='latin-1', index_col='partida')
+#df = pd.read_excel('inst.xlsx', index_col = '#')
 
 # Variables
 prop = oferta['clave'].nunique()
