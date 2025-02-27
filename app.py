@@ -74,7 +74,7 @@ type_options = {
 }
 
 
-    selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options))
+    selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options).keys(), key="resumen_abasto")
     abastecimiento = abasto_options[selected_abasto]
 
     selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="resumen_type")
