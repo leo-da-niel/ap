@@ -73,11 +73,7 @@ type_options = {
     "Material de Curación": material_curacion
 }
 
-# Pestañas
-tab1= st.tabs(["Claves"])
 
-# Pestaña 1: Resumen de licitación
-with tab1:
     selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="resumen_abasto")
     abastecimiento = abasto_options[selected_abasto]
 
