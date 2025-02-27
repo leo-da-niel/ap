@@ -22,8 +22,7 @@ def crear_pie(data):
     return px.pie(data, names='Tipo', color='Tipo', color_discrete_map={'Medicamento': 'blue', 'Material de Curación': 'red'})
 def crear_(data):
     data['Tipo'] = data['ABASTO'].apply(lambda x: 'Abastecimiento único' if x ==1 else 'Abastecimiento simultáneo')
-    return px.bar(data, names='Tipo', color='Tipo', color_discrete_map={'Abastecimiento único': 'green', 'Abastecimiento simultáneo': 'yellow'})x
-    fig1 = px   .(df, x="day", y="total_bill", color="sex", barmode="group")
+    return px.bar(data, names='Tipo', color='Tipo', color_discrete_map={'Abastecimiento único': 'green', 'Abastecimiento simultáneo': 'yellow'})
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
