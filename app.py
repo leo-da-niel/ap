@@ -18,26 +18,14 @@ ab_u = unico['CLAVES'].unique()
 ab_s = simultaneo['CLAVES'].unique()
 
 # Definir funciones para crear gráficos
-
-#, names, title):
-#names, title)
-#, x, title):
-# , x, title)
-#, x, y, color):
-#, x, y, color)
 def crear_pie(data):
     return px.pie(data)
-
 
 def crear_hist(data):
     return px.histogram(data)
 
-
 def crear_líneas(data):
     return px.line(data)
-
-#def crear_pie_demanda(data):
- #   return px.pie(data, names='estatus', title='Distribución de Estatus de Demanda')
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
@@ -73,24 +61,21 @@ type_options = {
     "Material de Curación": material_curacion
 }
 
+selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="resumen_abasto")
+abastecimiento = abasto_options[selected_abasto]
 
-    selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options).keys(), key="resumen_abasto")
-    abastecimiento = abasto_options[selected_abasto]
+selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="resumen_type")
+ty = type_options[selected_type]
 
-    selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="resumen_type")
-    ty = type_options[selected_type]
+clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="resumen_clave")
+cl = [s.strip() for s in clave_input]
 
-    clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="resumen_clave")
-    cl = [s.strip() for s in clave_input]
+# Filtrar datos
+datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['ABASTO'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
 
-    # Filtrar datos
-    datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['ABASTO'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
-
-    # Crear un contenedor para el recuadro
-
-    # Mostrar gráficos 
-    st.plotly_chart(crear_hist(datos_filtrados), key="resumen_histogram_oferta")
-    st.plotly_chart(crear_pie(datos_filtrados), key="resumen_pie_oferta")
+# Mostrar gráficos 
+st.plotly_chart(crear_hist(datos_filtrados), key="resumen_histogram_oferta")
+st.plotly_chart(crear_pie(datos_filtrados), key="resumen_pie_oferta")
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
