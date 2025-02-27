@@ -21,6 +21,11 @@ def crear_pie(data):
     data['Tipo'] = data['CLAVES'].apply(lambda x: 'Medicamento' if int(x.split('.')[0]) < 60 else 'Material de Curación')
     return px.pie(data, names='Tipo', color='Tipo', color_discrete_map={'Medicamento': 'blue', 'Material de Curación': 'red'})
 
+def crear_hist(data):
+    data['Tipo'] = data['ABASTO'].apply(lambda x: 'Abastecimiento único' if x == 1 else 'Abastecimiento simultáneo')
+    return px.histogram(data, x='Tipo', color='Tipo', color_discrete_map={'Abastecimiento único': 'green', 'Abastecimiento simultáneo': 'yellow'})
+
+
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
 
@@ -55,6 +60,13 @@ type_options = {
     "Material de Curación": material_curacion
 }
 
+# Pestañas
+tab1, tab2 = st.tabs(["Adjudicación Directa", "Institutos"])
+
+# Pestaña 1
+with tab1:
+    st.header("Resumen de Adjudicación Directa")
+
 selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="resumen_abasto")
 abastecimiento = abasto_options[selected_abasto]
 
@@ -67,8 +79,41 @@ cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
 # Filtrar datos
 datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
 
-# Mostrar gráficos 
-st.plotly_chart(crear_pie(datos_filtrados), key="resumen_pie_oferta")
+# Crear columnas
+col1, col2 = st.columns(2)
+
+# Mostrar gráficos en columnas
+with col1:
+    st.plotly_chart(crear_pie(datos_filtrados), key="resumen_pie_oferta")
+
+with col2:
+    st.plotly_chart(crear_hist(datos_filtrados), key="resumen_hist_oferta")
+
+# Pestaña 2
+with tab1:
+    st.header("CCINSHAE")
+
+selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="resumen_abasto")
+abastecimiento = abasto_options[selected_abasto]
+
+selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="resumen_type")
+ty = type_options[selected_type]
+
+clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="resumen_clave")
+cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
+
+# Filtrar datos
+datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
+
+# Crear columnas
+col1, col2 = st.columns(2)
+
+# Mostrar gráficos en columnas
+with col1:
+    st.plotly_chart(crear_pie(datos_filtrados), key="resumen_pie_oferta")
+
+with col2:
+    st.plotly_chart(crear_hist(datos_filtrados), key="resumen_hist_oferta")
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
