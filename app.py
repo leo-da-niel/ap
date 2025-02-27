@@ -133,21 +133,21 @@ with tab1:
     # Mostrar gráficos en columnas
     with col1:
         st.header("Tipo de Abastecimiento Bianual")
-        st.plotly_chart(crear_pie(datos_filtradosbi), key="resumen_pie_oferta")
+        st.plotly_chart(crear_pie(datos_filtradosbi), key="resumenbi_pie_oferta")
         st.header("Tipo de Clave Bianual")
-        st.plotly_chart(crear_hist(datos_filtradosbi), key="resumen_hist_oferta")
+        st.plotly_chart(crear_hist(datos_filtradosbi), key="resumenbi_hist_oferta")
     
     with col2:
         st.header("Tipo de Abastecimiento 2025")
-        st.plotly_chart(crear_pie(datos_filtrados25), key="resumen_pie_oferta")
+        st.plotly_chart(crear_pie(datos_filtrados25), key="resumen25_pie_oferta")
         st.header("Tipo de Clave 2025")
-        st.plotly_chart(crear_hist(datos_filtrados25), key="resumen_hist_oferta")
+        st.plotly_chart(crear_hist(datos_filtrados25), key="resumen25_hist_oferta")
 
     with col3:
         st.header("Tipo de Abastecimiento 2026")
-        st.plotly_chart(crear_pie(datos_filtrados26), key="resumen_pie_oferta")
+        st.plotly_chart(crear_pie(datos_filtrados26), key="resumen26_pie_oferta")
         st.header("Tipo de Clave 2026")
-        st.plotly_chart(crear_hist(datos_filtrados26), key="resumen_hist_oferta")
+        st.plotly_chart(crear_hist(datos_filtrados26), key="resumen26_hist_oferta")
 
 # Pestaña 2
 with tab2:
