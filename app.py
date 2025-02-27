@@ -128,7 +128,7 @@ with tab1:
     datos_filtrados26 = rooted26[(rooted26['CLAVES'].isin(cl)) & (rooted26['CLAVES'].isin(abastecimiento)) & (rooted26['CLAVES'].isin(ty))]
     
     # Crear columnas
-    col1, col2, col2 = st.columns(3)
+    col1, col2, col3 = st.columns(3)
     
     # Mostrar gráficos en columnas
     with col1:
