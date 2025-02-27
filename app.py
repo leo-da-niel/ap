@@ -10,7 +10,7 @@ df = pd.read_excel('inst.xlsx', index_col='#')
 proveedores_unicos = df['PROVEEDOR'].unique()
 claves_unicas = df['CLAVES'].unique()
 medicamentos = [clave for clave in claves_unicas if int(clave.split('.')[0]) < 60]
-material_curacion = [clave for clave en claves_unicas if int(clave.split('.')[0]) >= 60]
+material_curacion = [clave for clave in claves_unicas if int(clave.split('.')[0]) >= 60]
 unico = df[df['ABASTO'] == 1]
 simultaneo = df[df['ABASTO'] < 1]
 ab_u = unico['CLAVES'].unique()
@@ -41,7 +41,7 @@ instituto_options = {
     "CONASAMA": "CONASAMA",
     "PEMEX": "PEMEX"
 }
-proveedor_options = {proveedor: proveedor for proveedor en proveedores_unicos}
+proveedor_options = {proveedor: proveedor for proveedor in proveedores_unicos}
 
 abasto_options = {
     "General": claves_unicas,
