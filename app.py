@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
 import numpy as np
 
 # Leer datos
@@ -18,14 +17,8 @@ ab_u = unico['CLAVES'].unique()
 ab_s = simultaneo['CLAVES'].unique()
 
 # Definir funciones para crear gráficos
-def crear_pie(data):
-    return px.pie(data)
-
-def crear_hist(data):
-    return px.histogram(data)
-
-def crear_líneas(data):
-    return px.line(data)
+def crear_pie(data, column):
+    return px.pie(data, names=column)
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
@@ -68,14 +61,13 @@ selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys(
 ty = type_options[selected_type]
 
 clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="resumen_clave")
-cl = [s.strip() for s in clave_input]
+cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
 
 # Filtrar datos
-datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['ABASTO'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
+datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
 
 # Mostrar gráficos 
-#st.plotly_chart(crear_líneas(df[clave_input]), key="resumen_histogram_oferta")
-st.plotly_chart(crear_pie(abastecimiento[df]), key="resumen_pie_oferta")
+st.plotly_chart(crear_pie(datos_filtrados, 'CLAVES'), key="resumen_pie_oferta")
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
