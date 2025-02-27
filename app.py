@@ -20,6 +20,10 @@ ab_s = simultaneo['CLAVES'].unique()
 def crear_pie(data):
     data['Tipo'] = data['CLAVES'].apply(lambda x: 'Medicamento' if int(x.split('.')[0]) < 60 else 'Material de Curación')
     return px.pie(data, names='Tipo', color='Tipo', color_discrete_map={'Medicamento': 'blue', 'Material de Curación': 'red'})
+def crear_(data):
+    data['Tipo'] = data['ABASTO'].apply(lambda x: 'Abastecimiento único' if x ==1 else 'Abastecimiento simultáneo')
+    return px.bar(data, names='Tipo', color='Tipo', color_discrete_map={'Abastecimiento único': 'green', 'Abastecimiento simultáneo': 'yellow'})x
+    fig1 = px   .(df, x="day", y="total_bill", color="sex", barmode="group")
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
@@ -69,6 +73,7 @@ datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento
 
 # Mostrar gráficos 
 st.plotly_chart(crear_pie(datos_filtrados), key="resumen_pie_oferta")
+st.plotly_chart(crear_bar(datos_filtrados), key="resumen_pie_oferta")
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
