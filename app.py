@@ -9,8 +9,8 @@ df = pd.read_excel('inst.xlsx', index_col='#')
 # Variables
 proveedores_unicos = df['PROVEEDOR'].unique()
 claves_unicas = df['CLAVES'].unique()
-#medicamentos = [clave for clave in claves_unicas if int(clave.split('.')[0]) < 60]
-#material_curacion = [clave for clave in claves_unicas if int(clave.split('.')[0]) >= 60]
+medicamentos = [clave for clave in claves_unicas if int(clave.split('.')[0]) < 60]
+material_curacion = [clave for clave in claves_unicas if int(clave.split('.')[0]) >= 60]
 unico = df[df['ABASTO'] == 1]
 simultaneo = df[df['ABASTO'] < 1]
 ab_u = unico['CLAVES'].unique()
@@ -50,12 +50,9 @@ abasto_options = {
 }
 
 type_options = {
-    "General": "General",
-    #claves_unicas,
-    "Medicamento": "Medicamento",
-    #medicamentos,
-    "Material de Curación": "Material de Curación"
-    #material_curacion
+    "General": claves_unicas,
+    "Medicamento": medicamentos,
+    "Material de Curación": material_curacion
 }
 
 selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="resumen_abasto")
