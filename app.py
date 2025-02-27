@@ -74,8 +74,8 @@ cl = [s.strip() for s in clave_input]
 datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['ABASTO'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
 
 # Mostrar gráficos 
-st.plotly_chart(crear_líneas(datos_filtrados), key="resumen_histogram_oferta")
-st.plotly_chart(crear_pie(datos_filtrados), key="resumen_pie_oferta")
+#st.plotly_chart(crear_líneas(df[clave_input]), key="resumen_histogram_oferta")
+st.plotly_chart(crear_pie(abastecimiento[df]), key="resumen_pie_oferta")
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
