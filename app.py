@@ -6,12 +6,17 @@ import numpy as np
 # Leer datos
 df = pd.read_excel('inst.xlsx', index_col='#')
 
-# Variables
+# Tratamiento de datos
 dfroot = df[["CLAVES", "DESCRIPCIÓN", "PROVEEDOR", "PRECIO UNITARIO", "ABASTO", "MARCA"]]
 df5 = df[["IMSS_25", "IMSS BIENESTAR_25", "ISSSTE_25", "SEMAR_25", "CENAPRECE_25", "CENSIDA_25", "CNEGSR_25", "CONASAMA_25", "PEMEX_25"]]
 df6 = df[["IMSS_26", "IMSS BIENESTAR_26", "ISSSTE_26", "SEMAR_26", "CENAPRECE_26", "CENSIDA_26", "CNEGSR_26", "CONASAMA_26", "PEMEX_26"]]
 bi = df5.add(df6.values, fill_value=0)
 bi.columns = [col[:-1] + '5-26' for col in bi.columns]
+birooted = rooted(bi)
+rooted25 = rooted(df5)
+rooted26 = rooted(df6)
+
+# Variables
 proveedores_unicos = df['PROVEEDOR'].unique()
 claves_unicas = df['CLAVES'].unique()
 medicamentos = [clave for clave in claves_unicas if int(clave.split('.')[0]) < 60]
@@ -119,19 +124,31 @@ with tab1:
     cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
     
     # Filtrar datos
-    datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
+    datos_filtradosbi = birooted[(birootedi['CLAVES'].isin(cl)) & (birooted['CLAVES'].isin(abastecimiento)) & (birooted['CLAVES'].isin(ty))]
+    datos_filtrados25 = rooted25[(rooted25['CLAVES'].isin(cl)) & (rooted25['CLAVES'].isin(abastecimiento)) & (rooted25['CLAVES'].isin(ty))]
+    datos_filtrados26 = rooted26[(rooted26['CLAVES'].isin(cl)) & (rooted26['CLAVES'].isin(abastecimiento)) & (rooted26['CLAVES'].isin(ty))]
     
     # Crear columnas
-    col1, col2 = st.columns(2)
+    col1, col2, col2 = st.columns(3)
     
     # Mostrar gráficos en columnas
     with col1:
-        st.header("Tipo de Abastecimiento")
-        st.plotly_chart(crear_pie(datos_filtrados), key="resumen_pie_oferta")
+        st.header("Tipo de Abastecimiento Bianual")
+        st.plotly_chart(crear_pie(datos_filtradosbi), key="resumen_pie_oferta")
+        st.header("Tipo de Clave Bianual")
+        st.plotly_chart(crear_hist(datos_filtradosbi), key="resumen_hist_oferta")
     
     with col2:
-        st.header("Tipo de Clave")
-        st.plotly_chart(crear_hist(datos_filtrados), key="resumen_hist_oferta")
+        st.header("Tipo de Abastecimiento 2025")
+        st.plotly_chart(crear_pie(datos_filtrados25), key="resumen_pie_oferta")
+        st.header("Tipo de Clave 2025")
+        st.plotly_chart(crear_hist(datos_filtrados25), key="resumen_hist_oferta")
+
+    with col3:
+        st.header("Tipo de Abastecimiento 2026")
+        st.plotly_chart(crear_pie(datos_filtrados26), key="resumen_pie_oferta")
+        st.header("Tipo de Clave 2026")
+        st.plotly_chart(crear_hist(datos_filtrados26), key="resumen_hist_oferta")
 
 # Pestaña 2
 with tab2:
