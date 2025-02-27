@@ -20,7 +20,7 @@ ab_s = simultaneo['CLAVES'].unique()
 def crear_pie(data):
     data['Tipo'] = data['CLAVES'].apply(lambda x: 'Medicamento' if int(x.split('.')[0]) < 60 else 'Material de Curación')
     return px.pie(data, names='Tipo', color='Tipo', color_discrete_map={'Medicamento': 'blue', 'Material de Curación': 'red'})
-def crear_(data):
+def crear_bar(data):
     data['Tipo'] = data['ABASTO'].apply(lambda x: 'Abastecimiento único' if x ==1 else 'Abastecimiento simultáneo')
     return px.bar(data, names='Tipo', color='Tipo', color_discrete_map={'Abastecimiento único': 'green', 'Abastecimiento simultáneo': 'yellow'})
 
