@@ -90,16 +90,16 @@ with col2:
     st.plotly_chart(crear_hist(datos_filtrados), key="resumen_hist_oferta")
 
 # Pestaña 2
-with tab1:
+with tab2:
     st.header("CCINSHAE")
 
-selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="resumen_abasto")
+selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="instituto_abasto")
 abastecimiento = abasto_options[selected_abasto]
 
-selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="resumen_type")
+selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="instituto_type")
 ty = type_options[selected_type]
 
-clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="resumen_clave")
+clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="instituto_clave")
 cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
 
 # Filtrar datos
@@ -110,10 +110,10 @@ col1, col2 = st.columns(2)
 
 # Mostrar gráficos en columnas
 with col1:
-    st.plotly_chart(crear_pie(datos_filtrados), key="resumen_pie_oferta")
+    st.plotly_chart(crear_pie(datos_filtrados), key="instituto_pie_oferta")
 
 with col2:
-    st.plotly_chart(crear_hist(datos_filtrados), key="resumen_hist_oferta")
+    st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
