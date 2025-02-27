@@ -7,6 +7,11 @@ import numpy as np
 df = pd.read_excel('inst.xlsx', index_col='#')
 
 # Variables
+dfroot = df[["CLAVES", "DESCRIPCIÓN", "PROVEEDOR", "PRECIO UNITARIO", "ABASTO", "MARCA"]]
+df5 = df[["IMSS_25", "IMSS BIENESTAR_25", "ISSSTE_25", "SEMAR_25", "CENAPRECE_25", "CENSIDA_25", "CNEGSR_25", "CONASAMA_25", "PEMEX_25"]]
+df6 = df[["IMSS_26", "IMSS BIENESTAR_26", "ISSSTE_26", "SEMAR_26", "CENAPRECE_26", "CENSIDA_26", "CNEGSR_26", "CONASAMA_26", "PEMEX_26"]]
+bi = df5.add(df6.values, fill_value=0)
+bi.columns = [col[:-1] + '5-26' for col in bi.columns]
 proveedores_unicos = df['PROVEEDOR'].unique()
 claves_unicas = df['CLAVES'].unique()
 medicamentos = [clave for clave in claves_unicas if int(clave.split('.')[0]) < 60]
@@ -16,7 +21,19 @@ simultaneo = df[df['ABASTO'] < 1]
 ab_u = unico['CLAVES'].unique()
 ab_s = simultaneo['CLAVES'].unique()
 
-# Definir funciones para crear gráficos
+# Definimos funciones de Cálculo
+def calcular_monto(data):
+    data_monto = pd.DataFrame()
+    for col in data.columns:
+        data.loc[:, 'Monto ' + col] = data[col] * dfroot['PRECIO UNITARIO']
+        data_monto = pd.concat([data_monto, data[['Monto ' + col]]], axis=1)
+    return data_monto
+
+def rooted(data):
+    data_rooted = pd.concat([dfroot, data], axis=1)
+    return data_rooted
+
+# Definimos funciones para crear gráficos
 def crear_pie(data):
     data['Tipo'] = data['CLAVES'].apply(lambda x: 'Medicamento' if int(x.split('.')[0]) < 60 else 'Material de Curación')
     return px.pie(data, names='Tipo', color='Tipo', color_discrete_map={'Medicamento': 'blue', 'Material de Curación': 'red'})
@@ -25,6 +42,31 @@ def crear_hist(data):
     data['Tipo'] = data['ABASTO'].apply(lambda x: 'Abastecimiento único' if x == 1 else 'Abastecimiento simultáneo')
     return px.histogram(data, x='Tipo', color='Tipo', color_discrete_map={'Abastecimiento único': 'green', 'Abastecimiento simultáneo': 'yellow'})
 
+def visualMonto(data_inst, data):
+    data_grouped = data.groupby("CLAVES").sum().reset_index()
+
+    fig1 = px.line(data_grouped[data_grouped[data_inst] > 1000000], x="CLAVES", y=data_inst, title="CANTIDADES DEMANDADAS")
+    fig2 = px.line(data_grouped[(data_grouped[data_inst] > 50000) & (data_grouped[data_inst] < 1000000)], x="CLAVES", y=data_inst)
+    fig3 = px.line(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst)
+    fig4 = px.line(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst)
+    
+    fig1.show()
+    fig2.show()
+    fig3.show()
+    fig4.show()
+
+def visual(data_inst, data):
+    data_grouped = data.groupby("CLAVES").sum().reset_index()
+
+    fig1 = px.bar(data_grouped[data_grouped[data_inst] > 1000000], x="CLAVES", y=data_inst, title="CANTIDADES DEMANDADAS")
+    fig2 = px.bar(data_grouped[(data_grouped[data_inst] > 50000) & (data_grouped[data_inst] < 1000000)], x="CLAVES", y=data_inst)
+    fig3 = px.bar(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst)
+    fig4 = px.bar(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst)
+    
+    fig1.show()
+    fig2.show()
+    fig3.show()
+    fig4.show()
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
@@ -84,9 +126,11 @@ with tab1:
     
     # Mostrar gráficos en columnas
     with col1:
+        st.header("Tipo de Abastecimiento")
         st.plotly_chart(crear_pie(datos_filtrados), key="resumen_pie_oferta")
     
     with col2:
+        st.header("Tipo de Clave")
         st.plotly_chart(crear_hist(datos_filtrados), key="resumen_hist_oferta")
 
 # Pestaña 2
@@ -110,9 +154,12 @@ with tab2:
     
     # Mostrar gráficos en columnas
     with col1:
+        st.header("Tipo de Abastecimiento")
         st.plotly_chart(crear_pie(datos_filtrados), key="instituto_pie_oferta")
+        
     
     with col2:
+        st.header("Tipo de Clave")
         st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
 
 # Incluir imagen como pie de página
