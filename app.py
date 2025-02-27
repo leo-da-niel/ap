@@ -72,9 +72,9 @@ cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
 # Filtrar datos
 datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
 
-# Mostrar gráficos 
 st.plotly_chart(crear_pie(datos_filtrados), key="resumen_pie_oferta")
-st.plotly_chart(crear_hist(datos_filtrados), key="resumen_pie_oferta")
+st.plotly_chart(crear_hist(datos_filtrados), key="resumen_hist_oferta")
+
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
