@@ -12,9 +12,6 @@ df5 = df[["IMSS_25", "IMSS BIENESTAR_25", "ISSSTE_25", "SEMAR_25", "CENAPRECE_25
 df6 = df[["IMSS_26", "IMSS BIENESTAR_26", "ISSSTE_26", "SEMAR_26", "CENAPRECE_26", "CENSIDA_26", "CNEGSR_26", "CONASAMA_26", "PEMEX_26"]]
 bi = df5.add(df6.values, fill_value=0)
 bi.columns = [col[:-1] + '5-26' for col in bi.columns]
-birooted = rooted(bi)
-rooted25 = rooted(df5)
-rooted26 = rooted(df6)
 
 # Variables
 proveedores_unicos = df['PROVEEDOR'].unique()
@@ -106,7 +103,9 @@ type_options = {
     "Medicamento": medicamentos,
     "Material de Curación": material_curacion
 }
-
+birooted = rooted(bi)
+rooted25 = rooted(df5)
+rooted26 = rooted(df6)
 # Pestañas
 tab1, tab2 = st.tabs(["Adjudicación Directa", "Institutos"])
 
