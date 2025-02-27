@@ -123,7 +123,7 @@ with tab1:
     cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
     
     # Filtrar datos
-    datos_filtradosbi = birooted[(biroote['CLAVES'].isin(cl)) & (birooted['CLAVES'].isin(abastecimiento)) & (birooted['CLAVES'].isin(ty))]
+    datos_filtradosbi = birooted[(birooted['CLAVES'].isin(cl)) & (birooted['CLAVES'].isin(abastecimiento)) & (birooted['CLAVES'].isin(ty))]
     datos_filtrados25 = rooted25[(rooted25['CLAVES'].isin(cl)) & (rooted25['CLAVES'].isin(abastecimiento)) & (rooted25['CLAVES'].isin(ty))]
     datos_filtrados26 = rooted26[(rooted26['CLAVES'].isin(cl)) & (rooted26['CLAVES'].isin(abastecimiento)) & (rooted26['CLAVES'].isin(ty))]
     
