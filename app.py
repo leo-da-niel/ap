@@ -50,9 +50,12 @@ abasto_options = {
 }
 
 type_options = {
-    "General": claves_unicas,
-    "Medicamento": medicamentos,
-    "Material de Curación": material_curacion
+    "General": "General",
+    claves_unicas,
+    "Medicamento": "Medicamento",
+    medicamentos,
+    "Material de Curación": "Material de Curación"
+    material_curacion
 }
 
 selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="resumen_abasto")
