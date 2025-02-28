@@ -75,10 +75,8 @@ def visual(data_inst, data):
     fig3 = px.bar(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst)
     fig4 = px.bar(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst)
     
-    fig1.show()
-    fig2.show()
-    fig3.show()
-    fig4.show()
+    return [fig1, fig2, fig3, fig4]
+
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
@@ -201,7 +199,10 @@ with tab2:
         st.header("Tipo de Abastecimiento")
         st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
         
-    st.plotly_chart(visual("IMSS_25", datos_filtrados), key="instituto_cantidades")
+    figures = visual("IMSS_25", datos_filtrados)
+    for fig in figures:
+        st.plotly_chart(fig, key=f"fig_{figures.index(fig)}")
+
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
