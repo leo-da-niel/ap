@@ -194,7 +194,7 @@ with tab2:
     # Filtrar datos
     datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
     datas = rooted(datos_filtrados[inst+"_25"])
-    datasis = [datas["TOTAL"] !=0]
+    datasis = [datas["Total"] !=0]
     
     # Crear columnas
     col1, col2 = st.columns(2)
