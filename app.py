@@ -78,6 +78,9 @@ def visual(data_inst, data):
     return [fig1, fig2, fig3, fig4]
 
 
+
+
+
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
 
@@ -200,8 +203,10 @@ with tab2:
         st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
         
     figures = visual("IMSS_25", datos_filtrados)
-    for fig in figures:
-        st.plotly_chart(fig, key=f"fig_{figures.index(fig)}")
+    
+    # Usar un contador para claves únicas
+    for i, fig in enumerate(figures):
+        st.plotly_chart(fig, key=f"fig_{i}")
 
 
 # Incluir imagen como pie de página
