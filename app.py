@@ -175,7 +175,6 @@ with tab1:
         st.plotly_chart(crear_hist(datos_filtrados26), key="resumen26_hist_oferta")
 
 # Pestaña 2
-
 with tab2:
     st.header("CCINSHAE")
 
@@ -191,33 +190,32 @@ with tab2:
     selected_instituto = st.selectbox("Ingrese el Instituto:", list(instituto_options.keys()), key="demanda_instituto")
     inst = instituto_options[selected_instituto]
 
+    
     # Filtrar datos
     datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
+    datas = totales(datos_filtrados[[inst+"_25"]])
+    datasis = rooted(datas)
+    dat = datasis[datasis["TOTAL"] !=0]
     
-    # Verificar si hay datos después del filtrado
-    if datos_filtrados.empty:
-        st.warning("No hay datos disponibles para los filtros seleccionados.")
-    else:
-        datas = totales(datos_filtrados[[inst+"_25"]])
-        datasis = rooted(datas)
-        dat = datasis[datasis["TOTAL"] != 0]
+    # Crear columnas
+    col1, col2 = st.columns(2)
+    
+    # Mostrar gráficos en columnas
+    with col1:
+        st.header("Tipo de Clave")
+        st.plotly_chart(crear_pie(dat), key="instituto_pie_oferta")
         
-        # Crear columnas
-        col1, col2 = st.columns(2)
+    with col2:
+        st.header("Tipo de Abastecimiento")
+        st.plotly_chart(crear_hist(dat), key="instituto_hist_oferta")
         
-        # Mostrar gráficos en columnas
-        with col1:
-            st.header("Tipo de Clave")
-            st.plotly_chart(crear_pie(dat), key="instituto_pie_oferta")
-            
-        with col2:
-            st.header("Tipo de Abastecimiento")
-            st.plotly_chart(crear_hist(dat), key="instituto_hist_oferta")
-            
-        figures = visual("TOTAL", dat)
-        
-        # Usar un contador para claves únicas
-        for i, fig in enumerate(figures):
-            st.plotly_chart(fig, key=f"fig_{i}")
+    figures = visual("TOTAL", dat)
+    
+    # Usar un contador para claves únicas
+    for i, fig in enumerate(figures):
+        st.plotly_chart(fig, key=f"fig_{i}")
 
-        st.dataframe(dat)
+    st.dataframe(dat)
+
+# Incluir imagen como pie de página
+st.image("footer.png", use_container_width=True)
