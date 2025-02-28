@@ -117,9 +117,9 @@ bitrooted = rooted(bit)
 rooted25 = rooted(df25)
 rooted26 = rooted(df26)
 
-nzbitrooted = bitrooted[bitrooted[TOTAL !=0]]
-nzrooted25 = rooted25[rooted25[TOTAL !=0]]
-nzrooted26 = rooted26[rooted26[TOTAL !=0]]
+nzbitrooted = bitrooted[bitrooted["TOTAL"] !=0]
+nzrooted25 = rooted25[rooted25["TOTAL"] !=0]
+nzrooted26 = rooted26[rooted26["TOTAL"] !=0]
 
 # Pestañas
 tab1, tab2 = st.tabs(["Adjudicación Directa", "Institutos"])
