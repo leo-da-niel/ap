@@ -193,7 +193,7 @@ with tab2:
     
     # Filtrar datos
     datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
-    datas = totales(datos_filtrados[datos_filtrados[inst+"_25"]])
+    datas = totales([datos_filtrados[[inst+"_25"]])
     datasis = rooted(datas)
     dat = datasis[datasis["TOTAL"] !=0]
     
