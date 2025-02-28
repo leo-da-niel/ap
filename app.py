@@ -48,11 +48,11 @@ def grouping(data):
 # Definimos funciones para crear gráficos
 def crear_pie(data):
     data['Tipo'] = data['CLAVES'].apply(lambda x: 'Medicamento' if int(x.split('.')[0]) < 60 else 'Material de Curación')
-    return px.pie(data, names='Tipo', color='Tipo', color_discrete_map={'Medicamento': 'blue', 'Material de Curación': 'red'}, width=300, height=300)
+    return px.pie(data, names='Tipo', color='Tipo', color_discrete_map={'Medicamento': 'blue', 'Material de Curación': 'red'}, width=400, height=400)
 
 def crear_hist(data):
     data['Tipo'] = data['ABASTO'].apply(lambda x: 'Abastecimiento único' if x == 1 else 'Abastecimiento simultáneo')
-    return px.histogram(data, x='Tipo', color='Tipo', color_discrete_map={'Abastecimiento único': 'green', 'Abastecimiento simultáneo': 'yellow'}, width=300, height=300)
+    return px.histogram(data, x='Tipo', color='Tipo', color_discrete_map={'Abastecimiento único': 'green', 'Abastecimiento simultáneo': 'yellow'}, width=400, height=400)
 
 def visualMonto(data_inst, data):
     data_grouped = data.groupby("CLAVES").sum().reset_index()
@@ -208,6 +208,7 @@ with tab2:
     for i, fig in enumerate(figures):
         st.plotly_chart(fig, key=f"fig_{i}")
 
+    st.dataframe(datos_filtrados)
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
