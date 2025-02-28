@@ -193,7 +193,7 @@ with tab2:
     
     # Filtrar datos
     datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty)) & df[int+"_25"]]
-    #datas = rooted(datos_filtrados[int+"_25"])
+    #datas = rooted(datos_filtrados[inst+"_25"])
     
     # Crear columnas
     col1, col2 = st.columns(2)
