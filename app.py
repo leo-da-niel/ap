@@ -194,7 +194,8 @@ with tab2:
     # Filtrar datos
     datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
     datas = totales(datos_filtrados[inst+"_25"])
-    datasis = [datas["TOTAL"] !=0]
+    datasis = rooted(datas)
+    dat = datasis[datasis["TOTAL"] !=0]
     
     # Crear columnas
     col1, col2 = st.columns(2)
@@ -202,19 +203,19 @@ with tab2:
     # Mostrar gráficos en columnas
     with col1:
         st.header("Tipo de Clave")
-        st.plotly_chart(crear_pie(datasis), key="instituto_pie_oferta")
+        st.plotly_chart(crear_pie(dat), key="instituto_pie_oferta")
         
     with col2:
         st.header("Tipo de Abastecimiento")
-        st.plotly_chart(crear_hist(datasis), key="instituto_hist_oferta")
+        st.plotly_chart(crear_hist(dat), key="instituto_hist_oferta")
         
-    figures = visual(inst+"_25", datasis)
+    figures = visual(inst+"_25", dat)
     
     # Usar un contador para claves únicas
     for i, fig in enumerate(figures):
         st.plotly_chart(fig, key=f"fig_{i}")
 
-    st.dataframe(datasis)
+    st.dataframe(dat)
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
