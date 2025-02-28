@@ -34,7 +34,12 @@ def calcular_monto(data):
 def rooted(data):
     data_rooted = pd.concat([dfroot, data], axis=1)
     return data_rooted
-
+    
+def totales(data):
+    data_total = data.sum(axis=1)
+    data_total_df = pd.DataFrame(data_total, columns=['Total'])
+    return data_total_df
+    
 # Definimos funciones para crear gráficos
 def crear_pie(data):
     data['Tipo'] = data['CLAVES'].apply(lambda x: 'Medicamento' if int(x.split('.')[0]) < 60 else 'Material de Curación')
@@ -103,9 +108,14 @@ type_options = {
     "Medicamento": medicamentos,
     "Material de Curación": material_curacion
 }
-birooted = rooted(bi)
-rooted25 = rooted(df5)
-rooted26 = rooted(df6)
+
+df25 = pd.concat([df5, totales(df5)], axis=1)
+df26 = pd.concat([df6, totales(df6)], axis=1)
+bit  = pd.concat([bi, totales(bi)], axis=1)
+
+birooted = rooted(bit)
+rooted25 = rooted(df25)
+rooted26 = rooted(df26)
 # Pestañas
 tab1, tab2 = st.tabs(["Adjudicación Directa", "Institutos"])
 
@@ -177,6 +187,9 @@ with tab2:
     with col2:
         st.header("Tipo de Clave")
         st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
+
+    st.header("Tipo de Abastecimiento")
+    st.plotly_chart(crear_pie(datos_filtrados), key="instituto_pie_oferta")
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
