@@ -57,10 +57,10 @@ def crear_hist(data):
 def visualMonto(data_inst, data):
     data_grouped = data.groupby("CLAVES").sum().reset_index()
 
-    fig1 = px.line(data_grouped[data_grouped[data_inst] > 1000000], x="CLAVES", y=data_inst, title="CANTIDADES DEMANDADAS", width=800, height=400)
-    fig2 = px.line(data_grouped[(data_grouped[data_inst] > 50000) & (data_grouped[data_inst] < 1000000)], x="CLAVES", y=data_inst, width=800, height=400)
-    fig3 = px.line(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst, width=800, height=400)
-    fig4 = px.line(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst, width=800, height=400)
+    fig1 = px.line(data_grouped[data_grouped[data_inst] > 1000000], x="CLAVES", y=data_inst, title="CANTIDADES DEMANDADAS")
+    fig2 = px.line(data_grouped[(data_grouped[data_inst] > 50000) & (data_grouped[data_inst] < 1000000)], x="CLAVES", y=data_inst)
+    fig3 = px.line(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst)
+    fig4 = px.line(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst)
     
     fig1.show()
     fig2.show()
@@ -70,10 +70,10 @@ def visualMonto(data_inst, data):
 def visual(data_inst, data):
     data_grouped = data.groupby("CLAVES").sum().reset_index()
 
-    fig1 = px.bar(data_grouped[data_grouped[data_inst] > 1000000], x="CLAVES", y=data_inst, title="CANTIDADES DEMANDADAS", width=400, height=200)
-    fig2 = px.bar(data_grouped[(data_grouped[data_inst] > 50000) & (data_grouped[data_inst] < 1000000)], x="CLAVES", y=data_inst, width=400, height=200)
-    fig3 = px.bar(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst, width=400, height=200)
-    fig4 = px.bar(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst, width=400, height=200)
+    fig1 = px.bar(data_grouped[data_grouped[data_inst] > 1000000], x="CLAVES", y=data_inst, title="CANTIDADES DEMANDADAS")
+    fig2 = px.bar(data_grouped[(data_grouped[data_inst] > 50000) & (data_grouped[data_inst] < 1000000)], x="CLAVES", y=data_inst)
+    fig3 = px.bar(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst)
+    fig4 = px.bar(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst)
     
     return [fig1, fig2, fig3, fig4]
 
@@ -186,9 +186,14 @@ with tab2:
     
     clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="instituto_clave")
     cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
+
+    selected_instituto = st.selectbox("Ingrese el Instituto:", list(instituto_options.keys()), key="demanda_instituto")
+    inst = instituto_options[selected_instituto]
+
     
     # Filtrar datos
     datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
+    datas = rooted(datos_filtrados[int+"_25"])
     
     # Crear columnas
     col1, col2 = st.columns(2)
@@ -196,19 +201,19 @@ with tab2:
     # Mostrar gráficos en columnas
     with col1:
         st.header("Tipo de Clave")
-        st.plotly_chart(crear_pie(datos_filtrados), key="instituto_pie_oferta")
+        st.plotly_chart(crear_pie(datas), key="instituto_pie_oferta")
         
     with col2:
         st.header("Tipo de Abastecimiento")
-        st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
+        st.plotly_chart(crear_hist(datas), key="instituto_hist_oferta")
         
-    figures = visual("IMSS_25", datos_filtrados)
+    figures = visual("IMSS_25", datas)
     
     # Usar un contador para claves únicas
     for i, fig in enumerate(figures):
         st.plotly_chart(fig, key=f"fig_{i}")
 
-    st.dataframe(datos_filtrados)
+    st.dataframe(datas)
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
