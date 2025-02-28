@@ -175,6 +175,8 @@ with tab1:
         st.plotly_chart(crear_hist(datos_filtrados26), key="resumen26_hist_oferta")
 
 # Pestaña 2
+
+
 with tab2:
     st.header("CCINSHAE")
 
@@ -190,12 +192,11 @@ with tab2:
     selected_instituto = st.selectbox("Ingrese el Instituto:", list(instituto_options.keys()), key="demanda_instituto")
     inst = instituto_options[selected_instituto]
 
-    
     # Filtrar datos
     datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
     datas = totales(datos_filtrados[[inst+"_25"]])
     datasis = rooted(datas)
-    dat = datasis[datasis["TOTAL"] !=0]
+    dat = datasis[datasis["TOTAL"] != 0]
     
     # Crear columnas
     col1, col2 = st.columns(2)
@@ -216,6 +217,3 @@ with tab2:
         st.plotly_chart(fig, key=f"fig_{i}")
 
     st.dataframe(dat)
-
-# Incluir imagen como pie de página
-st.image("footer.png", use_container_width=True)
