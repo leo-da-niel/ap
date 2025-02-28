@@ -213,7 +213,7 @@ with tab2:
     for i, fig in enumerate(figures):
         st.plotly_chart(fig, key=f"fig_{i}")
 
-    st.dataframe(datos_filtrados)
+    st.dataframe(datas)
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
