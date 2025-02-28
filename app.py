@@ -96,7 +96,7 @@ instituto_options = {
     "ISSSTE": "ISSSTE",
     "SEMAR": "SEMAR",
     "CENAPRECE": "CENAPRECE",
-    "CENISDA": "CENISDA",
+    "CENSIDA": "CENSIDA",
     "CNEGRS": "CNEGRS",
     "CONASAMA": "CONASAMA",
     "PEMEX": "PEMEX"
