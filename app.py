@@ -192,8 +192,8 @@ with tab2:
 
     
     # Filtrar datos
-    datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty)) & df[inst+"_25"]]
-    #datas = rooted(datos_filtrados[inst+"_25"])
+    datos_filtrados = df[(df['CLAVES'].isin(cl)) & (df['CLAVES'].isin(abastecimiento)) & (df['CLAVES'].isin(ty))]
+    datas = rooted(datos_filtrados[inst+"_25"])
     
     # Crear columnas
     col1, col2 = st.columns(2)
@@ -201,13 +201,13 @@ with tab2:
     # Mostrar gráficos en columnas
     with col1:
         st.header("Tipo de Clave")
-        st.plotly_chart(crear_pie(datos_filtrados), key="instituto_pie_oferta")
+        st.plotly_chart(crear_pie(datas), key="instituto_pie_oferta")
         
     with col2:
         st.header("Tipo de Abastecimiento")
-        st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
+        st.plotly_chart(crear_hist(datas), key="instituto_hist_oferta")
         
-    figures = visual(inst+"_25", datos_filtrados)
+    figures = visual(inst+"_25", datas)
     
     # Usar un contador para claves únicas
     for i, fig in enumerate(figures):
