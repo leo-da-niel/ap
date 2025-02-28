@@ -37,7 +37,7 @@ def rooted(data):
     
 def totales(data):
     data_total = data.sum(axis=1)
-    data_total_df = pd.DataFrame(data_total, columns=['Total'])
+    data_total_df = pd.DataFrame(data_total, columns=['TOTAL'])
     return data_total_df
     
 # Definimos funciones para crear gráficos
@@ -113,9 +113,14 @@ df25 = pd.concat([df5, totales(df5)], axis=1)
 df26 = pd.concat([df6, totales(df6)], axis=1)
 bit  = pd.concat([bi, totales(bi)], axis=1)
 
-birooted = rooted(bit)
+bitrooted = rooted(bit)
 rooted25 = rooted(df25)
 rooted26 = rooted(df26)
+
+nzbitrooted = bitrooted[bitrooted[TOTAL !=0]]
+nzrooted25 = rooted25[rooted25[TOTAL !=0]]
+nzrooted26 = rooted26[rooted26[TOTAL !=0]]
+
 # Pestañas
 tab1, tab2 = st.tabs(["Adjudicación Directa", "Institutos"])
 
@@ -133,9 +138,9 @@ with tab1:
     cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
     
     # Filtrar datos
-    datos_filtradosbi = birooted[(birooted['CLAVES'].isin(cl)) & (birooted['CLAVES'].isin(abastecimiento)) & (birooted['CLAVES'].isin(ty))]
-    datos_filtrados25 = rooted25[(rooted25['CLAVES'].isin(cl)) & (rooted25['CLAVES'].isin(abastecimiento)) & (rooted25['CLAVES'].isin(ty))]
-    datos_filtrados26 = rooted26[(rooted26['CLAVES'].isin(cl)) & (rooted26['CLAVES'].isin(abastecimiento)) & (rooted26['CLAVES'].isin(ty))]
+    datos_filtradosbi = nzbirooted[(nzbirooted['CLAVES'].isin(cl)) & (nzbirooted['CLAVES'].isin(abastecimiento)) & (nzbirooted['CLAVES'].isin(ty))]
+    datos_filtrados25 = nzrooted25[(nzrooted25['CLAVES'].isin(cl)) & (nzrooted25['CLAVES'].isin(abastecimiento)) & (nzrooted25['CLAVES'].isin(ty))]
+    datos_filtrados26 = nzrooted26[(nzrooted26['CLAVES'].isin(cl)) & (nzrooted26['CLAVES'].isin(abastecimiento)) & (nzrooted26['CLAVES'].isin(ty))]
     
     # Crear columnas
     col1, col2, col3 = st.columns(3)
