@@ -197,11 +197,11 @@ with tab2:
         st.header("Tipo de Clave")
         st.plotly_chart(crear_pie(datos_filtrados), key="instituto_pie_oferta")
         
-    
     with col2:
         st.header("Tipo de Abastecimiento")
         st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
-
+        
+    st.plotly_chart(visual("IMSS_25", datos_filtrados), key="instituto_cantidades")
 
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
