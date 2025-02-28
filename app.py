@@ -128,7 +128,7 @@ nzrooted26 = rooted26[rooted26["TOTAL"] !=0]
 
 grnzbitrooted = grouping(nzbitrooted)
 grnzrooted25 = grouping(nzrooted25)
-grnzrooted25 = grouping(nzbitrooted)
+grnzrooted26 = grouping(nzrooted26)
 
 # Pestañas
 tab1, tab2 = st.tabs(["Adjudicación Directa", "Institutos"])
