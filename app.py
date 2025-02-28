@@ -97,7 +97,7 @@ instituto_options = {
     "SEMAR": "SEMAR",
     "CENAPRECE": "CENAPRECE",
     "CENSIDA": "CENSIDA",
-    "CNEGRS": "CNEGRS",
+    "CNEGSR": "CNEGSR",
     "CONASAMA": "CONASAMA",
     "PEMEX": "PEMEX"
 }
