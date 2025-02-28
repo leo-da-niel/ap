@@ -39,7 +39,12 @@ def totales(data):
     data_total = data.sum(axis=1)
     data_total_df = pd.DataFrame(data_total, columns=['TOTAL'])
     return data_total_df
-    
+
+def grouping(data):
+    data_grouped= data.groupby("CLAVES").sum().reset_index()
+    return data_grouped
+
+
 # Definimos funciones para crear gráficos
 def crear_pie(data):
     data['Tipo'] = data['CLAVES'].apply(lambda x: 'Medicamento' if int(x.split('.')[0]) < 60 else 'Material de Curación')
@@ -121,6 +126,10 @@ nzbitrooted = bitrooted[bitrooted["TOTAL"] !=0]
 nzrooted25 = rooted25[rooted25["TOTAL"] !=0]
 nzrooted26 = rooted26[rooted26["TOTAL"] !=0]
 
+grnzbitrooted = grouping(nzbitrooted)
+grnzrooted25 = grouping(nzrooted25)
+grnzrooted25 = grouping(nzbitrooted)
+
 # Pestañas
 tab1, tab2 = st.tabs(["Adjudicación Directa", "Institutos"])
 
@@ -138,9 +147,9 @@ with tab1:
     cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
     
     # Filtrar datos
-    datos_filtradosbi = nzbitrooted[(nzbitrooted['CLAVES'].isin(cl)) & (nzbitrooted['CLAVES'].isin(abastecimiento)) & (nzbitrooted['CLAVES'].isin(ty))]
-    datos_filtrados25 = nzrooted25[(nzrooted25['CLAVES'].isin(cl)) & (nzrooted25['CLAVES'].isin(abastecimiento)) & (nzrooted25['CLAVES'].isin(ty))]
-    datos_filtrados26 = nzrooted26[(nzrooted26['CLAVES'].isin(cl)) & (nzrooted26['CLAVES'].isin(abastecimiento)) & (nzrooted26['CLAVES'].isin(ty))]
+    datos_filtradosbi = grnzbitrooted[(grnzbitrooted['CLAVES'].isin(cl)) & (grnzbitrooted['CLAVES'].isin(abastecimiento)) & (grnzbitrooted['CLAVES'].isin(ty))]
+    datos_filtrados25 = grnzrooted25[(grnzrooted25['CLAVES'].isin(cl)) & (grnzrooted25['CLAVES'].isin(abastecimiento)) & (grnzrooted25['CLAVES'].isin(ty))]
+    datos_filtrados26 = grnzrooted26[(grnzrooted26['CLAVES'].isin(cl)) & (grnzrooted26['CLAVES'].isin(abastecimiento)) & (grnzrooted26['CLAVES'].isin(ty))]
     
     # Crear columnas
     col1, col2, col3 = st.columns(3)
