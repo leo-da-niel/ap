@@ -209,7 +209,7 @@ with tab2:
         st.header("Tipo de Abastecimiento")
         st.plotly_chart(crear_hist(dat), key="instituto_hist_oferta")
         
-    figures = visual(inst+"_25", dat)
+    figures = visual("TOTAL", dat)
     
     # Usar un contador para claves únicas
     for i, fig in enumerate(figures):
