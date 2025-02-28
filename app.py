@@ -138,7 +138,7 @@ with tab1:
     cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
     
     # Filtrar datos
-    datos_filtradosbi = nzbirooted[(nzbirooted['CLAVES'].isin(cl)) & (nzbirooted['CLAVES'].isin(abastecimiento)) & (nzbirooted['CLAVES'].isin(ty))]
+    datos_filtradosbi = nzbitrooted[(nzbitrooted['CLAVES'].isin(cl)) & (nzbitrooted['CLAVES'].isin(abastecimiento)) & (nzbitrooted['CLAVES'].isin(ty))]
     datos_filtrados25 = nzrooted25[(nzrooted25['CLAVES'].isin(cl)) & (nzrooted25['CLAVES'].isin(abastecimiento)) & (nzrooted25['CLAVES'].isin(ty))]
     datos_filtrados26 = nzrooted26[(nzrooted26['CLAVES'].isin(cl)) & (nzrooted26['CLAVES'].isin(abastecimiento)) & (nzrooted26['CLAVES'].isin(ty))]
     
