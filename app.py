@@ -62,20 +62,17 @@ def visualMonto(data_inst, data):
     fig3 = px.line(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst)
     fig4 = px.line(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst)
     
-    fig1.show()
-    fig2.show()
-    fig3.show()
-    fig4.show()
+    return [fig1, fig2, fig3, fig4]
 
 def visual(data_inst, data):
     data_grouped = data.groupby("CLAVES").sum().reset_index()
 
-    fig1 = px.bar(data_grouped[data_grouped[data_inst] > 1000000], x="CLAVES", y=data_inst, title="CANTIDADES DEMANDADAS")
-    fig2 = px.bar(data_grouped[(data_grouped[data_inst] > 50000) & (data_grouped[data_inst] < 1000000)], x="CLAVES", y=data_inst)
-    fig3 = px.bar(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst)
-    fig4 = px.bar(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst)
+    fig5 = px.bar(data_grouped[data_grouped[data_inst] > 1000000], x="CLAVES", y=data_inst, title="CANTIDADES DEMANDADAS")
+    fig6 = px.bar(data_grouped[(data_grouped[data_inst] > 50000) & (data_grouped[data_inst] < 1000000)], x="CLAVES", y=data_inst)
+    fig7 = px.bar(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst)
+    fig8 = px.bar(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst)
     
-    return [fig1, fig2, fig3, fig4]
+    return [fig5, fig6, fig7, fig8]
 
 
 
@@ -202,12 +199,12 @@ with tab2:
     
     # Mostrar gráficos en columnas
     with col1:
-        st.header("Tipo de Clave")
-        st.plotly_chart(crear_pie(dat), key="instituto_pie_oferta")
+       # st.header("Tipo de Clave")
+       # st.plotly_chart(crear_pie(dat), key="instituto_pie_oferta")
         
     with col2:
-        st.header("Tipo de Abastecimiento")
-        st.plotly_chart(crear_hist(dat), key="instituto_hist_oferta")
+      #  st.header("Tipo de Abastecimiento")
+      #  st.plotly_chart(crear_hist(dat), key="instituto_hist_oferta")
         
     figures = visual("TOTAL", dat)
     
