@@ -205,9 +205,7 @@ with tab2:
     instpref = rooted(filtrar_inst(inst))
     instf = nonz(rooted(filtrar_inst(inst)))
     datos_filtrados = instf[(instf['CLAVES'].isin(cl)) & (instf['CLAVES'].isin(abastecimiento)) & (instf['CLAVES'].isin(ty))]
-    #datas = totales(datos_filtrados[[inst+"_25"]])
-    #datasis = rooted(datas)
-    #dat = datasis[datasis["TOTAL"] !=0]
+
     
     # Crear columnas
     col1, col2 = st.columns(2)
