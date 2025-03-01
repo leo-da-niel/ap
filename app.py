@@ -195,14 +195,14 @@ with tab2:
     dat = datasis[datasis["TOTAL"] !=0]
     
     # Crear columnas
-    col1, col2 = st.columns(2)
+    #col1, col2 = st.columns(2)
     
     # Mostrar gráficos en columnas
-    with col1:
+   #with col1:
        # st.header("Tipo de Clave")
        # st.plotly_chart(crear_pie(dat), key="instituto_pie_oferta")
         
-    with col2:
+    #with col2:
       #  st.header("Tipo de Abastecimiento")
       #  st.plotly_chart(crear_hist(dat), key="instituto_hist_oferta")
         
