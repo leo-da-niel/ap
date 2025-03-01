@@ -211,7 +211,7 @@ with tab2:
     col1, col2 = st.columns(2)
     
     # Mostrar gráficos en columnas
-   with col1:
+    with col1:
         st.header("Tipo de Clave")
         st.plotly_chart(crear_pie(datos_filtrados), key="instituto_pie_oferta")
         
