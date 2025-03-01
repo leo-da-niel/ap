@@ -219,7 +219,7 @@ with tab2:
         st.header("Tipo de Abastecimiento")
         st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
         
-    figures = visual(list(datos_filtrados.columns)[0], datos_filtrados)
+    figures = visual(list(filtrar_inst(inst).columns)[0], datos_filtrados)
     for i, fig in enumerate(figures):
         st.plotly_chart(fig, key=f"fig_{i}")
     # Incluir información general   
