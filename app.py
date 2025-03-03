@@ -230,24 +230,24 @@ with tab2:
     with col1:
         figq25 = visual(list(filtrar_inst(inst).columns)[0], datos_filtrados)
         for i, fig25 in enumerate(figq25):
-            st.plotly_chart(fig25, key=f"fig_{i}")
+            st.plotly_chart(fig25, key=f"fig25_{i}")
         figm25 = visualMonto(list(filtrar_inst(inst).columns)[0], datos_filtrados)
         for j, fic25 in enumerate(figm25):
-            st.plotly_chart(fic25, key=f"fic_{j}")
+            st.plotly_chart(fic25, key=f"fic25_{j}")
     with col2:
         figq26 = visual(list(filtrar_inst(inst).columns)[1], datos_filtrados)
         for k, fig26 in enumerate(figq26):
-            st.plotly_chart(fig26, key=f"fig_{k}")
+            st.plotly_chart(fig26, key=f"fig26_{k}")
         figm26 = visualMonto(list(filtrar_inst(inst).columns)[1], datos_filtrados)
         for l, fic26 in enumerate(figm26):
-            st.plotly_chart(fic26, key=f"fig_{l}")
+            st.plotly_chart(fic26, key=f"fic26_{l}")
     with col3:
         figqbi = visual(list(filtrar_inst(inst).columns)[2], datos_filtrados)
         for h, figbi in enumerate(figqbi):
-            st.plotly_chart(figbi, key=f"fig_{h}")
+            st.plotly_chart(figbi, key=f"figbi_{h}")
         figmbi = visualMonto(list(filtrar_inst(inst).columns)[2], datos_filtrados)
         for g, ficbi in enumerate(figmbi):
-            st.plotly_chart(ficbi, key=f"fic_{g}")
+            st.plotly_chart(ficbi, key=f"ficbi_{g}")
     # Incluir información general   
     st.dataframe(datos_filtrados)
     
