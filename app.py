@@ -142,7 +142,7 @@ grnzrooted25 = grouping(nzrooted25)
 grnzrooted26 = grouping(nzrooted26)
 
 # Pestañas
-tab1, tab2 = st.tabs(["Adjudicación Directa", "Institutos"])
+tab1, tab2, tab3 = st.tabs(["Adjudicación Directa", "Institutos", "Proveedores"])
 
 # Pestaña 1
 with tab1:
@@ -224,6 +224,47 @@ with tab2:
         st.plotly_chart(fig, key=f"fig_{i}")
     # Incluir información general   
     st.dataframe(datos_filtrados)
+    
+# Pestaña 3
+with tab1:
+    st.header("Proveedores")
 
+    selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="proveedor_abasto")
+    abastecimiento = abasto_options[selected_abasto]
+    
+    selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="proveedor_type")
+    ty = type_options[selected_type]
+    
+    clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="proveedor_clave")
+    cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
+
+    selected_proveedor = st.selectbox("Ingrese el Instituto:", list(proveedor_options.keys()), key="proveedor_instituto")
+    prov = proveedor_options[proveedor_instituto]
+
+    
+    # Filtrar datos
+    instpref = rooted(filtrar_inst(inst))
+    instf = nonz(rooted(filtrar_inst(inst)))
+    datos_filtrados = instf[(instf['CLAVES'].isin(cl)) & (instf['CLAVES'].isin(abastecimiento)) & (instf['CLAVES'].isin(ty))]
+
+    
+    # Crear columnas
+    col1, col2 = st.columns(2)
+    
+    # Mostrar gráficos en columnas
+    with col1:
+        st.header("Tipo de Clave")
+        st.plotly_chart(crear_pie(datos_filtrados), key="instituto_pie_oferta")
+        
+    with col2:
+        st.header("Tipo de Abastecimiento")
+        st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
+        
+    figures = visual(list(filtrar_inst(inst).columns)[0], datos_filtrados)
+    for i, fig in enumerate(figures):
+        st.plotly_chart(fig, key=f"fig_{i}")
+    # Incluir información general   
+    st.dataframe(datos_filtrados)
+    
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
