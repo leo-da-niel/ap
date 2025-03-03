@@ -226,13 +226,28 @@ with tab2:
     with col2:
         st.header("Tipo de Abastecimiento")
         st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
-        
-    figures = visual(list(filtrar_inst(inst).columns)[0], datos_filtrados)
-    for i, fig in enumerate(figures):
-        st.plotly_chart(fig, key=f"fig_{i}")
-    figs = visualMonto(list(filtrar_inst(inst).columns)[0], datos_filtrados)
-    for j, fic in enumerate(figs):
-        st.plotly_chart(fic, key=f"fic_{j}")
+    col1, col2, col3= st.columns(3) 
+    with col1:
+        figures = visual(list(filtrar_inst(inst).columns)[0], datos_filtrados)
+        for i, fig in enumerate(figures):
+            st.plotly_chart(fig, key=f"fig_{i}")
+        figs = visualMonto(list(filtrar_inst(inst).columns)[0], datos_filtrados)
+        for j, fic in enumerate(figs):
+            st.plotly_chart(fic, key=f"fic_{j}")
+    with col2:
+        figures = visual(list(filtrar_inst(inst).columns)[1], datos_filtrados)
+        for i, fig in enumerate(figures):
+            st.plotly_chart(fig, key=f"fig_{i}")
+        figs = visualMonto(list(filtrar_inst(inst).columns)[1], datos_filtrados)
+        for j, fic in enumerate(figs):
+            st.plotly_chart(fic, key=f"fic_{j}")
+    with col3:
+        figures = visual(list(filtrar_inst(inst).columns)[2], datos_filtrados)
+        for i, fig in enumerate(figures):
+            st.plotly_chart(fig, key=f"fig_{i}")
+        figs = visualMonto(list(filtrar_inst(inst).columns)[2], datos_filtrados)
+        for j, fic in enumerate(figs):
+            st.plotly_chart(fic, key=f"fic_{j}")
     # Incluir información general   
     st.dataframe(datos_filtrados)
     
@@ -249,7 +264,7 @@ with tab3:
     clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="proveedor_clave")
     cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
 
-    selected_proveedor = st.selectbox("Ingrese el Instituto:", list(proveedor_options.keys()), key="proveedor_instituto")
+    selected_proveedor = st.selectbox("Ingrese el Proveedor:", list(proveedor_options.keys()), key="proveedor_instituto")
     prov = proveedor_options[selected_proveedor]
 
     
