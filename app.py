@@ -238,15 +238,13 @@ with tab2:
         figq26 = visual(list(filtrar_inst(inst).columns)[1], datos_filtrados)
         for k, fig26 in enumerate(figq26):
             st.plotly_chart(fig26, key=f"fig_{i}")
-        figm26 = visualMonto(list(filtrar_inst(inst).columns)[1], datos_filtrados)
-        for l, fic26 in enumerate(figm26):
-            st.plotly_chart(fic26, key=f"fic_{j}")
+        figm26 = visualMonto(list(filtrar_inst(inst).columns)[1], datos_filtrados)                                                                                                                                                                                                                                                                                                                                                      st.plotly_chart(fic26, key=f"fic_{j}")
     with col3:
-        figures = visual(list(filtrar_inst(inst).columns)[2], datos_filtrados)
-        for i, fig in enumerate(figures):
+        figbi = visual(list(filtrar_inst(inst).columns)[2], datos_filtrados)
+        for l, figbi in enumerate(figures):
             st.plotly_chart(fig, key=f"fig_{i}")
-        figs = visualMonto(list(filtrar_inst(inst).columns)[2], datos_filtrados)
-        for j, fic in enumerate(figs):
+        ficbi = visualMonto(list(filtrar_inst(inst).columns)[2], datos_filtrados)
+        for m, ficbi in enumerate(figs):
             st.plotly_chart(fic, key=f"fic_{j}")
     # Incluir información general   
     st.dataframe(datos_filtrados)
