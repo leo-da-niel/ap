@@ -202,7 +202,7 @@ with tab2:
         selected_instituto = st.selectbox("Ingrese el Instituto:", list(instituto_options.keys()), key="demanda_instituto")
         inst = instituto_options[selected_instituto]
     with col5:
-        col6, sol7 = st.columns(2)
+        col6, col7 = st.columns(2)
 
         col1.metric("TOTAL DE PROPUESTAS", f"{propveedores_unicos}")
         col2.metric("Claves demandandas", f"{claves_unicas}")
