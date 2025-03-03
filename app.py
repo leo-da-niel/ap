@@ -203,16 +203,19 @@ with tab2:
     
         selected_instituto = st.selectbox("Ingrese el Instituto:", list(instituto_options.keys()), key="demanda_instituto")
         inst = instituto_options[selected_instituto]
-    with col5:
-        col6, col7 = st.columns(2)
-    
-        col6.metric("TOTAL DE PROPUESTAS", f"{nproveedores_unicos}")
-        col7.metric("Claves demandandas", f"{nclaves_unicas}")
-
-    # Filtrar datos
+      # Filtrar datos
     instpref = rooted(filtrar_inst(inst))
     instf = nonz(rooted(filtrar_inst(inst)))
     datos_filtrados = instf[(instf['CLAVES'].isin(cl)) & (instf['CLAVES'].isin(abastecimiento)) & (instf['CLAVES'].isin(ty))]
+
+    
+    with col5:
+        col6, col7 = st.columns(2)
+    
+        col6.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].unique()}")
+        col7.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
+
+
 
     
     # Crear columnas
