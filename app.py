@@ -212,7 +212,7 @@ with tab2:
     with col5:
         col6, col7 = st.columns(2)
     
-        col6.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].unique()}")
+        col6.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
         col7.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
 
 
