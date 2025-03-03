@@ -239,7 +239,7 @@ with tab1:
     cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
 
     selected_proveedor = st.selectbox("Ingrese el Instituto:", list(proveedor_options.keys()), key="proveedor_instituto")
-    prov = proveedor_options[proveedor_instituto]
+    prov = proveedor_options[selected_proveedor]
 
     
     # Filtrar datos
