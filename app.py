@@ -187,20 +187,26 @@ with tab1:
 # Pestaña 2
 with tab2:
     st.header("CCINSHAE")
-
-    selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="instituto_abasto")
-    abastecimiento = abasto_options[selected_abasto]
+#  columnas dashboard
+    col4, col5 = st.columns()
+    with col4:
+        selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="instituto_abasto")
+        abastecimiento = abasto_options[selected_abasto]
+        
+        selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="instituto_type")
+        ty = type_options[selected_type]
+        
+        clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="instituto_clave")
+        cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
     
-    selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="instituto_type")
-    ty = type_options[selected_type]
-    
-    clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="instituto_clave")
-    cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
+        selected_instituto = st.selectbox("Ingrese el Instituto:", list(instituto_options.keys()), key="demanda_instituto")
+        inst = instituto_options[selected_instituto]
+    with col5:
+        col6, sol7 = st.columns(2)
 
-    selected_instituto = st.selectbox("Ingrese el Instituto:", list(instituto_options.keys()), key="demanda_instituto")
-    inst = instituto_options[selected_instituto]
+        col1.metric("TOTAL DE PROPUESTAS", f"{propveedores_unicos}")
+        col2.metric("Claves demandandas", f"{claves_unicas}")
 
-    
     # Filtrar datos
     instpref = rooted(filtrar_inst(inst))
     instf = nonz(rooted(filtrar_inst(inst)))
