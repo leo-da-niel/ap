@@ -204,7 +204,7 @@ with tab2:
     with col5:
         col6, col7 = st.columns(2)
     
-        col6.metric("TOTAL DE PROPUESTAS", f"{propveedores_unicos}")
+        col6.metric("TOTAL DE PROPUESTAS", f"{proveedores_unicos}")
         col7.metric("Claves demandandas", f"{claves_unicas}")
 
     # Filtrar datos
