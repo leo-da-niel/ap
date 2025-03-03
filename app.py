@@ -188,7 +188,7 @@ with tab1:
 with tab2:
     st.header("CCINSHAE")
 #  columnas dashboard
-    col4, col5 = st.columns()
+    col4, col5 = st.columns(2)
     with col4:
         selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="instituto_abasto")
         abastecimiento = abasto_options[selected_abasto]
