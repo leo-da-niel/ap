@@ -16,6 +16,8 @@ bi.columns = [col[:-1] + '5-26' for col in bi.columns]
 # Variables
 proveedores_unicos = df['PROVEEDOR'].unique()
 claves_unicas = df['CLAVES'].unique()
+nproveedores_unicos = df['PROVEEDOR'].nunique()
+nclaves_unicas = df['CLAVES'].nunique()
 medicamentos = [clave for clave in claves_unicas if int(clave.split('.')[0]) < 60]
 material_curacion = [clave for clave in claves_unicas if int(clave.split('.')[0]) >= 60]
 unico = df[df['ABASTO'] == 1]
@@ -204,8 +206,8 @@ with tab2:
     with col5:
         col6, col7 = st.columns(2)
     
-        col6.metric("TOTAL DE PROPUESTAS", f"{proveedores_unicos}")
-        col7.metric("Claves demandandas", f"{claves_unicas}")
+        col6.metric("TOTAL DE PROPUESTAS", f"{nproveedores_unicos}")
+        col7.metric("Claves demandandas", f"{nclaves_unicas}")
 
     # Filtrar datos
     instpref = rooted(filtrar_inst(inst))
@@ -228,6 +230,9 @@ with tab2:
     figures = visual(list(filtrar_inst(inst).columns)[0], datos_filtrados)
     for i, fig in enumerate(figures):
         st.plotly_chart(fig, key=f"fig_{i}")
+    figs = visualMonto(list(filtrar_inst(inst).columns)[0], datos_filtrados)
+    for j, fic in enumerate(figs):
+        st.plotly_chart(fic, key=f"fic_{j}")
     # Incluir información general   
     st.dataframe(datos_filtrados)
     
