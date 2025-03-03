@@ -72,7 +72,7 @@ def crear_hist(data):
 def visualMonto(data_inst, data):
     data_grouped = data.groupby("CLAVES").sum().reset_index()
 
-    fig1 = px.line(data_grouped[data_grouped[data_inst] > 1000000], x="CLAVES", y=data_inst, title="CANTIDADES DEMANDADAS")
+    fig1 = px.line(data_grouped[data_grouped[data_inst] > 1000000], x="CLAVES", y=data_inst, title="Importe ($)")
     fig2 = px.line(data_grouped[(data_grouped[data_inst] > 50000) & (data_grouped[data_inst] < 1000000)], x="CLAVES", y=data_inst)
     fig3 = px.line(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst)
     fig4 = px.line(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst)
@@ -82,7 +82,7 @@ def visualMonto(data_inst, data):
 def visual(data_inst, data):
     data_grouped = data.groupby("CLAVES").sum().reset_index()
 
-    fig5 = px.bar(data_grouped[data_grouped[data_inst] > 1000000], x="CLAVES", y=data_inst, title="CANTIDADES DEMANDADAS")
+    fig5 = px.bar(data_grouped[data_grouped[data_inst] > 1000000], x="CLAVES", y=data_inst, title="CANTIDADES")
     fig6 = px.bar(data_grouped[(data_grouped[data_inst] > 50000) & (data_grouped[data_inst] < 1000000)], x="CLAVES", y=data_inst)
     fig7 = px.bar(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst)
     fig8 = px.bar(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst)
@@ -228,23 +228,29 @@ with tab2:
         st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
     col1, col2, col3= st.columns(3) 
     with col1:
+        st.header("Canitdades bianual")
         figq25 = visual(list(filtrar_inst(inst).columns)[0], datos_filtrados)
         for i, fig25 in enumerate(figq25):
             st.plotly_chart(fig25, key=f"fig25_{i}")
+        st.header("Importe bianual")
         figm25 = visualMonto(list(filtrar_inst(inst).columns)[0], datos_filtrados)
         for j, fic25 in enumerate(figm25):
             st.plotly_chart(fic25, key=f"fic25_{j}")
     with col2:
+        st.header("Cantidades 2025")
         figq26 = visual(list(filtrar_inst(inst).columns)[1], datos_filtrados)
         for k, fig26 in enumerate(figq26):
             st.plotly_chart(fig26, key=f"fig26_{k}")
+        st.header("Importe 2025")
         figm26 = visualMonto(list(filtrar_inst(inst).columns)[1], datos_filtrados)
         for l, fic26 in enumerate(figm26):
             st.plotly_chart(fic26, key=f"fic26_{l}")
     with col3:
+        st.header("Canitades 2026")
         figqbi = visual(list(filtrar_inst(inst).columns)[2], datos_filtrados)
         for h, figbi in enumerate(figqbi):
             st.plotly_chart(figbi, key=f"figbi_{h}")
+        st.header("Importe 2026")
         figmbi = visualMonto(list(filtrar_inst(inst).columns)[2], datos_filtrados)
         for g, ficbi in enumerate(figmbi):
             st.plotly_chart(ficbi, key=f"ficbi_{g}")
