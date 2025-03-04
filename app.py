@@ -300,8 +300,9 @@ with tab2:
     col1, col2, col3 = st.columns(3)
     col1.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
     col1.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
-    chart = make_donut(input_response, input_text, input_color)
-    chart.display()
+    with col1:
+        chart = make_donut(input_response, input_text, input_color)
+        chart.display()
     with col2:
         st.dataframe(instf['PROVEEDOR'].unique())
 
