@@ -247,7 +247,7 @@ with tab2:
     
         col6.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
         col7.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
-        st.dataframe(instf['PROVEEDOR'].nunique())
+        st.dataframe(instf['PROVEEDOR'].unique())
 
 
     
