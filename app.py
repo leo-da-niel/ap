@@ -187,7 +187,8 @@ with tab1:
         filmbi = visualMonto("TOTAL", datos_filbi)
         for b, filmb in enumerate(filmbi):
             st.plotly_chart(filmb, key=f"filmb_{b}")
-
+        st.dataframe(filqbi)
+    
     with col2:
         st.header("Tipo de Clave 2025")
         st.plotly_chart(crear_pie(datos_filtrados25), key="resumen25_pie_oferta")
@@ -246,7 +247,7 @@ with tab2:
     
         col6.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
         col7.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
-
+        st.dataframe(datos_filtrados)
 
 
     
