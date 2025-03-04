@@ -248,7 +248,7 @@ with tab2:
         selected_instituto = st.selectbox("Ingrese el Instituto:", list(instituto_options.keys()), key="demanda_instituto")
         inst = instituto_options[selected_instituto]
     with col5:
-        periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="resumen_periodo")
+        periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="instituto_periodo")
       # Filtrar datos
     instpref = rooted(filtrar_inst(inst))
     instf = nonz(rooted(filtrar_inst(inst)))
