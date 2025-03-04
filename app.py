@@ -196,7 +196,7 @@ with tab1:
 
         st.header("Cantidades 2025")
         filq25 = visual("TOTAL", datos_filtrados25)
-        for c, filg25 in enumerate(filq26):
+        for c, filg25 in enumerate(filq25):
             st.plotly_chart(filg25, key=f"filg25_{c}")
         st.header("Importe 2025")
         film25 = visualMonto("TOTAL", datos_fil25)
