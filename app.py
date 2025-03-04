@@ -156,7 +156,7 @@ tab1, tab2, tab3 = st.tabs(["Adjudicación Directa", "Institutos", "Proveedores"
 with tab1:
     st.header("Resumen de Adjudicación Directa")
 
-    col1, col2 = st.columns(2)
+    col1, col2, col3, col4 = st.columns(2)
     with col1:
         selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="resumen_abasto")
         abastecimiento = abasto_options[selected_abasto]
@@ -164,11 +164,11 @@ with tab1:
         selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="resumen_type")
         ty = type_options[selected_type]
 
-    col3, col4 = st.columns(2)
+    #col3, col4 = st.columns(2)
     with col3:
         clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="resumen_clave")
         cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
-    with col1:
+    with col4:
         periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="resumen_periodo")
     # Filtrar datos
     datos_filtradosbi = grnzbitrooted[(grnzbitrooted['CLAVES'].isin(cl)) & (grnzbitrooted['CLAVES'].isin(abastecimiento)) & (grnzbitrooted['CLAVES'].isin(ty))]
