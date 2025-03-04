@@ -167,7 +167,7 @@ with tab1:
         clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="resumen_clave")
         cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
     with col1:
-        periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys(), key="resumen_periodo")
+        periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="resumen_periodo")
     # Filtrar datos
     datos_filtradosbi = grnzbitrooted[(grnzbitrooted['CLAVES'].isin(cl)) & (grnzbitrooted['CLAVES'].isin(abastecimiento)) & (grnzbitrooted['CLAVES'].isin(ty))]
     datos_filtrados25 = grnzrooted25[(grnzrooted25['CLAVES'].isin(cl)) & (grnzrooted25['CLAVES'].isin(abastecimiento)) & (grnzrooted25['CLAVES'].isin(ty))]
