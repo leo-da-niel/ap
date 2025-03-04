@@ -180,11 +180,11 @@ with tab1:
         st.plotly_chart(crear_hist(datos_filbi), key="resumenbi_hist_oferta")
 
         st.header("Canitdades bianual")
-        filqbi = visual(list(datos_filtradosbi.columns)['TOTAL'], datos_filtradosbi)
+        filqbi = visual("TOTAL", datos_filtradosbi)
         for a, filb in enumerate(filqbi):
             st.plotly_chart(filb, key=f"filb_{a}")
         st.header("Importe bianual")
-        filmbi = visualMonto(list(datos_filbi.columns)['TOTAL'], datos_filbi)
+        filmbi = visualMonto(list(datos_filbi.columns)["TOTAL"], datos_filbi)
         for b, filmb in enumerate(filmbi):
             st.plotly_chart(filmb, key=f"filmb_{b}")
 
@@ -195,11 +195,11 @@ with tab1:
         st.plotly_chart(crear_hist(datos_fil25), key="resumen25_hist_oferta")
 
         st.header("Cantidades 2025")
-        filq25 = visual(list(datos_filtrados25.columns)['TOTAL'], datos_filtrados25)
+        filq25 = visual(list(datos_filtrados25.columns)["TOTAL"], datos_filtrados25)
         for c, filg25 in enumerate(filq26):
             st.plotly_chart(filg25, key=f"filg25_{c}")
         st.header("Importe 2025")
-        film25 = visualMonto(list(datos_fil25.columns)['TOTAL'], datos_fil25)
+        film25 = visualMonto(list(datos_fil25.columns)["TOTAL"], datos_fil25)
         for d, filc25 in enumerate(film25):
             st.plotly_chart(filc25, key=f"filc25_{d}")
 
@@ -210,11 +210,11 @@ with tab1:
         st.plotly_chart(crear_hist(datos_fil26), key="resumen26_hist_oferta")
 
         st.header("Cantidades 2026")
-        filq26 = visual(list(datos_filtrados26.columns)['TOTAL'], datos_filtrados26)
+        filq26 = visual(list(datos_filtrados26.columns)["TOTAL"], datos_filtrados26)
         for c, filg26 in enumerate(filq26):
             st.plotly_chart(filg26, key=f"filg26_{c}")
         st.header("Importe 2026")
-        film26 = visualMonto(list(datos_fil26.columns)['TOTAL'], datos_fil26)
+        film26 = visualMonto(list(datos_fil26.columns)["TOTAL"], datos_fil26)
         for d, filc26 in enumerate(film26):
             st.plotly_chart(filc26, key=f"filc26_{d}")
 
