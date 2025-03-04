@@ -269,11 +269,11 @@ with tab2:
     with col1:
         st.header("Canitdades bianual")
         figq25 = visual(list(filtrar_inst(inst).columns)[0], datos_filtrados)
-        for i, fig25 in enumerate(figq25):
-            st.plotly_chart(fig25, key=f"fig25_{i}")
-        with st.container():
+         with st.container():
+            for i, fig25 in enumerate(figq25):
+                st.plotly_chart(fig25, key=f"fig25_{i}")
             st.header("Importe bianual")
-        figm25 = visualMonto(list(filtrar_inst(inst).columns)[0], datos_filtrados)
+            figm25 = visualMonto(list(filtrar_inst(inst).columns)[0], datos_filtrados)
         for j, fic25 in enumerate(figm25):
             st.plotly_chart(fic25, key=f"fic25_{j}")
     with col2:
