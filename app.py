@@ -302,7 +302,7 @@ with tab2:
     col1.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
     with col1:
         chart = make_donut(input_response, input_text, input_color)
-        chart.display()
+        st.altair_chart(chart, use_container_width=True)
     with col2:
         st.dataframe(instf['PROVEEDOR'].unique())
 
