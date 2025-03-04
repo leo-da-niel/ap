@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import numpy as np
+import warnings
 
 # Leer datos
 df = pd.read_excel('inst.xlsx', index_col='#')
@@ -84,11 +85,54 @@ def visual(data_inst, data):
     fig5 = px.bar(data_grouped[data_grouped[data_inst] > 1000000], x="CLAVES", y=data_inst, title="CANTIDADES")
     fig6 = px.bar(data_grouped[(data_grouped[data_inst] > 50000) & (data_grouped[data_inst] < 1000000)], x="CLAVES", y=data_inst)
     fig7 = px.bar(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst)
-    fig8 = px.bar(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst)
-    
+    fig8 = px.bar(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst) 
     return [fig5, fig6, fig7, fig8]
 
 
+warnings.filterwarnings("ignore", category=FutureWarning, module="altair")
+def make_donut(input_response, input_text, input_color):
+    if input_color == 'blue':
+        chart_color = ['#29b5e8', '#155F7A']
+    elif input_color == 'green':
+        chart_color = ['#27AE60', '#12783D']
+    elif input_color == 'orange':
+        chart_color = ['#F39C12', '#875A12']
+    elif input_color == 'red':
+        chart_color = ['#E74C3C', '#781F16']
+    
+    source = pd.DataFrame({
+        "Topic": ['', input_text],
+        "value": [100-input_response, input_response]
+    })
+    source_bg = pd.DataFrame({
+        "Topic": ['', input_text],
+        "value": [100, 0]
+    })
+    
+    plot = alt.Chart(source).mark_arc(innerRadius=45, cornerRadius=25).encode(
+        theta="value",
+        color= alt.Color("Topic:N",
+                        scale=alt.Scale(
+                            domain=[input_text, ''],
+                            range=chart_color),
+                        legend=None),
+    ).properties(width=130, height=130)
+    
+    text = plot.mark_text(align='center', color="#29b5e8", font="Lato", fontSize=32, fontWeight=700, fontStyle="italic").encode(text=alt.value(f'{input_response}'))
+    plot_bg = alt.Chart(source_bg).mark_arc(innerRadius=45, cornerRadius=20).encode(
+        theta="value",
+        color= alt.Color("Topic:N",
+                        scale=alt.Scale(
+                            domain=[input_text, ''],
+                            range=chart_color),
+                        legend=None),
+    ).properties(width=130, height=130)
+    return plot_bg + plot + text
+
+# Ejemplo de uso
+input_response = 75
+input_text = "Progreso"
+input_color = "blue"
 
 
 
@@ -256,6 +300,8 @@ with tab2:
     col1, col2, col3 = st.columns(3)
     col1.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
     col1.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
+    chart = make_donut(input_response, input_text, input_color)
+    chart.display()
     with col2:
         st.dataframe(instf['PROVEEDOR'].unique())
 
