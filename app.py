@@ -302,7 +302,7 @@ with tab2:
     col1.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
     col1.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
     with col1:
-        st.altair_chart(make_donut(75, Adjudicadas, "green"))
+        st.altair_chart(make_donut(75%, "Adjudicadas", "green"))
     with col2:
         st.dataframe(instf['PROVEEDOR'].unique())
 
