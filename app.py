@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import numpy as np
 import warnings
+import altair as alt
 
 # Leer datos
 df = pd.read_excel('inst.xlsx', index_col='#')
