@@ -130,9 +130,7 @@ def make_donut(input_response, input_text, input_color):
     return plot_bg + plot + text
 
 # Ejemplo de uso
-input_response = 75
-input_text = "Progreso"
-input_color = "blue"
+
 
 
 
@@ -296,7 +294,9 @@ with tab2:
     instpref = rooted(filtrar_inst(inst))
     instf = nonz(rooted(filtrar_inst(inst)))
     datos_filtrados = instf[(instf['CLAVES'].isin(cl)) & (instf['CLAVES'].isin(abastecimiento)) & (instf['CLAVES'].isin(ty))]
-
+    input_response = 75
+    input_text = "Progreso"
+    input_color = "blue"
     col1, col2, col3 = st.columns(3)
     col1.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
     col1.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
