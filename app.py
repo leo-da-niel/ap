@@ -164,6 +164,11 @@ with tab1:
     datos_filtrados25 = grnzrooted25[(grnzrooted25['CLAVES'].isin(cl)) & (grnzrooted25['CLAVES'].isin(abastecimiento)) & (grnzrooted25['CLAVES'].isin(ty))]
     datos_filtrados26 = grnzrooted26[(grnzrooted26['CLAVES'].isin(cl)) & (grnzrooted26['CLAVES'].isin(abastecimiento)) & (grnzrooted26['CLAVES'].isin(ty))]
     
+    datos_filbi = nzbitrooted[(nzbitrooted['CLAVES'].isin(cl)) & (nzbitrooted['CLAVES'].isin(abastecimiento)) & (nzbitrooted['CLAVES'].isin(ty))]
+    datos_fil25 = nzrooted25[(nzrooted25['CLAVES'].isin(cl)) & (nzrooted25['CLAVES'].isin(abastecimiento)) & (nzrooted25['CLAVES'].isin(ty))]
+    datos_fil26 = nzrooted26[(nzrooted26['CLAVES'].isin(cl)) & (nzrooted26['CLAVES'].isin(abastecimiento)) & (nzrooted26['CLAVES'].isin(ty))]
+    
+    
     # Crear columnas
     col1, col2, col3 = st.columns(3)
     
@@ -172,19 +177,19 @@ with tab1:
         st.header("Tipo de Clave Bianual")
         st.plotly_chart(crear_pie(datos_filtradosbi), key="resumenbi_pie_oferta")
         st.header("Tipo de Abastecimiento Bianual")
-        st.plotly_chart(crear_hist(datos_filtradosbi), key="resumenbi_hist_oferta")
+        st.plotly_chart(crear_hist(datos_filbi), key="resumenbi_hist_oferta")
     
     with col2:
         st.header("Tipo de Clave 2025")
         st.plotly_chart(crear_pie(datos_filtrados25), key="resumen25_pie_oferta")
         st.header("Tipo de Abastecimiento 2025")
-        st.plotly_chart(crear_hist(datos_filtrados25), key="resumen25_hist_oferta")
+        st.plotly_chart(crear_hist(datos_fil25), key="resumen25_hist_oferta")
 
     with col3:
         st.header("Tipo de Clave 2026")
         st.plotly_chart(crear_pie(datos_filtrados26), key="resumen26_pie_oferta")
         st.header("Tipo de Abastecimiento 2026")
-        st.plotly_chart(crear_hist(datos_filtrados26), key="resumen26_hist_oferta")
+        st.plotly_chart(crear_hist(datos_fil26), key="resumen26_hist_oferta")
 
 # Pestaña 2
 with tab2:
