@@ -254,7 +254,7 @@ with tab2:
     instf = nonz(rooted(filtrar_inst(inst)))
     datos_filtrados = instf[(instf['CLAVES'].isin(cl)) & (instf['CLAVES'].isin(abastecimiento)) & (instf['CLAVES'].isin(ty))]
 
-    col1, col2 = st.columns(3)
+    col1, col2, col3 = st.columns(3)
     col1.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
     col1.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
     with col2:
