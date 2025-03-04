@@ -234,31 +234,30 @@ with tab1:
 with tab2:
     st.header("CCINSHAE")
 # columnas dashboard
-    col4, col5 = st.columns(2)
-    with col4:
+    col1, col2, col3, col4, col5 = st.columns(5)
+    with col1:
         selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="instituto_abasto")
         abastecimiento = abasto_options[selected_abasto]
-        
+    with col2:    
         selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="instituto_type")
         ty = type_options[selected_type]
-        
+    with col3:   
         clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="instituto_clave")
         cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
-    
+    with col4:
         selected_instituto = st.selectbox("Ingrese el Instituto:", list(instituto_options.keys()), key="demanda_instituto")
         inst = instituto_options[selected_instituto]
+    with col5:
+        periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="resumen_periodo")
       # Filtrar datos
     instpref = rooted(filtrar_inst(inst))
     instf = nonz(rooted(filtrar_inst(inst)))
     datos_filtrados = instf[(instf['CLAVES'].isin(cl)) & (instf['CLAVES'].isin(abastecimiento)) & (instf['CLAVES'].isin(ty))]
 
     
-    with col5:
-        col6, col7 = st.columns(2)
-    
-        col6.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
-        col7.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
-        st.dataframe(instf['PROVEEDOR'].unique())
+    col6.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
+    col7.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
+    st.dataframe(instf['PROVEEDOR'].unique())
 
 
     
