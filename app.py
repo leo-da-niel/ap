@@ -254,22 +254,16 @@ with tab2:
     instf = nonz(rooted(filtrar_inst(inst)))
     datos_filtrados = instf[(instf['CLAVES'].isin(cl)) & (instf['CLAVES'].isin(abastecimiento)) & (instf['CLAVES'].isin(ty))]
 
-    
-    col6.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
-    col7.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
-    st.dataframe(instf['PROVEEDOR'].unique())
+    col1, col2 = st.columns(3)
+    col1.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
+    col1.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
+    with col2:
+        st.dataframe(instf['PROVEEDOR'].unique())
 
-
-    
-    # Crear columnas
-    col1, col2 = st.columns(2)
-    
-    # Mostrar gráficos en columnas
-    with col1:
+    with col3:
         st.header("Tipo de Clave")
         st.plotly_chart(crear_pie(datos_filtrados), key="instituto_pie_oferta")
         
-    with col2:
         st.header("Tipo de Abastecimiento")
         st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
     col1, col2, col3= st.columns(3) 
