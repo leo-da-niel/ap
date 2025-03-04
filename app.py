@@ -76,7 +76,7 @@ def visualMonto(data_inst, data):
     fig2 = px.line(data_grouped[(data_grouped[data_inst] > 50000) & (data_grouped[data_inst] < 1000000)], x="CLAVES", y=data_inst, markers=True)
     fig3 = px.line(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst, markers=True)
     fig4 = px.line(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst, markers=True)
-        return [fig1, fig2, fig3, fig4]
+    return [fig1, fig2, fig3, fig4]
 
 def visual(data_inst, data):
     data_grouped = data.groupby("CLAVES").sum().reset_index()
