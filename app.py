@@ -187,7 +187,7 @@ with tab1:
         filmbi = visualMonto("TOTAL", datos_filbi)
         for b, filmb in enumerate(filmbi):
             st.plotly_chart(filmb, key=f"filmb_{b}")
-        st.dataframe(filqbi)
+        st.dataframe(datos_filtradosbi)
     
     with col2:
         st.header("Tipo de Clave 2025")
