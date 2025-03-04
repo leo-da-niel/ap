@@ -102,6 +102,12 @@ st.image("header.png", use_container_width=True)
 # Opciones
 clave_options = {"TODAS LAS CLAVES": "General", **{clave: clave for clave in claves_unicas}}
 
+periodo_options = {
+"BIANUAL": "BIANUAL",
+"2025": "2025",
+"2026": "2026"
+}
+    
 instituto_options = {
     "IMSS": "IMSS",
     "IMSS BIENESTAR": "IMSS BIENESTAR",
@@ -150,15 +156,18 @@ tab1, tab2, tab3 = st.tabs(["Adjudicación Directa", "Institutos", "Proveedores"
 with tab1:
     st.header("Resumen de Adjudicación Directa")
 
-    selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="resumen_abasto")
-    abastecimiento = abasto_options[selected_abasto]
-    
-    selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="resumen_type")
-    ty = type_options[selected_type]
-    
-    clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="resumen_clave")
-    cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
-    
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="resumen_abasto")
+        abastecimiento = abasto_options[selected_abasto]
+    with col2:
+        selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="resumen_type")
+        ty = type_options[selected_type]
+    with col3:
+        clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="resumen_clave")
+        cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
+    with col1:
+        periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys(), key="resumen_periodo")
     # Filtrar datos
     datos_filtradosbi = grnzbitrooted[(grnzbitrooted['CLAVES'].isin(cl)) & (grnzbitrooted['CLAVES'].isin(abastecimiento)) & (grnzbitrooted['CLAVES'].isin(ty))]
     datos_filtrados25 = grnzrooted25[(grnzrooted25['CLAVES'].isin(cl)) & (grnzrooted25['CLAVES'].isin(abastecimiento)) & (grnzrooted25['CLAVES'].isin(ty))]
