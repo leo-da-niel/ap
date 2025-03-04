@@ -76,12 +76,7 @@ def visualMonto(data_inst, data):
     fig2 = px.line(data_grouped[(data_grouped[data_inst] > 50000) & (data_grouped[data_inst] < 1000000)], x="CLAVES", y=data_inst, markers=True)
     fig3 = px.line(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst, markers=True)
     fig4 = px.line(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst, markers=True)
-        with st.container():
-            st.plotly_chart(fig1)
-            st.plotly_chart(fig2)
-            st.plotly_chart(fig3)
-            st.plotly_chart(fig4)
-        #return [fig1, fig2, fig3, fig4]
+        return [fig1, fig2, fig3, fig4]
 
 def visual(data_inst, data):
     data_grouped = data.groupby("CLAVES").sum().reset_index()
@@ -276,7 +271,8 @@ with tab2:
         figq25 = visual(list(filtrar_inst(inst).columns)[0], datos_filtrados)
         for i, fig25 in enumerate(figq25):
             st.plotly_chart(fig25, key=f"fig25_{i}")
-        st.header("Importe bianual")
+        with st.container():
+            st.header("Importe bianual")
         figm25 = visualMonto(list(filtrar_inst(inst).columns)[0], datos_filtrados)
         for j, fic25 in enumerate(figm25):
             st.plotly_chart(fic25, key=f"fic25_{j}")
