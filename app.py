@@ -156,7 +156,7 @@ tab1, tab2, tab3 = st.tabs(["Adjudicación Directa", "Institutos", "Proveedores"
 with tab1:
     st.header("Resumen de Adjudicación Directa")
 
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="resumen_abasto")
         abastecimiento = abasto_options[selected_abasto]
