@@ -88,7 +88,17 @@ def visual(data_inst, data):
     fig7 = px.bar(data_grouped[(data_grouped[data_inst] > 1000) & (data_grouped[data_inst] < 50000)], x="CLAVES", y=data_inst)
     fig8 = px.bar(data_grouped[(data_grouped[data_inst] > 0) & (data_grouped[data_inst] < 1000)], x="CLAVES", y=data_inst) 
     return [fig5, fig6, fig7, fig8]
-
+def Vvisual(data_inst, data):
+    data_grouped = data.groupby("CLAVES").sum().reset_index()
+    data_top10 = data_grouped.nlargest(10, data_inst)
+    fig = px.bar(data_top10, x="CLAVES", y=data_inst, title="TOP 10 CANTIDADES DEMANDADAS")
+    fig.show()
+    
+def VvisualMonto(data_inst, data):
+    data_grouped = data.groupby("CLAVES").sum().reset_index()
+    data_top10 = data_grouped.nlargest(10, data_inst)
+    fig = px.line(data_top10, x="CLAVES", y=data_inst, title="TOP 10 IMPORTE ($) POR CLAVE", markers=True)
+    fig.show()
 
 warnings.filterwarnings("ignore", category=FutureWarning, module="altair")
 def make_donut(input_response, input_text, input_color):
@@ -263,15 +273,11 @@ with tab1:
     with col2:
 
         st.header(df1T)
-        filq25 = visual("TOTAL", df1)
-        for c, filg25 in enumerate(filq25):
-            st.plotly_chart(filg25, key=f"filg25_{c}")
+        st.plotly_chart(visual("TOTAL", df1), key=f"filg25_{c}")
 
     with col3:
         st.header(df2T)
-        film26 = visualMonto("TOTAL", df2)
-        for d, filc26 in enumerate(film26):
-            st.plotly_chart(filc26, key=f"filc26_{d}")
+        st.plotly_chart(visualMonto("TOTAL", df2), key=f"filc26_{d}")
     st.dataframe(df1)
 # Pestaña 2
 with tab2:
