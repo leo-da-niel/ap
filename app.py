@@ -221,29 +221,46 @@ with tab1:
         df2 = datos_filbi
         df1T = "CANTIDAD DEMANDADA BIANUAL"
         df2T = "IMPORTE BIANUAL"
-        df3 = nzbitrooted
+        qclaves_fil = datos_filbi['CLAVES'].nunique()
+        claves_fil = datos_filbi['CLAVES'].unique()
+        qprov_fil = datos_filbi['PROVEEDOR'].nunique()
+        prov_fil = datos_filbi['PROVEEDOR'].unique()
+        
+        
     elif periodo_input == "2025":
         df1 = datos_filtrados25
         df2 = datos_fil25
         df1T = "CANTIDAD DEMANDADA 2025"
         df2T = "IMPORTE 2025"
+        qclaves_fil = datos_filbi['CLAVES'].nunique()
+        claves_fil = datos_filbi['CLAVES'].unique()
+        qprov_fil = datos_fil25['PROVEEDOR'].nunique()
+        prov_fil = datos_fil25['PROVEEDOR'].unique()
 
     else:
         df1 = datos_filtrados26
         df2 = datos_fil26
         df1T = "CANTIDAD DEMANDADA 2026"
-        df2T = "IMPORTE 2026"    
+        df2T = "IMPORTE 2026"
+        qclaves_fil = datos_filbi['CLAVES'].nunique()
+        claves_fil = datos_filbi['CLAVES'].unique()
+        qprov_fil = datos_fil26['PROVEEDOR'].nunique()
+        prov_fil = datos_fil26['PROVEEDOR'].unique()
         
     # Crear columnas
     col1, col2, col3 = st.columns(3)
     
     # Mostrar gráficos en columnas
     with col1:
+    col1.metric("NÚMERO DE PROVEEDORES", f"{qclaves_fil}")
+    col1.metric("CLAVES ADJUDICADAS", f"{qprov_fil}")
+
         st.header("Tipo de Clave Bianual")
         st.plotly_chart(crear_pie(df1), key="resumenbi_pie_oferta")
         st.header("Tipo de Abastecimiento Bianual")
         st.plotly_chart(crear_hist(df2), key="resumenbi_hist_oferta")
-
+        st.dataframe(prov_fil)
+        
 #        st.header("Canitdades bianual")
  #       filqbi = visual("TOTAL", datos_filtradosbi)
   #      for a, filb in enumerate(filqbi):
