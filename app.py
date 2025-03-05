@@ -220,7 +220,16 @@ with tab1:
     datos_filbi = nzbitrooted[(nzbitrooted['CLAVES'].isin(cl)) & (nzbitrooted['CLAVES'].isin(abastecimiento)) & (nzbitrooted['CLAVES'].isin(ty))]
     datos_fil25 = nzrooted25[(nzrooted25['CLAVES'].isin(cl)) & (nzrooted25['CLAVES'].isin(abastecimiento)) & (nzrooted25['CLAVES'].isin(ty))]
     datos_fil26 = nzrooted26[(nzrooted26['CLAVES'].isin(cl)) & (nzrooted26['CLAVES'].isin(abastecimiento)) & (nzrooted26['CLAVES'].isin(ty))]
-    
+
+    if periodo_input == "BIANUAL":
+        df1 = datos_filtradosbi
+        df2 = datos_filbi
+    elif periodo_input == "2025":
+        df1 = datos_filtrados25
+        df2 = datos_fil25
+    else:
+        df1 = datos_filtrados26
+        df2 = datos_fil26
     
     # Crear columnas
     col1, col2, col3 = st.columns(3)
