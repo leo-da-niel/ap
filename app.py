@@ -249,8 +249,8 @@ with tab1:
         
     # Crear columnas
     col1, col2, col3 = st.columns(3)
-    col1.metric("NÚMERO DE PROVEEDORES", f"{qclaves_fil}")
-    col1.metric("CLAVES ADJUDICADAS", f"{qprov_fil}")
+    col1.metric("NÚMERO DE PROVEEDORES", f"{qprov_fil}")
+    col1.metric("CLAVES ADJUDICADAS", f"{qclaves_fil}")
     # Mostrar gráficos en columnas
     with col1:
         st.header("Tipo de Clave Bianual")
