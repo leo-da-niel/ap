@@ -299,7 +299,7 @@ with tab1:
         film26 = visualMonto("TOTAL", df2)
         for d, filc26 in enumerate(film26):
             st.plotly_chart(filc26, key=f"filc26_{d}")
-
+    st.dataframe(df1)
 # Pestaña 2
 with tab2:
     st.header("CCINSHAE")
