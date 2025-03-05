@@ -130,11 +130,6 @@ def make_donut(input_response, input_text, input_color):
     ).properties(width=130, height=130)
     return plot_bg + plot + text
 
-# Ejemplo de uso
-
-
-
-
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
 
@@ -226,11 +221,13 @@ with tab1:
         df2 = datos_filbi
         df1T = "CANTIDAD DEMANDADA BIANUAL"
         df2T = "IMPORTE BIANUAL"
+        df3 = nzbitrooted
     elif periodo_input == "2025":
         df1 = datos_filtrados25
         df2 = datos_fil25
         df1T = "CANTIDAD DEMANDADA 2025"
         df2T = "IMPORTE 2025"
+        df3 =
     else:
         df1 = datos_filtrados26
         df2 = datos_fil26
@@ -245,7 +242,7 @@ with tab1:
         st.header("Tipo de Clave Bianual")
         st.plotly_chart(crear_pie(df1), key="resumenbi_pie_oferta")
         st.header("Tipo de Abastecimiento Bianual")
-        st.plotly_chart(crear_hist(df1), key="resumenbi_hist_oferta")
+        st.plotly_chart(crear_hist(df2), key="resumenbi_hist_oferta")
 
 #        st.header("Canitdades bianual")
  #       filqbi = visual("TOTAL", datos_filtradosbi)
