@@ -92,6 +92,7 @@ def Vvisual(data_inst, data):
     data_grouped = data.groupby("CLAVES").sum().reset_index()
     data_top10 = data_grouped.nlargest(10, data_inst)
     fig = px.bar(data_top10, x="CLAVES", y=data_inst, title="TOP 10 CANTIDADES DEMANDADAS")
+    fig.update_traces(text=data_top10[data_inst], textposition="top center")
     return fig 
     #fig.show()
     
@@ -99,6 +100,7 @@ def VvisualMonto(data_inst, data):
     data_grouped = data.groupby("CLAVES").sum().reset_index()
     data_top10 = data_grouped.nlargest(10, data_inst)
     fig = px.line(data_top10, x="CLAVES", y=data_inst, title="TOP 10 IMPORTE ($) POR CLAVE", markers=True)
+    fig.update_traces(text=data_top10[data_inst], textposition="top center")
     return fig
     #fig.show()
 
