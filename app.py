@@ -275,11 +275,11 @@ with tab1:
     with col2:
 
         st.header(df1T)
-        st.plotly_chart(Vvisual("TOTAL", rooted(df1)), key=f"df1T")
+        st.plotly_chart(Vvisual("TOTAL", df2, key=f"df1T")
 
     with col3:
         st.header(df2T)
-        st.plotly_chart(VvisualMonto("TOTAL", rooted(df2)), key=f"df2T")
+        st.plotly_chart(VvisualMonto("TOTAL", df2, key=f"df2T")
     st.dataframe(df1)
 # Pestaña 2
 with tab2:
