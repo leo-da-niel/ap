@@ -227,7 +227,7 @@ with tab1:
         df2 = datos_fil25
         df1T = "CANTIDAD DEMANDADA 2025"
         df2T = "IMPORTE 2025"
-        df3 =
+
     else:
         df1 = datos_filtrados26
         df2 = datos_fil26
