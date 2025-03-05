@@ -249,17 +249,16 @@ with tab1:
         
     # Crear columnas
     col1, col2, col3 = st.columns(3)
-    
-    # Mostrar gráficos en columnas
-    with col1:
     col1.metric("NÚMERO DE PROVEEDORES", f"{qclaves_fil}")
     col1.metric("CLAVES ADJUDICADAS", f"{qprov_fil}")
-
+    # Mostrar gráficos en columnas
+    with col1:
         st.header("Tipo de Clave Bianual")
         st.plotly_chart(crear_pie(df1), key="resumenbi_pie_oferta")
         st.header("Tipo de Abastecimiento Bianual")
         st.plotly_chart(crear_hist(df2), key="resumenbi_hist_oferta")
         st.dataframe(prov_fil)
+        st.dataframe(claves_fil)
         
 #        st.header("Canitdades bianual")
  #       filqbi = visual("TOTAL", datos_filtradosbi)
