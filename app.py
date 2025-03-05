@@ -263,7 +263,7 @@ with tab1:
    #     st.header("Tipo de Abastecimiento 2025")
     #    st.plotly_chart(crear_hist(datos_fil25), key="resumen25_hist_oferta")
 
-        st.header("df1T")
+        st.header(df1T)
         filq25 = visual("TOTAL", df1)
         for c, filg25 in enumerate(filq25):
             st.plotly_chart(filg25, key=f"filg25_{c}")
@@ -282,7 +282,7 @@ with tab1:
      #   filq26 = visual("TOTAL", datos_filtrados26)
       #  for c, filg26 in enumerate(filq26):
        #     st.plotly_chart(filg26, key=f"filg26_{c}")
-        st.header("df2T")
+        st.header(df2T)
         film26 = visualMonto("TOTAL", df2)
         for d, filc26 in enumerate(film26):
             st.plotly_chart(filc26, key=f"filc26_{d}")
