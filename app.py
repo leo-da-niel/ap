@@ -207,7 +207,8 @@ def cloud_bubbles_prov(data):
         yaxis_title='Cantidad de claves adjudicadas',
         coloraxis_colorbar=dict(
             title='IMPORTE TOTAL ($)',
-            tickformat= f'{int(x * factor):,}'
+            tickvals=[i for i in range(int(tentop['IMPORTE_REDUCIDO'].min()), int(tentop['IMPORTE_REDUCIDO'].max()) + 1)],
+            ticktext=[f'{int(i * factor):,}' for i in range(int(tentop['IMPORTE_REDUCIDO'].min()), int(tentop['IMPORTE_REDUCIDO'].max()) + 1)]
         )
     )
     
