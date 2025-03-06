@@ -33,7 +33,7 @@ def calcular_monto(data):
     data_monto = pd.DataFrame()
     for col in data.columns:
         data.loc[:, 'Monto ' + col] = data[col] * dfroot['PRECIO UNITARIO']
-        data_monto = pd.concat([data_monto, data[['Monto ' + col]]], axis=1)
+        data_monto = pd.concat([data_monto, data[['MONTO ' + col]]], axis=1)
     return data_monto
 
 def rooted(data):
@@ -273,8 +273,13 @@ with tab1:
     col1, col2, col3 = st.columns(3)
     col1.metric("NÚMERO DE PROVEEDORES", f"{qprov_fil}")
     col1.metric("CLAVES ADJUDICADAS", f"{qclaves_fil}")
+    col1.mretic("IMPORTE TOTAL ADJUDICADO($)", f"{sum(calcular_monto(totales(bi))["MONTO TOTAL"])}")
     # Mostrar gráficos en columnas
     with col1:
+        st.header("Abasto")
+        st.altair_chart(make_donut(75, "Adjudicadas", "green"))
+        st.header("Desabasto")
+        st.altair_chart(make_donut(25, "No Adjudicadas", "red"))
         st.dataframe(prov_fil)
 
     with col2:
