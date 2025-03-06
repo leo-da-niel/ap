@@ -32,7 +32,7 @@ ab_s = simultaneo['CLAVES'].unique()
 def calcular_monto(data):
     data_monto = pd.DataFrame()
     for col in data.columns:
-        data.loc[:, 'Monto ' + col] = data[col] * dfroot['PRECIO UNITARIO']
+        data.loc[:, 'MONTO ' + col] = data[col] * dfroot['PRECIO UNITARIO']
         data_monto = pd.concat([data_monto, data[['MONTO ' + col]]], axis=1)
     return data_monto
 
