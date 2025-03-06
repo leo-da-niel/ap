@@ -74,7 +74,7 @@ def crear_hist(data):
     fig.add_annotation(
         text="El abastecimiento simultáneo se cuenta con multiplicidad",
         xref="paper", yref="paper",
-        x=0.5, y=-.5,
+        x=0.5, y=-.4,
         showarrow=False,
         font=dict(size=12)
     )
