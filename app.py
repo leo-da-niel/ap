@@ -72,9 +72,9 @@ def crear_hist(data):
     data['Tipo'] = data['ABASTO'].apply(lambda x: 'Abastecimiento único' if x == 1 else 'Abastecimiento simultáneo')
     fig = px.histogram(data, x='Tipo', color='Tipo', color_discrete_map={'Abastecimiento único': 'green', 'Abastecimiento simultáneo': 'yellow'}, width=400, height=400)
     fig.add_annotation(
-        text="El abastecimiento simultáneo se cuenta con multiplicidad",
+        text="* El abastecimiento simultáneo se cuenta con multiplicidad",
         xref="paper", yref="paper",
-        x=0.5, y=-.4,
+        x=0.5, y=-.45,
         showarrow=False,
         font=dict(size=12)
     )
