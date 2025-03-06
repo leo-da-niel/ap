@@ -510,7 +510,8 @@ with tab3:
     #for j, fig in enumerate(figures):
      #   st.plotly_chart(fig, key=f"fig_{j}")
     # Incluir información general
-    st.plotly_chart(cloud_bubbles_prov(bi), key="prov-top10")
+    st.plotly_chart(cloud_bubbles_prov(bi), key="prov-top10-1")
+
     st.dataframe(datos_filtrados)
     
 # Incluir imagen como pie de página
