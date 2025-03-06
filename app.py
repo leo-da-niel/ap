@@ -295,10 +295,12 @@ with tab1:
     col1.metric("IMPORTE TOTAL ADJUDICADO($)", f"{"{:,.2f}".format(sum(df3["TOTAL"]))}")
     # Mostrar gráficos en columnas
     with col1:
-        st.header("Abasto")
-        st.altair_chart(make_donut(75, "Adjudicadas", "green"))
-        st.header("Desabasto")
-        st.altair_chart(make_donut(25, "No Adjudicadas", "red"))
+        st.header("ABASTO / DESABASTO")
+        col1, col2 = st.columns(2)
+        with col1:
+            st.altair_chart(make_donut(75, "Adjudicadas", "green"))
+        with col1:
+            st.altair_chart(make_donut(25, "No Adjudicadas", "red"))
         st.header("PROVEEDORES ADJUDICADOS")
         st.dataframe(prov_fil)
 
