@@ -275,22 +275,23 @@ with tab1:
     col1.metric("CLAVES ADJUDICADAS", f"{qclaves_fil}")
     # Mostrar gráficos en columnas
     with col1:
+        st.dataframe(prov_fil)
+
+    with col2:
+
         st.header("Tipo de Clave Bianual")
         st.plotly_chart(crear_pie(df1), key="resumenbi_pie_oferta")
         st.header("Tipo de Abastecimiento Bianual")
         st.plotly_chart(crear_hist(df2), key="resumenbi_hist_oferta")
-        st.dataframe(prov_fil)
-        st.dataframe(claves_fil)
-
-    with col2:
-
-        st.header(df1T)
-        st.plotly_chart(Vvisual("TOTAL", df2), key=f"df1T")
+        
+   #     st.dataframe(claves_fil)
 
     with col3:
+        st.header(df1T)
+        st.plotly_chart(Vvisual("TOTAL", df2), key=f"df1T")
         st.header(df2T)
         st.plotly_chart(VvisualMonto("TOTAL", df2), key=f"df2T")
-    st.dataframe(df1)
+    st.dataframe(df2)
 # Pestaña 2
 with tab2:
     st.header("CCINSHAE")
