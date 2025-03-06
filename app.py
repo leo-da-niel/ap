@@ -75,7 +75,7 @@ def tentop_prov(data):
     monprov = rooted(totales(calcular_monto(data)))
     impprov = monprov.groupby("PROVEEDOR").sum().reset_index()
     sortprov=impprov.sort_values('PROVEEDOR')
-    top = sortprov.sort_values("TOTAL").tail(15)
+    top = sortprov.sort_values("TOTAL").tail(10)
     topsorted = top.sort_values("PROVEEDOR")
     
     ten = cuenta[cuenta['PROVEEDOR'].isin(top['PROVEEDOR'])]
@@ -458,6 +458,7 @@ with tab2:
 with tab3:
     st.header("Proveedores")
 
+    
     selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="proveedor_abasto")
     abastecimiento = abasto_options[selected_abasto]
     
