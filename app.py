@@ -299,6 +299,7 @@ with tab1:
         st.altair_chart(make_donut(75, "Adjudicadas", "green"))
         st.header("Desabasto")
         st.altair_chart(make_donut(25, "No Adjudicadas", "red"))
+        st.header("PROVEEDORES ADJUDICADOS")
         st.dataframe(prov_fil)
 
     with col2:
@@ -315,6 +316,7 @@ with tab1:
         st.plotly_chart(Vvisual("TOTAL", df2), key=f"df1T")
         st.header(df2T)
         st.plotly_chart(VvisualMonto("TOTAL", df3), key=f"df2T")
+    st.header("INFO")
     st.dataframe(df2)
 # Pestaña 2
 with tab2:
