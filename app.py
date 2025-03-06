@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import numpy as np
 import warnings
 import altair as alt
@@ -100,6 +101,13 @@ def VvisualMonto(data_inst, data):
     data_grouped = data.groupby("CLAVES").sum().reset_index()
     data_top10 = data_grouped.nlargest(10, data_inst)
     fig = px.line(data_top10, x="CLAVES", y=data_inst, title="TOP 10 IMPORTE ($) POR CLAVE", markers=True)
+    fig.add_trace(go.Scatter(
+        x=data_top10["CLAVES"],
+        y=data_top10[data_inst],
+        mode='text',
+        text=data_top10[data_inst].astype(str),
+        textposition="top center"
+    ))
     #fic = fig.update_traces(mode='markers+lines+text', text=data_top10[data_inst], textposition="top center")
     return fig
     #return fic
