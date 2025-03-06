@@ -5,6 +5,8 @@ import plotly.graph_objects as go
 import numpy as np
 import warnings
 import altair as alt
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 
 # Leer datos
 df = pd.read_excel('inst.xlsx', index_col='#')
@@ -32,6 +34,7 @@ ab_s = simultaneo['CLAVES'].unique()
 def calcular_monto(data):
     data_monto = pd.DataFrame()
     for col in data.columns:
+        data = data.copy()
         data.loc[:, 'MONTO ' + col] = data[col] * dfroot['PRECIO UNITARIO']
         data_monto = pd.concat([data_monto, data[['MONTO ' + col]]], axis=1)
     return data_monto
@@ -61,6 +64,24 @@ def filtrar_inst(nombre_inst):
 def nonz(data):
     datanz = data[data.iloc[:,-1] !=0]
     return datanz
+
+def tentop_prov(data):
+    provider_counts = df['PROVEEDOR'].value_counts()
+    proveedores_unicos = df['PROVEEDOR'].unique()
+    counts_list = [provider_counts[provider] for provider in proveedores_unicos]
+    cuentas = pd.DataFrame({'PROVEEDOR': proveedores_unicos, 'CUENTA': counts_list})
+    cuenta = cuentas.sort_values(by='PROVEEDOR')
+
+    monprov = rooted(totales(calcular_monto(data)))
+    impprov = monprov.groupby("PROVEEDOR").sum().reset_index()
+    sortprov=impprov.sort_values('PROVEEDOR')
+    top = sortprov.sort_values("TOTAL").tail(10)
+    topsorted = top.sort_values("PROVEEDOR")
+    
+    ten = cuenta[cuenta['PROVEEDOR'].isin(top['PROVEEDOR'])]
+    
+    tentop = pd.DataFrame({'PROVEEDOR': ten['PROVEEDOR'].reset_index(drop=True), 'CUENTA': ten['CUENTA'].reset_index(drop=True), 'IMPORTE': topsorted['TOTAL'].reset_index(drop=True)})
+    return tentop
 
 
 # Definimos funciones para crear gráficos
@@ -159,6 +180,27 @@ def make_donut(input_response, input_text, input_color):
                         legend=None),
     ).properties(width=130, height=130)
     return plot_bg + plot + text
+
+def cloud_bubbles_prov(data):
+    tentop = tentop_prov(data)
+    
+    plt.figure(figsize=(10, 7))
+    factor = 50000  # Dividir por mil millones para reducir el tamaño
+    tentop['IMPORTE_REDUCIDO'] = tentop['IMPORTE'] / factor
+    bubble = plt.scatter(tentop['PROVEEDOR'], tentop['CUENTA'], s=tentop['IMPORTE_REDUCIDO'], alpha=0.5, c=tentop['IMPORTE_REDUCIDO'], cmap='viridis')
+    
+    # Añadir una barra de color
+    cbar = plt.colorbar(bubble)
+    cbar.set_label('IMPORTE TOTAL ($)')
+    cbar.ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: f'{int(x * factor):,}'))
+    
+    
+    plt.xticks(rotation=90)
+    plt.xlabel('Proveedor')
+    plt.ylabel('Cantidad de claves adjudicadas')
+    plt.title('Importe total por proveedor')
+    
+    return plt
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
@@ -441,7 +483,8 @@ with tab3:
    # figures = visual(list(filtrar_inst(inst).columns)[0], datos_filtrados)
     #for j, fig in enumerate(figures):
      #   st.plotly_chart(fig, key=f"fig_{j}")
-    # Incluir información general   
+    # Incluir información general
+    st.plotly_chart(cloud_bubbles_prov(bi), key="prov-top10")
     st.dataframe(datos_filtrados)
     
 # Incluir imagen como pie de página
