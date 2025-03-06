@@ -184,6 +184,9 @@ def make_donut(input_response, input_text, input_color):
 import plotly.express as px
 import streamlit as st
 
+import plotly.express as px
+import streamlit as st
+
 def cloud_bubbles_prov(data):
     tentop = tentop_prov(data)
     
@@ -213,6 +216,10 @@ def cloud_bubbles_prov(data):
     )
     
     return fig
+
+# Uso en Streamlit
+st.plotly_chart(cloud_bubbles_prov(bi), key="prov-top10")
+
     
 
 # Configuración de la página
