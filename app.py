@@ -181,18 +181,6 @@ def make_donut(input_response, input_text, input_color):
     ).properties(width=130, height=130)
     return plot_bg + plot + text
 
-import plotly.express as px
-import streamlit as st
-
-import plotly.express as px
-import streamlit as st
-
-import plotly.express as px
-import streamlit as st
-
-import plotly.express as px
-import streamlit as st
-
 def cloud_bubbles_prov(data):
     tentop = tentop_prov(data)
     
@@ -216,8 +204,7 @@ def cloud_bubbles_prov(data):
         yaxis_title='Cantidad de claves adjudicadas',
         coloraxis_colorbar=dict(
             title='IMPORTE TOTAL ($)',
-            tickvals=[i for i in range(int(tentop['IMPORTE_REDUCIDO'].min()), int(tentop['IMPORTE_REDUCIDO'].max()) + 1)],
-            ticktext=[f'{int(i * factor):,}' for i in range(int(tentop['IMPORTE_REDUCIDO'].min()), int(tentop['IMPORTE_REDUCIDO'].max()) + 1)]
+            tickformat=',.0f'
         )
     )
     
