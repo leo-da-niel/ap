@@ -190,6 +190,9 @@ import streamlit as st
 import plotly.express as px
 import streamlit as st
 
+import plotly.express as px
+import streamlit as st
+
 def cloud_bubbles_prov(data):
     tentop = tentop_prov(data)
     
@@ -213,20 +216,13 @@ def cloud_bubbles_prov(data):
         yaxis_title='Cantidad de claves adjudicadas',
         coloraxis_colorbar=dict(
             title='IMPORTE TOTAL ($)',
-            tickformat=',.0f'
+            tickvals=[i for i in range(int(tentop['IMPORTE_REDUCIDO'].min()), int(tentop['IMPORTE_REDUCIDO'].max()) + 1)],
+            ticktext=[f'{int(i * factor):,}' for i in range(int(tentop['IMPORTE_REDUCIDO'].min()), int(tentop['IMPORTE_REDUCIDO'].max()) + 1)]
         )
     )
     
     return fig
 
-# Uso en Streamlit
-st.plotly_chart(cloud_bubbles_prov(bi), key="prov-top10")
-
-
-# Uso en Streamlit
-st.plotly_chart(cloud_bubbles_prov(bi), key="prov-top10")
-
-    
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
@@ -510,7 +506,7 @@ with tab3:
     #for j, fig in enumerate(figures):
      #   st.plotly_chart(fig, key=f"fig_{j}")
     # Incluir información general
-    st.plotly_chart(cloud_bubbles_prov(bi), key="prov-top10-1")
+    st.plotly_chart(cloud_bubbles_prov(bi), key="prov-top10")
 
     st.dataframe(datos_filtrados)
     
