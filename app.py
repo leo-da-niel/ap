@@ -296,10 +296,10 @@ with tab1:
     # Mostrar gráficos en columnas
     with col1:
         st.header("ABASTO / DESABASTO")
-        col1, col2 = st.columns(2)
-        with col1:
+        col11, col12 = st.columns(2)
+        with col11:
             st.altair_chart(make_donut(75, "Adjudicadas", "green"))
-        with col2:
+        with col12:
             st.altair_chart(make_donut(25, "No Adjudicadas", "red"))
         st.header("PROVEEDORES ADJUDICADOS")
         st.dataframe(prov_fil)
