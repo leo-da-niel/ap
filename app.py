@@ -195,14 +195,26 @@ type_options = {
 df25 = pd.concat([df5, totales(df5)], axis=1)
 df26 = pd.concat([df6, totales(df6)], axis=1)
 bit  = pd.concat([bi, totales(bi)], axis=1)
+#monto
+df2025 = pd.concat([df5, totales(calcular_monto(df5))], axis=1)
+df2026 = pd.concat([df6, totales(calcular_monto(df6))], axis=1)
+bitmoon  = pd.concat([bi, totales(calcular_monto(bi))], axis=1)
 
 bitrooted = rooted(bit)
 rooted25 = rooted(df25)
 rooted26 = rooted(df26)
+#monto
+bitmoonrooted = rooted(bitmoon)
+rooted2025 = rooted(df2025)
+rooted2026 = rooted(df2026)
 
 nzbitrooted = bitrooted[bitrooted["TOTAL"] !=0]
 nzrooted25 = rooted25[rooted25["TOTAL"] !=0]
 nzrooted26 = rooted26[rooted26["TOTAL"] !=0]
+#monto
+nzbitmoonrooted = bitmoonrooted[bitmoonrooted["MONTO TOTAL"] !=0]
+nzrooted2025 = rooted2025[rooted25["MONTO TOTAL"] !=0]
+nzrooted2026 = rooted2026[rooted26["MONTO TOTAL"] !=0]
 
 grnzbitrooted = grouping(nzbitrooted)
 grnzrooted25 = grouping(nzrooted25)
@@ -238,9 +250,14 @@ with tab1:
     datos_fil25 = nzrooted25[(nzrooted25['CLAVES'].isin(cl)) & (nzrooted25['CLAVES'].isin(abastecimiento)) & (nzrooted25['CLAVES'].isin(ty))]
     datos_fil26 = nzrooted26[(nzrooted26['CLAVES'].isin(cl)) & (nzrooted26['CLAVES'].isin(abastecimiento)) & (nzrooted26['CLAVES'].isin(ty))]
 
+    datos_moon_bi = nzbitmoonrooted[(nzbitmoonrooted['CLAVES'].isin(cl)) & (nzbitmoonrooted['CLAVES'].isin(abastecimiento)) & (nzbitmoonrooted['CLAVES'].isin(ty))]
+    datos_moon_25 = nzrooted2025[(nzrooted2025['CLAVES'].isin(cl)) & (nzrooted2025['CLAVES'].isin(abastecimiento)) & (nzrooted2025['CLAVES'].isin(ty))]
+    datos_moon_26 = nzrooted2026[(nzrooted2026['CLAVES'].isin(cl)) & (nzrooted2026['CLAVES'].isin(abastecimiento)) & (nzrooted2026['CLAVES'].isin(ty))]
+    
     if periodo_input == "BIANUAL":
         df1 = datos_filtradosbi
         df2 = datos_filbi
+        df3 = datos_moon_bi
         df1T = "CANTIDADES BIANUAL"
         df2T = "IMPORTE BIANUAL"
         qclaves_fil = datos_filbi['CLAVES'].nunique()
@@ -252,6 +269,7 @@ with tab1:
     elif periodo_input == "2025":
         df1 = datos_filtrados25
         df2 = datos_fil25
+        df3 = datos_moon_25
         df1T = "CANTIDADES 2025"
         df2T = "IMPORTE 2025"
         qclaves_fil = datos_filbi['CLAVES'].nunique()
@@ -262,6 +280,7 @@ with tab1:
     else:
         df1 = datos_filtrados26
         df2 = datos_fil26
+        df3 = datos_moon_26
         df1T = "CANTIDADES 2026"
         df2T = "IMPORTE 2026"
         qclaves_fil = datos_filbi['CLAVES'].nunique()
@@ -273,7 +292,7 @@ with tab1:
     col1, col2, col3 = st.columns(3)
     col1.metric("NÚMERO DE PROVEEDORES", f"{qprov_fil}")
     col1.metric("CLAVES ADJUDICADAS", f"{qclaves_fil}")
-    col1.metric("IMPORTE TOTAL ADJUDICADO($)", f"{"{:,.2f}".format(sum(calcular_monto(totales(bi))["MONTO TOTAL"]))}")
+    col1.metric("IMPORTE TOTAL ADJUDICADO($)", f"{"{:,.2f}".format(sum(df3["MONTO TOTAL"]))}")
     # Mostrar gráficos en columnas
     with col1:
         st.header("Abasto")
@@ -295,7 +314,7 @@ with tab1:
         st.header(df1T)
         st.plotly_chart(Vvisual("TOTAL", df2), key=f"df1T")
         st.header(df2T)
-        st.plotly_chart(VvisualMonto("TOTAL", df2), key=f"df2T")
+        st.plotly_chart(VvisualMonto("TOTAL", df3), key=f"df2T")
     st.dataframe(df2)
 # Pestaña 2
 with tab2:
