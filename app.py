@@ -241,7 +241,7 @@ with tab1:
     if periodo_input == "BIANUAL":
         df1 = datos_filtradosbi
         df2 = datos_filbi
-        df1T = "CANTIDAD DEMANDADA BIANUAL"
+        df1T = "CANTIDADES BIANUAL"
         df2T = "IMPORTE BIANUAL"
         qclaves_fil = datos_filbi['CLAVES'].nunique()
         claves_fil = datos_filbi['CLAVES'].unique()
@@ -252,7 +252,7 @@ with tab1:
     elif periodo_input == "2025":
         df1 = datos_filtrados25
         df2 = datos_fil25
-        df1T = "CANTIDAD DEMANDADA 2025"
+        df1T = "CANTIDADES 2025"
         df2T = "IMPORTE 2025"
         qclaves_fil = datos_filbi['CLAVES'].nunique()
         claves_fil = datos_filbi['CLAVES'].unique()
@@ -262,7 +262,7 @@ with tab1:
     else:
         df1 = datos_filtrados26
         df2 = datos_fil26
-        df1T = "CANTIDAD DEMANDADA 2026"
+        df1T = "CANTIDADES 2026"
         df2T = "IMPORTE 2026"
         qclaves_fil = datos_filbi['CLAVES'].nunique()
         claves_fil = datos_filbi['CLAVES'].unique()
@@ -284,9 +284,9 @@ with tab1:
 
     with col2:
 
-        st.header("Tipo de Clave Bianual")
+        st.header("Tipo de Clave")
         st.plotly_chart(crear_pie(df1), key="resumenbi_pie_oferta")
-        st.header("Tipo de Abastecimiento Bianual")
+        st.header("Tipo de Abastecimiento")
         st.plotly_chart(crear_hist(df2), key="resumenbi_hist_oferta")
         
    #     st.dataframe(claves_fil)
