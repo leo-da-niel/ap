@@ -70,7 +70,15 @@ def crear_pie(data):
 
 def crear_hist(data):
     data['Tipo'] = data['ABASTO'].apply(lambda x: 'Abastecimiento único' if x == 1 else 'Abastecimiento simultáneo')
-    return px.histogram(data, x='Tipo', color='Tipo', color_discrete_map={'Abastecimiento único': 'green', 'Abastecimiento simultáneo': 'yellow'}, width=400, height=400)
+    fig = px.histogram(data, x='Tipo', color='Tipo', color_discrete_map={'Abastecimiento único': 'green', 'Abastecimiento simultáneo': 'yellow'}, width=400, height=400)
+    fig.add_annotation(
+        text="El abastecimiento simultáneo se cuenta con multiplicidad",
+        xref="paper", yref="paper",
+        x=0.5, y=-0.2,
+        showarrow=False,
+        font=dict(size=12)
+    )
+    return fig
 
 def visualMonto(data_inst, data):
     data_grouped = data.groupby("CLAVES").sum().reset_index()
