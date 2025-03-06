@@ -212,9 +212,9 @@ nzbitrooted = bitrooted[bitrooted["TOTAL"] !=0]
 nzrooted25 = rooted25[rooted25["TOTAL"] !=0]
 nzrooted26 = rooted26[rooted26["TOTAL"] !=0]
 #monto
-nzbitmoonrooted = bitmoonrooted[bitmoonrooted["MONTO TOTAL"] !=0]
-nzrooted2025 = rooted2025[rooted25["MONTO TOTAL"] !=0]
-nzrooted2026 = rooted2026[rooted26["MONTO TOTAL"] !=0]
+nzbitmoonrooted = bitmoonrooted[bitmoonrooted["TOTAL"] !=0]
+nzrooted2025 = rooted2025[rooted25["TOTAL"] !=0]
+nzrooted2026 = rooted2026[rooted26["TOTAL"] !=0]
 
 grnzbitrooted = grouping(nzbitrooted)
 grnzrooted25 = grouping(nzrooted25)
@@ -292,7 +292,7 @@ with tab1:
     col1, col2, col3 = st.columns(3)
     col1.metric("NÚMERO DE PROVEEDORES", f"{qprov_fil}")
     col1.metric("CLAVES ADJUDICADAS", f"{qclaves_fil}")
-    col1.metric("IMPORTE TOTAL ADJUDICADO($)", f"{"{:,.2f}".format(sum(df3["MONTO TOTAL"]))}")
+    col1.metric("IMPORTE TOTAL ADJUDICADO($)", f"{"{:,.2f}".format(sum(df3["TOTAL"]))}")
     # Mostrar gráficos en columnas
     with col1:
         st.header("Abasto")
