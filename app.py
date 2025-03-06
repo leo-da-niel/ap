@@ -93,7 +93,7 @@ def Vvisual(data_inst, data):
     data_top10 = data_grouped.nlargest(10, data_inst)
     fig = px.bar(data_top10, x="CLAVES", y=data_inst, title="TOP 10 CANTIDADES DEMANDADAS")
     #fic = fig.update_traces(mode='markers+lines+text', text=data_top10[data_inst], textposition="top center")
-    return fic
+    return fig
     #fig.show()
     
 def VvisualMonto(data_inst, data):
@@ -101,8 +101,8 @@ def VvisualMonto(data_inst, data):
     data_top10 = data_grouped.nlargest(10, data_inst)
     fig = px.line(data_top10, x="CLAVES", y=data_inst, title="TOP 10 IMPORTE ($) POR CLAVE", markers=True)
     #fic = fig.update_traces(mode='markers+lines+text', text=data_top10[data_inst], textposition="top center")
-    return fic
-    #fig.show()
+    return fig
+    #return fic
 
 warnings.filterwarnings("ignore", category=FutureWarning, module="altair")
 def make_donut(input_response, input_text, input_color):
