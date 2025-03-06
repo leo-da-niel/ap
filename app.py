@@ -299,7 +299,7 @@ with tab1:
         col1, col2 = st.columns(2)
         with col1:
             st.altair_chart(make_donut(75, "Adjudicadas", "green"))
-        with col1:
+        with col2:
             st.altair_chart(make_donut(25, "No Adjudicadas", "red"))
         st.header("PROVEEDORES ADJUDICADOS")
         st.dataframe(prov_fil)
