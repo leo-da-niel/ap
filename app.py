@@ -32,8 +32,8 @@ ab_s = simultaneo['CLAVES'].unique()
 def calcular_monto(data):
     data_monto = pd.DataFrame()
     for col in data.columns:
-        data.loc[:, 'Monto ' + col] = data[col] * dfroot['PRECIO UNITARIO']
-        data_monto = pd.concat([data_monto, data[['Monto ' + col]]], axis=1)
+        data.loc[:, 'MONTO ' + col] = data[col] * dfroot['PRECIO UNITARIO']
+        data_monto = pd.concat([data_monto, data[['MONTO ' + col]]], axis=1)
     return data_monto
 
 def rooted(data):
@@ -273,7 +273,7 @@ with tab1:
     col1, col2, col3 = st.columns(3)
     col1.metric("NÚMERO DE PROVEEDORES", f"{qprov_fil}")
     col1.metric("CLAVES ADJUDICADAS", f"{qclaves_fil}")
-    col1.mretic("IMPORTE TOTAL ADJUDICADO($)", f"{sum(calcular_monto(totales(bi))["Monto TOTAL"])}")
+    col1.metric("IMPORTE TOTAL ADJUDICADO($)", f"{sum(calcular_monto(totales(bi))["MONTO TOTAL"])}")
     # Mostrar gráficos en columnas
     with col1:
         st.header("Abasto")
