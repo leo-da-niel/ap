@@ -181,26 +181,38 @@ def make_donut(input_response, input_text, input_color):
     ).properties(width=130, height=130)
     return plot_bg + plot + text
 
+import plotly.express as px
+import streamlit as st
+
 def cloud_bubbles_prov(data):
     tentop = tentop_prov(data)
     
-    plt.figure(figsize=(10, 7))
     factor = 50000  # Dividir por mil millones para reducir el tamaño
     tentop['IMPORTE_REDUCIDO'] = tentop['IMPORTE'] / factor
-    bubble = plt.scatter(tentop['PROVEEDOR'], tentop['CUENTA'], s=tentop['IMPORTE_REDUCIDO'], alpha=0.5, c=tentop['IMPORTE_REDUCIDO'], cmap='viridis')
     
-    # Añadir una barra de color
-    cbar = plt.colorbar(bubble)
-    cbar.set_label('IMPORTE TOTAL ($)')
-    cbar.ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda x, pos: f'{int(x * factor):,}'))
+    fig = px.scatter(
+        tentop,
+        x='PROVEEDOR',
+        y='CUENTA',
+        size='IMPORTE_REDUCIDO',
+        color='IMPORTE_REDUCIDO',
+        hover_name='PROVEEDOR',
+        size_max=60,
+        color_continuous_scale='Viridis',
+        title='Importe total por proveedor'
+    )
     
+    fig.update_layout(
+        xaxis_title='Proveedor',
+        yaxis_title='Cantidad de claves adjudicadas',
+        coloraxis_colorbar=dict(
+            title='IMPORTE TOTAL ($)',
+            tickformat=',.0f'
+        )
+    )
     
-    plt.xticks(rotation=90)
-    plt.xlabel('Proveedor')
-    plt.ylabel('Cantidad de claves adjudicadas')
-    plt.title('Importe total por proveedor')
+    return fig
     
-    return plt
 
 # Configuración de la página
 st.set_page_config(page_title="Dashboard", layout="wide")
@@ -484,7 +496,7 @@ with tab3:
     #for j, fig in enumerate(figures):
      #   st.plotly_chart(fig, key=f"fig_{j}")
     # Incluir información general
-    st.plotly_chart(cloud_bubbles_prov(bi), key=f"prov-top10")
+    st.plotly_chart(cloud_bubbles_prov(bi), key="prov-top10")
     st.dataframe(datos_filtrados)
     
 # Incluir imagen como pie de página
