@@ -486,9 +486,9 @@ with tab3:
     prov_moon_26 = nzrooted2026[(nzrooted2026['CLAVES'].isin(p_cl)) & (nzrooted2026['CLAVES'].isin(p_abastecimiento)) & (nzrooted2026['CLAVES'].isin(p_ty))]
     
     if periodo_input == "BIANUAL":
-        prov1 = prov_filtradosbi[prov_filtradosbi["PROVEEDOR"]==p_inst]
-        prov2 = prov_filbi[ prov_filbi["PROVEEDOR"]==p_inst]
-        prov3 = prov_moon_bi[prov_moon_bi["PROVEEDOR"]==p_inst]
+        prov1 = prov_filtradosbi[prov_filtradosbi["PROVEEDOR"]==p_selected_proveedor]
+        prov2 = prov_filbi[ prov_filbi["PROVEEDOR"]==p_selected_proveedor]
+        prov3 = prov_moon_bi[prov_moon_bi["PROVEEDOR"]==p_selected_proveedor]
         prov4 = bi
         prov1T = "CANTIDADES BIANUAL"
         prov2T = "IMPORTE BIANUAL"
