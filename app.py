@@ -545,8 +545,8 @@ with tab3:
     # Mostrar gráficos en columnas
     with col1:
 
-      #  st.header("PROVEEDORES ADJUDICADOS")
-       # st.dataframe(prov_fil)
+        st.header("PROVEEDORES ADJUDICADOS")
+       st.dataframe(prov_fil)
 
     with col2:
 
