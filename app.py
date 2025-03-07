@@ -537,7 +537,7 @@ with tab3:
         ax.tick_params(axis='x', labelsize=18)
         ax.tick_params(axis='y', labelsize=18)
         for bar in bars:
-            ax.annotate(f'{bar.get_width()}', xy=(bar.get_width(), bar.get_y() + bar.get_height() / 2), xytext=(5, 0), textcoords='offset points', ha='left', va='center',  labelsize=18)
+            ax.annotate(f'{bar.get_width()}', xy=(bar.get_width(), bar.get_y() + bar.get_height() / 2), xytext=(15, 10), textcoords='offset points', ha='left', va='center')
         st.header("TOP 10 PROVEEDORES CON MÁS ADJUDICACIONES")
         st.pyplot(fig)
 
