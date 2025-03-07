@@ -519,9 +519,9 @@ with tab3:
         prov_claves_fil = prov2['CLAVES'].unique()
         prov_qprov_fil = prov2['PROVEEDOR'].nunique()
         prov_prov_fil = prov2['PROVEEDOR'].unique()
-    col18, col19 = st.columns(2)
+    col18, col19 = st.columns([0.65, 0.34])
     with col18:
-        st.header("TOP 10 PROVEEDORES CON IMPORTES MÁS GRANDES")
+        st.header("TOP 10 PROVEEDORES CON IMPORTES MAYORES")
         st.plotly_chart(cloud_bubbles_prov(prov4), key="prov-top10")
     with col19:
         provider_adjs = df['PROVEEDOR'].value_counts()
@@ -531,11 +531,12 @@ with tab3:
         tt = tt.tail(10)
         fig, ax = plt.subplots(figsize=(10, 6))
         bars = ax.barh(tt['PROVEEDOR'], tt['CUENTA'], color='skyblue')
-        ax.set_xlabel('Cuenta')
+        ax.set_xlabel('Número de Claves')
         ax.set_ylabel('Proveedor')
-        ax.set_title('Top 10 Proveedores con Más Cuentas Adjudicadas')
+        ax.set_title('Top 10 Proveedores con Más Claves Adjudicadas')
         for bar in bars:
             ax.annotate(f'{bar.get_width()}', xy=(bar.get_width(), bar.get_y() + bar.get_height() / 2), xytext=(5, 0), textcoords='offset points', ha='left', va='center')
+        st.header("TOP 10 PROVEEDORES CON MÁS ADJUDICACIONES")
         st.pyplot(fig)
 
     col1, col2, col3 = st.columns(3)
