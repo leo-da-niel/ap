@@ -529,7 +529,7 @@ with tab3:
         t10 = pd.DataFrame({'PROVEEDOR': proveedores_unicos, 'CUENTA': tlist})
         tt = t10.sort_values(by='CUENTA')
         tt = tt.tail(10)
-        fig, ax = plt.subplots(figsize=(10, 6))
+        fig, ax = plt.subplots(figsize=(10, 16))
         bars = ax.barh(tt['PROVEEDOR'], tt['CUENTA'], color='skyblue')
         ax.set_xlabel('Número de Claves')
         ax.set_ylabel('Proveedor')
