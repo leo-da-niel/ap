@@ -543,9 +543,9 @@ with tab3:
     with col2:
 
         st.header("Tipo de Clave")
-        st.plotly_chart(crear_pie(prov1), key="resumenbi_pie_oferta")
+        st.plotly_chart(crear_pie(prov1), key="prov_pie_oferta")
         st.header("Tipo de Abastecimiento")
-        st.plotly_chart(crear_hist(prov2), key="resumenbi_hist_oferta")
+        st.plotly_chart(crear_hist(prov2), key="prov_hist_oferta")
         
    #     st.dataframe(prov_claves_fil)
 
