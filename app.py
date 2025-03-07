@@ -534,6 +534,8 @@ with tab3:
         ax.set_xlabel('Número de Claves', fontsize=24)
         ax.set_ylabel('Proveedor', fontsize=24)
         ax.set_title('Top 10 Proveedores con Más Claves Adjudicadas', fontsize=24)
+        ax.tick_params(axis='x', labelsize=18)
+        ax.tick_params(axis='y', labelsize=18)
         for bar in bars:
             ax.annotate(f'{bar.get_width()}', xy=(bar.get_width(), bar.get_y() + bar.get_height() / 2), xytext=(5, 0), textcoords='offset points', ha='left', va='center', , fontsize=24)
         st.header("TOP 10 PROVEEDORES CON MÁS ADJUDICACIONES")
