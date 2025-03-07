@@ -457,27 +457,32 @@ with tab2:
 # Pestaña 3
 with tab3:
     st.header("Proveedores")
-
-    
-    selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="proveedor_abasto")
-    abastecimiento = abasto_options[selected_abasto]
-    
-    selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="proveedor_type")
-    ty = type_options[selected_type]
-    
-    clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="proveedor_clave")
-    cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
-
-    selected_proveedor = st.selectbox("Ingrese el Proveedor:", list(proveedor_options.keys()), key="proveedor_instituto")
-    prov = proveedor_options[selected_proveedor]
-
-    
-    # Filtrar datos
-    instpref = rooted(filtrar_inst(inst))
-    instf = nonz(rooted(filtrar_inst(inst)))
-    datos_filtrados = instf[(instf['CLAVES'].isin(cl)) & (instf['CLAVES'].isin(abastecimiento)) & (instf['CLAVES'].isin(ty))]
-
-    
+        col1, col2, col3, col4, col5 = st.columns(5)
+    with col1:
+        selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="proveedor_abasto")
+        abastecimiento = abasto_options[selected_abasto]
+    with col2:    
+        selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="proveedor_type")
+        ty = type_options[selected_type]
+    with col3:   
+        clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="proveedor_clave")
+        cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
+    with col4:
+        selected_proveedor = st.selectbox("Ingrese el Proveedor:", list(proveedor_options.keys()), key="adj_proveedor")
+        inst = instituto_options[selected_instituto]
+    with col5:
+        periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="proveedor_periodo")
+      # Filtrar datos
+  #  instpref = rooted(filtrar_inst(inst))
+   # instf = nonz(rooted(filtrar_inst(inst)))
+#    datos_filtrados = instf[(instf['CLAVES'].isin(cl)) & (instf['CLAVES'].isin(abastecimiento)) & (instf['CLAVES'].isin(ty))]
+ #   input_response = 75
+  #  input_text = "Progreso"
+   # input_color = "blue"
+    #col1, col2, col3 = st.columns(3)
+   # col1.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
+  #  col1.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
+ 
     # Crear columnas
     col1, col2 = st.columns(2)
     
