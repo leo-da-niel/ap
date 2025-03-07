@@ -492,10 +492,10 @@ with tab3:
         prov4 = bi
         prov1T = "CANTIDADES BIANUAL"
         prov2T = "IMPORTE BIANUAL"
-        prov_qclaves_fil = prov_filbi['CLAVES'].nunique()
-        prov_claves_fil = prov_filbi['CLAVES'].unique()
-        prov_qprov_fil = prov_filbi['PROVEEDOR'].nunique()
-        prov_prov_fil = prov_filbi['PROVEEDOR'].unique()
+        prov_qclaves_fil = prov2['CLAVES'].nunique()
+        prov_claves_fil = prov2['CLAVES'].unique()
+        prov_qprov_fil = prov2['PROVEEDOR'].nunique()
+        prov_prov_fil = prov2['PROVEEDOR'].unique()
         
         
     elif p_periodo_input == "2025":
@@ -505,10 +505,10 @@ with tab3:
         prov4 = df5
         prov1T = "CANTIDADES 2025"
         prov2T = "IMPORTE 2025"
-        prov_qclaves_fil = prov_fil25['CLAVES'].nunique()
-        prov_claves_fil = prov_fil25['CLAVES'].unique()
-        prov_qprov_fil = prov_fil25['PROVEEDOR'].nunique()
-        prov_prov_fil = prov_fil25['PROVEEDOR'].unique()
+        prov_qclaves_fil = prov2['CLAVES'].nunique()
+        prov_claves_fil = prov2['CLAVES'].unique()
+        prov_qprov_fil = prov2['PROVEEDOR'].nunique()
+        prov_prov_fil = prov2['PROVEEDOR'].unique()
 
     else:
         prov1 = prov_filtrados26[prov_filtrados26["PROVEEDOR"]==p_selected_proveedor]
@@ -517,10 +517,10 @@ with tab3:
         prov4 = df6
         prov1T = "CANTIDADES 2026"
         prov2T = "IMPORTE 2026"
-        prov_qclaves_fil = prov_fil26['CLAVES'].nunique()
-        prov_claves_fil = prov_fil26['CLAVES'].unique()
-        prov_qprov_fil = prov_fil26['PROVEEDOR'].nunique()
-        prov_prov_fil = prov_fil26['PROVEEDOR'].unique()
+        prov_qclaves_fil = prov2['CLAVES'].nunique()
+        prov_claves_fil = prov2['CLAVES'].unique()
+        prov_qprov_fil = prov2['PROVEEDOR'].nunique()
+        prov_prov_fil = prov2['PROVEEDOR'].unique()
 
     st.header("TOP 10 PROVEEDORES CON IMPORTES MÁS GRANDES")
     st.plotly_chart(cloud_bubbles_prov(prov4), key="prov-top10")
