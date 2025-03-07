@@ -519,7 +519,7 @@ with tab3:
         prov_claves_fil = prov2['CLAVES'].unique()
         prov_qprov_fil = prov2['PROVEEDOR'].nunique()
         prov_prov_fil = prov2['PROVEEDOR'].unique()
-    col18, col19 = st.columns([0.65, 0.34])
+    col18, col19 = st.columns([0.60, 0.40])
     with col18:
         st.header("TOP 10 PROVEEDORES CON IMPORTES MAYORES")
         st.plotly_chart(cloud_bubbles_prov(prov4), key="prov-top10")
@@ -529,7 +529,7 @@ with tab3:
         t10 = pd.DataFrame({'PROVEEDOR': proveedores_unicos, 'CUENTA': tlist})
         tt = t10.sort_values(by='CUENTA')
         tt = tt.tail(10)
-        fig, ax = plt.subplots(figsize=(10, 16))
+        fig, ax = plt.subplots(figsize=(12, 12))
         bars = ax.barh(tt['PROVEEDOR'], tt['CUENTA'], color='skyblue')
         ax.set_xlabel('Número de Claves')
         ax.set_ylabel('Proveedor')
