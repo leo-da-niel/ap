@@ -523,7 +523,7 @@ with tab3:
         st.header("TOP 10 PROVEEDORES CON IMPORTES MAYORES")
         st.plotly_chart(cloud_bubbles_prov(prov4), key="prov-top10")
     with col19:
-        provider_adjs = df['PROVEEDOR'].value_counts()
+        provider_adjs = prov4['PROVEEDOR'].value_counts()
         tlist = [provider_adjs[provider] for provider in proveedores_unicos]
         t10 = pd.DataFrame({'PROVEEDOR': proveedores_unicos, 'CUENTA': tlist})
         tt = t10.sort_values(by='CUENTA')
