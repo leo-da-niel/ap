@@ -485,7 +485,7 @@ with tab3:
     prov_moon_25 = nzrooted2025[(nzrooted2025['CLAVES'].isin(p_cl)) & (nzrooted2025['CLAVES'].isin(p_abastecimiento)) & (nzrooted2025['CLAVES'].isin(p_ty))]
     prov_moon_26 = nzrooted2026[(nzrooted2026['CLAVES'].isin(p_cl)) & (nzrooted2026['CLAVES'].isin(p_abastecimiento)) & (nzrooted2026['CLAVES'].isin(p_ty))]
     
-    if periodo_input == "BIANUAL":
+    if p_periodo_input == "BIANUAL":
         prov1 = prov_filtradosbi[prov_filtradosbi["PROVEEDOR"]==p_selected_proveedor]
         prov2 = prov_filbi[ prov_filbi["PROVEEDOR"]==p_selected_proveedor]
         prov3 = prov_moon_bi[prov_moon_bi["PROVEEDOR"]==p_selected_proveedor]
@@ -498,7 +498,7 @@ with tab3:
         prov_prov_fil = prov_filbi['PROVEEDOR'].unique()
         
         
-    elif periodo_input == "2025":
+    elif p_periodo_input == "2025":
         prov1 = prov_filtrados25[prov_filtrados25["PROVEEDOR"]==p_selected_proveedor]
         prov2 = prov_fil25[prov_fil25["PROVEEDOR"]==p_selected_proveedor]
         prov3 = prov_moon_25[prov_moon_25["PROVEEDOR"]==p_selected_proveedor]
@@ -554,8 +554,8 @@ with tab3:
         st.plotly_chart(Vvisual("TOTAL", prov2), key=f"prov1T")
         st.header(prov2T)
         st.plotly_chart(VvisualMonto("TOTAL", prov3), key=f"prov2T")
-    st.header("INFO")
-    st.dataframe(prov2)
+    #st.header("INFO")
+    #st.dataframe(prov2)
 
     
     # Crear columnas
