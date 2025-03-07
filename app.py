@@ -82,7 +82,15 @@ def tentop_prov(data):
     
     tentop = pd.DataFrame({'PROVEEDOR': ten['PROVEEDOR'].reset_index(drop=True), 'CUENTA': ten['CUENTA'].reset_index(drop=True), 'IMPORTE': topsorted['TOTAL'].reset_index(drop=True)})
     return tentop
-
+    
+def instxproveer(data, proveedor):
+    # Filtrar el DataFrame para el proveedor dado
+    df_proveedor = data[data['PROVEEDOR'] == proveedor]
+    # Obtener las columnas con valores distintos de cero
+    columnas_distintas_de_cero = df_proveedor.loc[:, (df_proveedor != 0).any(axis=0)].columns.tolist()
+    # Excluir las columnas 'PROVEEDOR' y '#'
+    columnas_distintas_de_cero = [col for col in columnas_distintas_de_cero if col not in ['PROVEEDOR', '#']]
+    return columnas_distintas_de_cero
 
 # Definimos funciones para crear gráficos
 def crear_pie(data):
@@ -520,7 +528,7 @@ with tab3:
         prov_prov_fil = prov2['PROVEEDOR'].unique()
     col18, col19 = st.columns([0.60, 0.40])
     with col18:
-        st.header("TOP 10 PROVEEDORES CON IMPORTES MAYORES")
+        st.header("TOP 10 PROVEEDORES CON MAYOR IMPORTE")
         st.plotly_chart(cloud_bubbles_prov(prov4), key="prov-top10")
     with col19:
         provider_adjs = rooted(prov4)['PROVEEDOR'].value_counts()
@@ -546,9 +554,9 @@ with tab3:
     col1.metric("IMPORTE TOTAL ADJUDICADO($)", f"{"{:,.2f}".format(sum(prov3["TOTAL"]))}")
     # Mostrar gráficos en columnas
     with col1:
-
-        st.header("PROVEEDORES ADJUDICADOS")
-        st.dataframe(prov_fil)
+        inst_a_proveer = instxproveer(prov4, p_selected_proveedor)
+        st.write(f"INSTITUTOS A PROVEER '{p_selected_proveedor}':")
+        st.table(pd.DataFrame(inst_a_proveer, columns=['Instituos']))
 
     with col2:
 
