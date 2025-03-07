@@ -486,9 +486,9 @@ with tab3:
     prov_moon_26 = nzrooted2026[(nzrooted2026['CLAVES'].isin(p_cl)) & (nzrooted2026['CLAVES'].isin(p_abastecimiento)) & (nzrooted2026['CLAVES'].isin(p_ty))]
     
     if periodo_input == "BIANUAL":
-        prov1 = prov_datos_filtradosbi
-        prov2 = prov_datos_filbi
-        prov3 = prov_datos_moon_bi
+        prov1 = prov_filtradosbi
+        prov2 = prov_filbi
+        prov3 = prov_moon_bi
         prov4 = bi
         prov1T = "CANTIDADES BIANUAL"
         prov2T = "IMPORTE BIANUAL"
@@ -499,9 +499,9 @@ with tab3:
         
         
     elif periodo_input == "2025":
-        prov1 = prov_datos_filtrados25
-        prov2 = prov_datos_fil25
-        prov3 = prov_datos_moon_25
+        prov1 = prov_filtrados25
+        prov2 = prov_fil25
+        prov3 = prov_moon_25
         prov4 = df5
         prov1T = "CANTIDADES 2025"
         prov2T = "IMPORTE 2025"
