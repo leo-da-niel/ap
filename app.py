@@ -85,7 +85,7 @@ def tentop_prov(data):
     
 def instxproveer(dats, proveedor):
     # Filtrar el DataFrame para el proveedor dado
-    data = pd.concat([df['PROVEEDOR'],data], axis=1)
+    data = pd.concat([df['PROVEEDOR'],dats], axis=1)
     df_proveedor = data[data['PROVEEDOR'] == proveedor]
     # Obtener las columnas con valores distintos de cero
     columnas_distintas_de_cero = df_proveedor.loc[:, (df_proveedor != 0).any(axis=0)].columns.tolist()
