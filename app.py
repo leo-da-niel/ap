@@ -556,7 +556,7 @@ with tab3:
     # Mostrar gráficos en columnas
     with col1:
         inst_a_proveer = instxproveer(prov4, p_selected_proveedor)
-        st.header(f"Institutos por abastecer para el proveedor {p_selected_proveedor}:")
+        st.header(f"INSTITUTOS A PROVEER POR {p_selected_proveedor}:")
         st.table(pd.DataFrame(inst_a_proveer, columns=['Instituos']))
 
     with col2:
