@@ -537,8 +537,8 @@ with tab3:
             st.altair_chart(make_donut(75, "Adjudicadas", "green"))
         with col12:
             st.altair_chart(make_donut(25, "No Adjudicadas", "red"))
-        st.header("PROVEEDORES ADJUDICADOS")
-        st.dataframe(prov_fil)
+      #  st.header("PROVEEDORES ADJUDICADOS")
+       # st.dataframe(prov_fil)
 
     with col2:
 
@@ -554,8 +554,8 @@ with tab3:
         st.plotly_chart(Vvisual("TOTAL", prov2), key=f"prov1T")
         st.header(prov2T)
         st.plotly_chart(VvisualMonto("TOTAL", prov3), key=f"prov2T")
-    #st.header("INFO")
-    #st.dataframe(prov2)
+    st.header("INFO")
+    st.dataframe(prov2)
 
     
     # Crear columnas
