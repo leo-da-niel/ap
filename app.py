@@ -468,7 +468,7 @@ with tab2:
         st.dataframe(instf['PROVEEDOR'].unique())
     with col2:
         st.header("Tipo de Clave")
-        st.plotly_chart(crear_pie(datos_filtrados), key="instituto_pie_oferta")
+        st.plotly_chart(crear_pie(datos_filtrados), key="instituto_")
 
     with col3:
         st.header("Tipo de Clave")
