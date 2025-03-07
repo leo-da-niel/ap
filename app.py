@@ -499,9 +499,9 @@ with tab3:
         
         
     elif periodo_input == "2025":
-        prov1 = prov_filtrados25[prov_filtrados25["PROVEEDOR"]==p_inst]
-        prov2 = prov_fil25[prov_fil25["PROVEEDOR"]==p_inst]
-        prov3 = prov_moon_25[prov_moon_25["PROVEEDOR"]==p_inst]
+        prov1 = prov_filtrados25[prov_filtrados25["PROVEEDOR"]==p_selected_proveedor]
+        prov2 = prov_fil25[prov_fil25["PROVEEDOR"]==p_selected_proveedor]
+        prov3 = prov_moon_25[prov_moon_25["PROVEEDOR"]==p_selected_proveedor]
         prov4 = df5
         prov1T = "CANTIDADES 2025"
         prov2T = "IMPORTE 2025"
@@ -511,9 +511,9 @@ with tab3:
         prov_prov_fil = prov_fil25['PROVEEDOR'].unique()
 
     else:
-        prov1 = prov_filtrados26[prov_filtrados26["PROVEEDOR"]==p_inst]
-        prov2 = prov_fil26[prov_fil26["PROVEEDOR"]==p_inst]
-        prov3 = prov_moon_26[prov_moon_26["PROVEEDOR"]==p_inst]
+        prov1 = prov_filtrados26[prov_filtrados26["PROVEEDOR"]==p_selected_proveedor]
+        prov2 = prov_fil26[prov_fil26["PROVEEDOR"]==p_selected_proveedor]
+        prov3 = prov_moon_26[prov_moon_26["PROVEEDOR"]==p_selected_proveedor]
         prov4 = df6
         prov1T = "CANTIDADES 2026"
         prov2T = "IMPORTE 2026"
