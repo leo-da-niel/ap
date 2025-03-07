@@ -458,20 +458,23 @@ with tab2:
 with tab3:
     st.header("Proveedores")
     col1, col2, col3, col4, col5 = st.columns(5)
-        with col1:
-            selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="proveedor_abasto")
-            abastecimiento = abasto_options[selected_abasto]
-        with col2:    
-            selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="proveedor_type")
-            ty = type_options[selected_type]
-        with col3:   
-            clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="proveedor_clave")
-            cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
-        with col4:
-            selected_proveedor = st.selectbox("Ingrese el Proveedor:", list(proveedor_options.keys()), key="adj_proveedor")
-            inst = instituto_options[selected_instituto]
-        with col5:
-            periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="proveedor_periodo")
+    with col1:
+        selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="proveedor_abasto")
+        abastecimiento = abasto_options[selected_abasto]
+    with col2:    
+        selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="proveedor_type")
+        ty = type_options[selected_type]
+    with col3:   
+        clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="proveedor_clave")
+        cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
+    with col4:
+        selected_proveedor = st.selectbox("Ingrese el Proveedor:", list(proveedor_options.keys()), key="adj_proveedor")
+        inst = instituto_options[selected_instituto]
+    with col5:
+        periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="proveedor_periodo")
+        
+    #if periodo_input == "BIANUAL":
+    #df[df["PROVEEDOR"]=="ULTRA LABORATORIOS SA DE CV"]
       # Filtrar datos
   #  instpref = rooted(filtrar_inst(inst))
    # instf = nonz(rooted(filtrar_inst(inst)))
