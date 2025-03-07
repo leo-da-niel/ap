@@ -546,7 +546,7 @@ with tab3:
     with col1:
 
         st.header("PROVEEDORES ADJUDICADOS")
-       st.dataframe(prov_fil)
+        st.dataframe(prov_fil)
 
     with col2:
 
