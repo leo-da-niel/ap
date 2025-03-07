@@ -521,7 +521,8 @@ with tab3:
         prov_claves_fil = prov_filbi['CLAVES'].unique()
         prov_qprov_fil = prov_fil26['PROVEEDOR'].nunique()
         prov_prov_fil = prov_fil26['PROVEEDOR'].unique()
-        
+
+    st-header("TOP 10 PROVEEDORES CON IMPORTES MÁS GRANDES")
     st.plotly_chart(cloud_bubbles_prov(prov4), key="prov-top10")
     # Crear columnas
     col1, col2 = st.columns(2)
