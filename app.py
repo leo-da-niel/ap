@@ -477,6 +477,10 @@ with tab2:
         st.header("Tipo de Abastecimiento")
         st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
     col1, col2, col3= st.columns(3) 
+#            st.header(df1T)
+ #       st.plotly_chart(Vvisual("TOTAL", df2), key=f"df1T")
+  #      st.header(df2T)
+   #     st.plotly_chart(VvisualMonto("TOTAL", df3), key=f"df2T")
     with col1:
         st.header("Canitdades bianual")
         figq25 = visual(list(filtrar_inst(inst).columns)[0], datos_filtrados)
