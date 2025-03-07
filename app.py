@@ -409,24 +409,8 @@ with tab2:
     col1.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
     col1.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
     with col1:
-        provider_adjs = df['PROVEEDOR'].value_counts()
-    tlist = [provider_adjs[provider] for provider in proveedores_unicos]
-    t10 = pd.DataFrame({'PROVEEDOR': proveedores_unicos, 'CUENTA': tlist})
-    tt = t10.sort_values(by='CUENTA')
-    tt = tt.tail(10)
-    fig, ax = plt.subplots(figsize=(10, 6))
-    bars = ax.barh(tt['PROVEEDOR'], tt['CUENTA'], color='skyblue')
-    ax.set_xlabel('Cuenta')
-    ax.set_ylabel('Proveedor')
-    ax.set_title('Top 10 Proveedores con Más Cuentas Adjudicadas')
-
-# Agregar etiquetas a las barras
-for bar in bars:
-    ax.annotate(f'{bar.get_width()}', xy=(bar.get_width(), bar.get_y() + bar.get_height() / 2),
-                xytext=(5, 0), textcoords='offset points', ha='left', va='center')
-
-# Mostrar el gráfico en Streamlit
-st.pyplot(fig)
+        st.header("ABASTO / DESABASTO")
+        st.altair_chart(make_donut(75, "Adjudicadas", "green"))
     with col2:
         st.dataframe(instf['PROVEEDOR'].unique())
 
@@ -545,12 +529,20 @@ with tab3:
     col1.metric("IMPORTE TOTAL ADJUDICADO($)", f"{"{:,.2f}".format(sum(prov3["TOTAL"]))}")
     # Mostrar gráficos en columnas
     with col1:
-        st.header("ABASTO / DESABASTO")
-        col11, col12 = st.columns(2)
-        with col11:
-            st.altair_chart(make_donut(75, "Adjudicadas", "green"))
-        with col12:
-            st.altair_chart(make_donut(25, "No Adjudicadas", "red"))
+        provider_adjs = df['PROVEEDOR'].value_counts()
+        tlist = [provider_adjs[provider] for provider in proveedores_unicos]
+        t10 = pd.DataFrame({'PROVEEDOR': proveedores_unicos, 'CUENTA': tlist})
+        tt = t10.sort_values(by='CUENTA')
+        tt = tt.tail(10)
+        fig, ax = plt.subplots(figsize=(10, 6))
+        bars = ax.barh(tt['PROVEEDOR'], tt['CUENTA'], color='skyblue')
+        ax.set_xlabel('Cuenta')
+        ax.set_ylabel('Proveedor')
+        ax.set_title('Top 10 Proveedores con Más Cuentas Adjudicadas')
+        for bar in bars:
+            ax.annotate(f'{bar.get_width()}', xy=(bar.get_width(), bar.get_y() + bar.get_height() / 2),
+                        xytext=(5, 0), textcoords='offset points', ha='left', va='center')
+        st.pyplot(fig)
       #  st.header("PROVEEDORES ADJUDICADOS")
        # st.dataframe(prov_fil)
 
