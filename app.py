@@ -486,9 +486,9 @@ with tab3:
     prov_moon_26 = nzrooted2026[(nzrooted2026['CLAVES'].isin(p_cl)) & (nzrooted2026['CLAVES'].isin(p_abastecimiento)) & (nzrooted2026['CLAVES'].isin(p_ty))]
     
     if periodo_input == "BIANUAL":
-        prov1 = prov_filtradosbi
-        prov2 = prov_filbi
-        prov3 = prov_moon_bi
+        prov1 = prov_filtradosbi[prov_filtradosbi["PROVEEDOR"]==p_inst]
+        prov2 = prov_filbi[ prov_filbi["PROVEEDOR"]==p_inst]
+        prov3 = prov_moon_bi[prov_moon_bi["PROVEEDOR"]==p_inst]
         prov4 = bi
         prov1T = "CANTIDADES BIANUAL"
         prov2T = "IMPORTE BIANUAL"
@@ -499,9 +499,9 @@ with tab3:
         
         
     elif periodo_input == "2025":
-        prov1 = prov_filtrados25
-        prov2 = prov_fil25
-        prov3 = prov_moon_25
+        prov1 = prov_filtrados25[prov_filtrados25["PROVEEDOR"]==p_inst]
+        prov2 = prov_fil25[prov_fil25["PROVEEDOR"]==p_inst]
+        prov3 = prov_moon_25[prov_moon_25["PROVEEDOR"]==p_inst]
         prov4 = df5
         prov1T = "CANTIDADES 2025"
         prov2T = "IMPORTE 2025"
@@ -511,9 +511,9 @@ with tab3:
         prov_prov_fil = prov_fil25['PROVEEDOR'].unique()
 
     else:
-        prov1 = prov_filtrados26
-        prov2 = prov_fil26
-        prov3 = prov_moon_26
+        prov1 = prov_filtrados26[prov_filtrados26["PROVEEDOR"]==p_inst]
+        prov2 = prov_fil26[prov_fil26["PROVEEDOR"]==p_inst]
+        prov3 = prov_moon_26[prov_moon_26["PROVEEDOR"]==p_inst]
         prov4 = df6
         prov1T = "CANTIDADES 2026"
         prov2T = "IMPORTE 2026"
@@ -524,21 +524,55 @@ with tab3:
 
     st.header("TOP 10 PROVEEDORES CON IMPORTES MÁS GRANDES")
     st.plotly_chart(cloud_bubbles_prov(prov4), key="prov-top10")
+
+    col1, col2, col3 = st.columns(3)
+    col1.metric("NÚMERO DE PROVEEDORES", f"{prov_qprov_fil}")
+    col1.metric("CLAVES ADJUDICADAS", f"{prov_qclaves_fil}")
+    col1.metric("IMPORTE TOTAL ADJUDICADO($)", f"{"{:,.2f}".format(sum(prov3["TOTAL"]))}")
+    # Mostrar gráficos en columnas
+    with col1:
+        st.header("ABASTO / DESABASTO")
+        col11, col12 = st.columns(2)
+        with col11:
+            st.altair_chart(make_donut(75, "Adjudicadas", "green"))
+        with col12:
+            st.altair_chart(make_donut(25, "No Adjudicadas", "red"))
+        st.header("PROVEEDORES ADJUDICADOS")
+        st.dataframe(prov_fil)
+
+    with col2:
+
+        st.header("Tipo de Clave")
+        st.plotly_chart(crear_pie(prov1), key="resumenbi_pie_oferta")
+        st.header("Tipo de Abastecimiento")
+        st.plotly_chart(crear_hist(prov2), key="resumenbi_hist_oferta")
+        
+   #     st.dataframe(prov_claves_fil)
+
+    with col3:
+        st.header(prov1T)
+        st.plotly_chart(Vvisual("TOTAL", prov2), key=f"prov1T")
+        st.header(prov2T)
+        st.plotly_chart(VvisualMonto("TOTAL", prov3), key=f"prov2T")
+    st.header("INFO")
+    st.dataframe(prov2)
+
+    
     # Crear columnas
     col1, col2 = st.columns(2)
     
     # Mostrar gráficos en columnas
-    with col1:
-        st.header("Tipo de Clave")
-        st.plotly_chart(crear_pie(datos_filtrados), key="prov_pie_oferta")
+   # with col1:
+    #    st.header("Tipo de Clave")
+     #   st.plotly_chart(crear_pie(datos_filtrados), key="prov_pie_oferta")
         
-    with col2:
-        st.header("Tipo de Abastecimiento")
-        st.plotly_chart(crear_hist(datos_filtrados), key="prov_hist_oferta")
+    #with col2:
+     #   st.header("Tipo de Abastecimiento")
+      #  st.plotly_chart(crear_hist(datos_filtrados), key="prov_hist_oferta")
         
     
 
-    st.dataframe(datos_filtrados)
+    #st.dataframe(datos_filtrados)
     
 # Incluir imagen como pie de página
 st.image("footer.png", use_container_width=True)
