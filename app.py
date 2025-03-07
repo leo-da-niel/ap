@@ -519,16 +519,11 @@ with tab3:
         prov_claves_fil = prov2['CLAVES'].unique()
         prov_qprov_fil = prov2['PROVEEDOR'].nunique()
         prov_prov_fil = prov2['PROVEEDOR'].unique()
-
-    st.header("TOP 10 PROVEEDORES CON IMPORTES MÁS GRANDES")
-    st.plotly_chart(cloud_bubbles_prov(prov4), key="prov-top10")
-
-    col1, col2, col3 = st.columns(3)
-   # col1.metric("NÚMERO DE PROVEEDORES", f"{prov_qprov_fil}")
-    col1.metric("CLAVES ADJUDICADAS", f"{prov_qclaves_fil}")
-    col1.metric("IMPORTE TOTAL ADJUDICADO($)", f"{"{:,.2f}".format(sum(prov3["TOTAL"]))}")
-    # Mostrar gráficos en columnas
+    col1, col2 = st.columns(2)
     with col1:
+        st.header("TOP 10 PROVEEDORES CON IMPORTES MÁS GRANDES")
+        st.plotly_chart(cloud_bubbles_prov(prov4), key="prov-top10")
+    with col2:
         provider_adjs = df['PROVEEDOR'].value_counts()
         tlist = [provider_adjs[provider] for provider in proveedores_unicos]
         t10 = pd.DataFrame({'PROVEEDOR': proveedores_unicos, 'CUENTA': tlist})
@@ -543,6 +538,14 @@ with tab3:
             ax.annotate(f'{bar.get_width()}', xy=(bar.get_width(), bar.get_y() + bar.get_height() / 2),
                         xytext=(5, 0), textcoords='offset points', ha='left', va='center')
         st.pyplot(fig)
+
+    col1, col2, col3 = st.columns(3)
+   # col1.metric("NÚMERO DE PROVEEDORES", f"{prov_qprov_fil}")
+    col1.metric("CLAVES ADJUDICADAS", f"{prov_qclaves_fil}")
+    col1.metric("IMPORTE TOTAL ADJUDICADO($)", f"{"{:,.2f}".format(sum(prov3["TOTAL"]))}")
+    # Mostrar gráficos en columnas
+    with col1:
+
       #  st.header("PROVEEDORES ADJUDICADOS")
        # st.dataframe(prov_fil)
 
