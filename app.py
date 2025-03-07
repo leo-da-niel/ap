@@ -505,8 +505,8 @@ with tab3:
         prov4 = df5
         prov1T = "CANTIDADES 2025"
         prov2T = "IMPORTE 2025"
-        qclaves_fil = prov_filbi['CLAVES'].nunique()
-        claves_fil = prov_filbi['CLAVES'].unique()
+        qclaves_fil = prov_fil25['CLAVES'].nunique()
+        claves_fil = prov_fil25['CLAVES'].unique()
         qprov_fil = prov_fil25['PROVEEDOR'].nunique()
         prov_prov_fil = prov_fil25['PROVEEDOR'].unique()
 
@@ -517,8 +517,8 @@ with tab3:
         prov4 = df6
         prov1T = "CANTIDADES 2026"
         prov2T = "IMPORTE 2026"
-        prov_qclaves_fil = prov_filbi['CLAVES'].nunique()
-        prov_claves_fil = prov_filbi['CLAVES'].unique()
+        prov_qclaves_fil = prov_fil26['CLAVES'].nunique()
+        prov_claves_fil = prov_fil26['CLAVES'].unique()
         prov_qprov_fil = prov_fil26['PROVEEDOR'].nunique()
         prov_prov_fil = prov_fil26['PROVEEDOR'].unique()
 
