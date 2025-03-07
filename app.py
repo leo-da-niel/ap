@@ -75,7 +75,7 @@ def tentop_prov(data):
     monprov = rooted(totales(calcular_monto(data)))
     impprov = monprov.groupby("PROVEEDOR").sum().reset_index()
     sortprov=impprov.sort_values('PROVEEDOR')
-    top = sortprov.sort_values("TOTAL").tail(78)
+    top = sortprov.sort_values("TOTAL").tail(20)
     topsorted = top.sort_values("PROVEEDOR")
     
     ten = cuenta[cuenta['PROVEEDOR'].isin(top['PROVEEDOR'])]
