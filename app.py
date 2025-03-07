@@ -531,11 +531,11 @@ with tab3:
         tt = tt.tail(10)
         fig, ax = plt.subplots(figsize=(12, 12))
         bars = ax.barh(tt['PROVEEDOR'], tt['CUENTA'], color='skyblue')
-        ax.set_xlabel('Número de Claves')
-        ax.set_ylabel('Proveedor')
-        ax.set_title('Top 10 Proveedores con Más Claves Adjudicadas')
+        ax.set_xlabel('Número de Claves', fontsize=14)
+        ax.set_ylabel('Proveedor', fontsize=14)
+        ax.set_title('Top 10 Proveedores con Más Claves Adjudicadas', fontsize=14)
         for bar in bars:
-            ax.annotate(f'{bar.get_width()}', xy=(bar.get_width(), bar.get_y() + bar.get_height() / 2), xytext=(7, 2), textcoords='offset points', ha='left', va='center')
+            ax.annotate(f'{bar.get_width()}', xy=(bar.get_width(), bar.get_y() + bar.get_height() / 2), xytext=(5, 0), textcoords='offset points', ha='left', va='center')
         st.header("TOP 10 PROVEEDORES CON MÁS ADJUDICACIONES")
         st.pyplot(fig)
 
