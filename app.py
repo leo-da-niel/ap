@@ -408,20 +408,66 @@ with tab2:
     with col5:
         periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="instituto_periodo")
       # Filtrar datos
+
+    hi_filtradosbi = grnzbitrooted[(grnzbitrooted['CLAVES'].isin(cl)) & (grnzbitrooted['CLAVES'].isin(abastecimiento)) & (grnzbitrooted['CLAVES'].isin(ty))]
+    datos_filtrados25 = grnzrooted25[(grnzrooted25['CLAVES'].isin(cl)) & (grnzrooted25['CLAVES'].isin(abastecimiento)) & (grnzrooted25['CLAVES'].isin(ty))]
+    datos_filtrados26 = grnzrooted26[(grnzrooted26['CLAVES'].isin(cl)) & (grnzrooted26['CLAVES'].isin(abastecimiento)) & (grnzrooted26['CLAVES'].isin(ty))]
+    
+    datos_filbi = nzbitrooted[(nzbitrooted['CLAVES'].isin(cl)) & (nzbitrooted['CLAVES'].isin(abastecimiento)) & (nzbitrooted['CLAVES'].isin(ty))]
+    datos_fil25 = nzrooted25[(nzrooted25['CLAVES'].isin(cl)) & (nzrooted25['CLAVES'].isin(abastecimiento)) & (nzrooted25['CLAVES'].isin(ty))]
+    datos_fil26 = nzrooted26[(nzrooted26['CLAVES'].isin(cl)) & (nzrooted26['CLAVES'].isin(abastecimiento)) & (nzrooted26['CLAVES'].isin(ty))]
+
+    datos_moon_bi = nzbitmoonrooted[(nzbitmoonrooted['CLAVES'].isin(cl)) & (nzbitmoonrooted['CLAVES'].isin(abastecimiento)) & (nzbitmoonrooted['CLAVES'].isin(ty))]
+    datos_moon_25 = nzrooted2025[(nzrooted2025['CLAVES'].isin(cl)) & (nzrooted2025['CLAVES'].isin(abastecimiento)) & (nzrooted2025['CLAVES'].isin(ty))]
+    datos_moon_26 = nzrooted2026[(nzrooted2026['CLAVES'].isin(cl)) & (nzrooted2026['CLAVES'].isin(abastecimiento)) & (nzrooted2026['CLAVES'].isin(ty))]
+    
+
+    
     instpref = rooted(filtrar_inst(inst))
     instf = nonz(rooted(filtrar_inst(inst)))
     datos_filtrados = instf[(instf['CLAVES'].isin(cl)) & (instf['CLAVES'].isin(abastecimiento)) & (instf['CLAVES'].isin(ty))]
-    input_response = 75
-    input_text = "Progreso"
-    input_color = "blue"
+
+    if periodo_input == "BIANUAL":
+        df1 = datos_filtradosbi
+        df2 = datos_filbi
+        df3 = datos_moon_bi
+        df1T = "CANTIDADES BIANUAL"
+        df2T = "IMPORTE BIANUAL"
+        qclaves_fil = datos_filbi['CLAVES'].nunique()
+        claves_fil = datos_filbi['CLAVES'].unique()
+        qprov_fil = datos_filbi['PROVEEDOR'].nunique()
+        prov_fil = datos_filbi['PROVEEDOR'].unique()
+        
+        
+    elif periodo_input == "2025":
+        df1 = datos_filtrados25
+        df2 = datos_fil25
+        df3 = datos_moon_25
+        df1T = "CANTIDADES 2025"
+        df2T = "IMPORTE 2025"
+        qclaves_fil = datos_filbi['CLAVES'].nunique()
+        claves_fil = datos_filbi['CLAVES'].unique()
+        qprov_fil = datos_fil25['PROVEEDOR'].nunique()
+        prov_fil = datos_fil25['PROVEEDOR'].unique()
+
+    else:
+        df1 = datos_filtrados26
+        df2 = datos_fil26
+        df3 = datos_moon_26
+        df1T = "CANTIDADES 2026"
+        df2T = "IMPORTE 2026"
+        qclaves_fil = datos_filbi['CLAVES'].nunique()
+        claves_fil = datos_filbi['CLAVES'].unique()
+        qprov_fil = datos_fil26['PROVEEDOR'].nunique()
+        prov_fil = datos_fil26['PROVEEDOR'].unique()
+        
     col1, col2, col3 = st.columns(3)
     col1.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
     col1.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
     with col1:
-        st.header("ABASTO / DESABASTO")
-        st.altair_chart(make_donut(75, "Adjudicadas", "green"))
-    with col2:
         st.dataframe(instf['PROVEEDOR'].unique())
+    with col2:
+        
 
     with col3:
         st.header("Tipo de Clave")
