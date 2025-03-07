@@ -83,8 +83,9 @@ def tentop_prov(data):
     tentop = pd.DataFrame({'PROVEEDOR': ten['PROVEEDOR'].reset_index(drop=True), 'CUENTA': ten['CUENTA'].reset_index(drop=True), 'IMPORTE': topsorted['TOTAL'].reset_index(drop=True)})
     return tentop
     
-def instxproveer(data, proveedor):
+def instxproveer(dats, proveedor):
     # Filtrar el DataFrame para el proveedor dado
+    data = pd.concat([df['PROVEEDOR'],data], axis=1)
     df_proveedor = data[data['PROVEEDOR'] == proveedor]
     # Obtener las columnas con valores distintos de cero
     columnas_distintas_de_cero = df_proveedor.loc[:, (df_proveedor != 0).any(axis=0)].columns.tolist()
@@ -474,7 +475,7 @@ with tab3:
         p_cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
     with col4:
         p_selected_proveedor = st.selectbox("Ingrese el Proveedor:", list(proveedor_options.keys()), key="adj_proveedor")
-        p_inst = instituto_options[selected_instituto]
+      #  p_inst = instituto_options[selected_instituto]            borrar linea
     with col5:
         p_periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="proveedor_periodo")
         
