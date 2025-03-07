@@ -505,9 +505,9 @@ with tab3:
         prov4 = df5
         prov1T = "CANTIDADES 2025"
         prov2T = "IMPORTE 2025"
-        qclaves_fil = prov_fil25['CLAVES'].nunique()
-        claves_fil = prov_fil25['CLAVES'].unique()
-        qprov_fil = prov_fil25['PROVEEDOR'].nunique()
+        prov_qclaves_fil = prov_fil25['CLAVES'].nunique()
+        prov_claves_fil = prov_fil25['CLAVES'].unique()
+        prov_qprov_fil = prov_fil25['PROVEEDOR'].nunique()
         prov_prov_fil = prov_fil25['PROVEEDOR'].unique()
 
     else:
