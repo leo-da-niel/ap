@@ -459,33 +459,70 @@ with tab3:
     st.header("Proveedores")
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
-        selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="proveedor_abasto")
-        abastecimiento = abasto_options[selected_abasto]
+        p_selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="proveedor_abasto")
+        p_abastecimiento = abasto_options[selected_abasto]
     with col2:    
-        selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="proveedor_type")
-        ty = type_options[selected_type]
+        p_selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="proveedor_type")
+        p_ty = type_options[selected_type]
     with col3:   
-        clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="proveedor_clave")
-        cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
+        p_clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="proveedor_clave")
+        p_cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
     with col4:
-        selected_proveedor = st.selectbox("Ingrese el Proveedor:", list(proveedor_options.keys()), key="adj_proveedor")
-        inst = instituto_options[selected_instituto]
+        p_selected_proveedor = st.selectbox("Ingrese el Proveedor:", list(proveedor_options.keys()), key="adj_proveedor")
+        p_inst = instituto_options[selected_instituto]
     with col5:
-        periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="proveedor_periodo")
+        p_periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="proveedor_periodo")
         
-    #if periodo_input == "BIANUAL":
-    #df[df["PROVEEDOR"]=="ULTRA LABORATORIOS SA DE CV"]
-      # Filtrar datos
-  #  instpref = rooted(filtrar_inst(inst))
-   # instf = nonz(rooted(filtrar_inst(inst)))
-#    datos_filtrados = instf[(instf['CLAVES'].isin(cl)) & (instf['CLAVES'].isin(abastecimiento)) & (instf['CLAVES'].isin(ty))]
- #   input_response = 75
-  #  input_text = "Progreso"
-   # input_color = "blue"
-    #col1, col2, col3 = st.columns(3)
-   # col1.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
-  #  col1.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
- 
+    prov_filtradosbi = grnzbitrooted[(grnzbitrooted['CLAVES'].isin(p_cl)) & (grnzbitrooted['CLAVES'].isin(p_abastecimiento)) & (grnzbitrooted['CLAVES'].isin(p_ty))]
+    prov_filtrados25 = grnzrooted25[(grnzrooted25['CLAVES'].isin(p_cl)) & (grnzrooted25['CLAVES'].isin(p_abastecimiento)) & (grnzrooted25['CLAVES'].isin(p_ty))]
+    prov_filtrados26 = grnzrooted26[(grnzrooted26['CLAVES'].isin(p_cl)) & (grnzrooted26['CLAVES'].isin(p_abastecimiento)) & (grnzrooted26['CLAVES'].isin(p_ty))]
+    
+    prov_filbi = nzbitrooted[(nzbitrooted['CLAVES'].isin(p_cl)) & (nzbitrooted['CLAVES'].isin(p_abastecimiento)) & (nzbitrooted['CLAVES'].isin(p_ty))]
+    prov_fil25 = nzrooted25[(nzrooted25['CLAVES'].isin(p_cl)) & (nzrooted25['CLAVES'].isin(p_abastecimiento)) & (nzrooted25['CLAVES'].isin(p_ty))]
+    prov_fil26 = nzrooted26[(nzrooted26['CLAVES'].isin(p_cl)) & (nzrooted26['CLAVES'].isin(p_abastecimiento)) & (nzrooted26['CLAVES'].isin(p_ty))]
+
+    prov_moon_bi = nzbitmoonrooted[(nzbitmoonrooted['CLAVES'].isin(p_cl)) & (nzbitmoonrooted['CLAVES'].isin(p_abastecimiento)) & (nzbitmoonrooted['CLAVES'].isin(p_ty))]
+    prov_moon_25 = nzrooted2025[(nzrooted2025['CLAVES'].isin(p_cl)) & (nzrooted2025['CLAVES'].isin(p_abastecimiento)) & (nzrooted2025['CLAVES'].isin(vty))]
+    prov_moon_26 = nzrooted2026[(nzrooted2026['CLAVES'].isin(p_cl)) & (nzrooted2026['CLAVES'].isin(p_abastecimiento)) & (nzrooted2026['CLAVES'].isin(p_ty))]
+    
+    if periodo_input == "BIANUAL":
+        prov1 = prov_datos_filtradosbi
+        prov2 = prov_datos_filbi
+        prov3 = prov_datos_moon_bi
+        prov4 = bi
+        prov1T = "CANTIDADES BIANUAL"
+        prov2T = "IMPORTE BIANUAL"
+        prov_qclaves_fil = prov_filbi['CLAVES'].nunique()
+        prov_claves_fil = prov_filbi['CLAVES'].unique()
+        prov_qprov_fil = prov_filbi['PROVEEDOR'].nunique()
+        prov_prov_fil = prov_filbi['PROVEEDOR'].unique()
+        
+        
+    elif periodo_input == "2025":
+        prov1 = prov_datos_filtrados25
+        prov2 = prov_datos_fil25
+        prov3 = prov_datos_moon_25
+        prov4 = df5
+        prov1T = "CANTIDADES 2025"
+        prov2T = "IMPORTE 2025"
+        qclaves_fil = prov_filbi['CLAVES'].nunique()
+        claves_fil = prov_filbi['CLAVES'].unique()
+        qprov_fil = prov_fil25['PROVEEDOR'].nunique()
+        prov_prov_fil = prov_fil25['PROVEEDOR'].unique()
+
+    else:
+        prov1 = prov_filtrados26
+        prov2 = prov_fil26
+        prov3 = prov_moon_26
+        prov4 = df6
+        prov1T = "CANTIDADES 2026"
+        prov2T = "IMPORTE 2026"
+        prov_qclaves_fil = prov_filbi['CLAVES'].nunique()
+        prov_claves_fil = prov_filbi['CLAVES'].unique()
+        prov_qprov_fil = prov_fil26['PROVEEDOR'].nunique()
+        prov_prov_fil = prov_fil26['PROVEEDOR'].unique()
+        
+    st.plotly_chart(cloud_bubbles_prov(prov4), key="prov-top10")
     # Crear columnas
     col1, col2 = st.columns(2)
     
@@ -498,11 +535,7 @@ with tab3:
         st.header("Tipo de Abastecimiento")
         st.plotly_chart(crear_hist(datos_filtrados), key="prov_hist_oferta")
         
-   # figures = visual(list(filtrar_inst(inst).columns)[0], datos_filtrados)
-    #for j, fig in enumerate(figures):
-     #   st.plotly_chart(fig, key=f"fig_{j}")
-    # Incluir información general
-    st.plotly_chart(cloud_bubbles_prov(bi), key="prov-top10")
+    
 
     st.dataframe(datos_filtrados)
     
