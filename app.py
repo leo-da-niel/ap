@@ -454,27 +454,6 @@ with tab2:
     
 # Pestaña 3
 with tab3:
-    col18, col19 = st.columns([0.60, 0.40])
-    with col18:
-        st.header("TOP 10 PROVEEDORES CON IMPORTES MAYORES")
-        st.plotly_chart(cloud_bubbles_prov(prov4), key="prov-top10")
-    with col19:
-        provider_adjs = df['PROVEEDOR'].value_counts()
-        tlist = [provider_adjs[provider] for provider in proveedores_unicos]
-        t10 = pd.DataFrame({'PROVEEDOR': proveedores_unicos, 'CUENTA': tlist})
-        tt = t10.sort_values(by='CUENTA')
-        tt = tt.tail(10)
-        fig, ax = plt.subplots(figsize=(12, 12))
-        bars = ax.barh(tt['PROVEEDOR'], tt['CUENTA'], color='skyblue')
-        ax.set_xlabel('Número de Claves', fontsize=24)
-        ax.set_ylabel('Proveedor', fontsize=24)
-        ax.set_title('Top 10 Proveedores con Más Claves Adjudicadas', fontsize=24)
-        ax.tick_params(axis='x', labelsize=18)
-        ax.tick_params(axis='y', labelsize=18)
-        for bar in bars:
-            ax.annotate(f'{bar.get_width()}', xy=(bar.get_width(), bar.get_y() + bar.get_height() / 2), xytext=(5, 0), textcoords='offset points', ha='left', va='center', fontsize=18)
-        st.header("TOP 10 PROVEEDORES CON MÁS ADJUDICACIONES")
-        st.pyplot(fig)
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         p_selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="proveedor_abasto")
@@ -539,6 +518,28 @@ with tab3:
         prov_claves_fil = prov2['CLAVES'].unique()
         prov_qprov_fil = prov2['PROVEEDOR'].nunique()
         prov_prov_fil = prov2['PROVEEDOR'].unique()
+    col18, col19 = st.columns([0.60, 0.40])
+    with col18:
+        st.header("TOP 10 PROVEEDORES CON IMPORTES MAYORES")
+        st.plotly_chart(cloud_bubbles_prov(prov4), key="prov-top10")
+    with col19:
+        provider_adjs = df['PROVEEDOR'].value_counts()
+        tlist = [provider_adjs[provider] for provider in proveedores_unicos]
+        t10 = pd.DataFrame({'PROVEEDOR': proveedores_unicos, 'CUENTA': tlist})
+        tt = t10.sort_values(by='CUENTA')
+        tt = tt.tail(10)
+        fig, ax = plt.subplots(figsize=(12, 12))
+        bars = ax.barh(tt['PROVEEDOR'], tt['CUENTA'], color='skyblue')
+        ax.set_xlabel('Número de Claves', fontsize=24)
+        ax.set_ylabel('Proveedor', fontsize=24)
+        ax.set_title('Top 10 Proveedores con Más Claves Adjudicadas', fontsize=24)
+        ax.tick_params(axis='x', labelsize=18)
+        ax.tick_params(axis='y', labelsize=18)
+        for bar in bars:
+            ax.annotate(f'{bar.get_width()}', xy=(bar.get_width(), bar.get_y() + bar.get_height() / 2), xytext=(5, 0), textcoords='offset points', ha='left', va='center', fontsize=18)
+        st.header("TOP 10 PROVEEDORES CON MÁS ADJUDICACIONES")
+        st.pyplot(fig)
+    
     col1, col2, col3 = st.columns(3)
    # col1.metric("NÚMERO DE PROVEEDORES", f"{prov_qprov_fil}")
     col1.metric("CLAVES ADJUDICADAS", f"{prov_qclaves_fil}")
