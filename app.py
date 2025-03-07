@@ -482,7 +482,7 @@ with tab3:
     prov_fil26 = nzrooted26[(nzrooted26['CLAVES'].isin(p_cl)) & (nzrooted26['CLAVES'].isin(p_abastecimiento)) & (nzrooted26['CLAVES'].isin(p_ty))]
 
     prov_moon_bi = nzbitmoonrooted[(nzbitmoonrooted['CLAVES'].isin(p_cl)) & (nzbitmoonrooted['CLAVES'].isin(p_abastecimiento)) & (nzbitmoonrooted['CLAVES'].isin(p_ty))]
-    prov_moon_25 = nzrooted2025[(nzrooted2025['CLAVES'].isin(p_cl)) & (nzrooted2025['CLAVES'].isin(p_abastecimiento)) & (nzrooted2025['CLAVES'].isin(vty))]
+    prov_moon_25 = nzrooted2025[(nzrooted2025['CLAVES'].isin(p_cl)) & (nzrooted2025['CLAVES'].isin(p_abastecimiento)) & (nzrooted2025['CLAVES'].isin(p_ty))]
     prov_moon_26 = nzrooted2026[(nzrooted2026['CLAVES'].isin(p_cl)) & (nzrooted2026['CLAVES'].isin(p_abastecimiento)) & (nzrooted2026['CLAVES'].isin(p_ty))]
     
     if periodo_input == "BIANUAL":
