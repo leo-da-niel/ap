@@ -464,10 +464,10 @@ with tab3:
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         p_selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="proveedor_abasto")
-        p_abastecimiento = abasto_options[p_selected_abasto]
+        p_abastecimiento = p_abasto_options[selected_abasto]
     with col2:    
         p_selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="proveedor_type")
-        p_ty = p_type_options[p_selected_type]
+        p_ty = p_type_options[selected_type]
     with col3:   
         p_clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="proveedor_clave")
         p_cl = [p_clave_input] if p_clave_input != "TODAS LAS CLAVES" else claves_unicas
