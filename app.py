@@ -425,7 +425,7 @@ with tab2:
         hi1T = "CANTIDADES BIANUAL"
         hi2T = "IMPORTE BIANUAL"
         i = 2
-        
+        name = inst+"_25-26"
     elif periodo_input == "2025":
         hi1T = "CANTIDADES 2025"
         hi2T = "IMPORTE 2025"
@@ -434,7 +434,7 @@ with tab2:
  #       claves_hi = datos_filbi['CLAVES'].unique()
   #      qprov_hi = datos_fil25['PROVEEDOR'].nunique()
    #     prov_hi = datos_fil25['PROVEEDOR'].unique()
-
+        name = inst+"_25"
     else:
         hi1T = "CANTIDADES 2026"
         hi2T = "IMPORTE 2026"
@@ -443,7 +443,7 @@ with tab2:
 #        claves_hi = datos_filbi['CLAVES'].unique()
  #       qprov_hi = datos_fil26['PROVEEDOR'].nunique()
   #      prov_hi = datos_fil26['PROVEEDOR'].unique()
-    
+        name = inst+"_26"
     hi1 = grouping(nonz(rooted(filtrar_inst(inst).iloc[:,[i]])))
     hi2 = nonz(rooted(filtrar_inst(inst).iloc[:,[i]]))
     hi3 =nonz(rooted(calcular_monto(filtrar_inst(inst).iloc[:,[i]])))
@@ -463,10 +463,10 @@ with tab2:
     with col2:
         st.header(hi1T)
         hi4=hi2
-        st.plotly_chart(Vvisual("TOTAL", hi5), key=f"hi1T")
+        st.plotly_chart(Vvisual(name, hi5), key=f"hi1T")
         st.header(hi2T)
         hi4=hi3
-        st.plotly_chart(VvisualMonto("TOTAL", hi5), key=f"hi2T")
+        st.plotly_chart(VvisualMonto(name, hi5), key=f"hi2T")
 
     with col3:
         hi4=hi2
