@@ -340,8 +340,8 @@ with tab1:
         df3 = datos_moon_25
         df1T = "CANTIDADES 2025"
         df2T = "IMPORTE 2025"
-        qclaves_fil = datos_filbi['CLAVES'].nunique()
-        claves_fil = datos_filbi['CLAVES'].unique()
+        qclaves_fil = datos_fil25['CLAVES'].nunique()
+        claves_fil = datos_fil25['CLAVES'].unique()
         qprov_fil = datos_fil25['PROVEEDOR'].nunique()
         prov_fil = datos_fil25['PROVEEDOR'].unique()
 
@@ -351,8 +351,8 @@ with tab1:
         df3 = datos_moon_26
         df1T = "CANTIDADES 2026"
         df2T = "IMPORTE 2026"
-        qclaves_fil = datos_filbi['CLAVES'].nunique()
-        claves_fil = datos_filbi['CLAVES'].unique()
+        qclaves_fil = datos_fil26['CLAVES'].nunique()
+        claves_fil = datos_fil26['CLAVES'].unique()
         qprov_fil = datos_fil26['PROVEEDOR'].nunique()
         prov_fil = datos_fil26['PROVEEDOR'].unique()
         
@@ -360,7 +360,7 @@ with tab1:
     col1, col2, col3 = st.columns(3)
     col1.metric("NÚMERO DE PROVEEDORES", f"{qprov_fil}")
     col1.metric("CLAVES ADJUDICADAS", f"{qclaves_fil}")
-    col1.metric("IMPORTE TOTAL ADJUDICADO($)", f"{"{:,.2f}".format(sum(df3["TOTAL"]))}")
+    col1.metric("IMPORTE TOTAL ADJUDICADO ($)", f"{"{:,.2f}".format(sum(df3["TOTAL"]))}")
     # Mostrar gráficos en columnas
     with col1:
         st.header("ABASTO / DESABASTO")
@@ -409,18 +409,6 @@ with tab2:
         periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="instituto_periodo")
       # Filtrar datos
 
-#    hi_filtradosbi = grnzbitrooted[(grnzbitrooted['CLAVES'].isin(cl)) & (grnzbitrooted['CLAVES'].isin(abastecimiento)) & (grnzbitrooted['CLAVES'].isin(ty))]
- #   datos_filtrados25 = grnzrooted25[(grnzrooted25['CLAVES'].isin(cl)) & (grnzrooted25['CLAVES'].isin(abastecimiento)) & (grnzrooted25['CLAVES'].isin(ty))]
-  #  datos_filtrados26 = grnzrooted26[(grnzrooted26['CLAVES'].isin(cl)) & (grnzrooted26['CLAVES'].isin(abastecimiento)) & (grnzrooted26['CLAVES'].isin(ty))]
-    
-#    datos_filbi = nzbitrooted[(nzbitrooted['CLAVES'].isin(cl)) & (nzbitrooted['CLAVES'].isin(abastecimiento)) & (nzbitrooted['CLAVES'].isin(ty))]
- #   datos_fil25 = nzrooted25[(nzrooted25['CLAVES'].isin(cl)) & (nzrooted25['CLAVES'].isin(abastecimiento)) & (nzrooted25['CLAVES'].isin(ty))]
-  #  datos_fil26 = nzrooted26[(nzrooted26['CLAVES'].isin(cl)) & (nzrooted26['CLAVES'].isin(abastecimiento)) & (nzrooted26['CLAVES'].isin(ty))]
-
-   # datos_moon_bi = nzbitmoonrooted[(nzbitmoonrooted['CLAVES'].isin(cl)) & (nzbitmoonrooted['CLAVES'].isin(abastecimiento)) & (nzbitmoonrooted['CLAVES'].isin(ty))]
-#    datos_moon_25 = nzrooted2025[(nzrooted2025['CLAVES'].isin(cl)) & (nzrooted2025['CLAVES'].isin(abastecimiento)) & (nzrooted2025['CLAVES'].isin(ty))]
- #   datos_moon_26 = nzrooted2026[(nzrooted2026['CLAVES'].isin(cl)) & (nzrooted2026['CLAVES'].isin(abastecimiento)) & (nzrooted2026['CLAVES'].isin(ty))]
-
     if periodo_input == "BIANUAL":
         hi1T = "CANTIDADES BIANUAL"
         hi2T = "IMPORTE BIANUAL"
@@ -430,19 +418,11 @@ with tab2:
         hi1T = "CANTIDADES 2025"
         hi2T = "IMPORTE 2025"
         i = 0
-#        qclaves_hi = datos_filbi['CLAVES'].nunique()
- #       claves_hi = datos_filbi['CLAVES'].unique()
-  #      qprov_hi = datos_fil25['PROVEEDOR'].nunique()
-   #     prov_hi = datos_fil25['PROVEEDOR'].unique()
         name = inst+"_25"
     else:
         hi1T = "CANTIDADES 2026"
         hi2T = "IMPORTE 2026"
         i = 1
-#        qclaves_hi = datos_filbi['CLAVES'].nunique()
-#        claves_hi = datos_filbi['CLAVES'].unique()
- #       qprov_hi = datos_fil26['PROVEEDOR'].nunique()
-  #      prov_hi = datos_fil26['PROVEEDOR'].unique()
         name = inst+"_26"
     hi1 = grouping(nonz(rooted(filtrar_inst(inst).iloc[:,[i]])))
     hi2 = nonz(rooted(filtrar_inst(inst).iloc[:,[i]]))
@@ -456,8 +436,9 @@ with tab2:
     prov_hi = hi5['PROVEEDOR'].unique()
         
     col1, col2, col3 = st.columns(3)
-    col1.metric("NÚMERO DE PROVEEDORES", f"{hi5['PROVEEDOR'].nunique()}")
-    col1.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
+    col1.metric("NÚMERO DE PROVEEDORES", f"{qprov_hi}")
+    col1.metric("CLAVES ADJUDICADAS", f"{qclaves_hi}")
+    col1.metric("IMPORTE TOTAL ADJUDICADO ($)", f"{"{:,.2f}".format(sum(hi5[name]))}")
     with col1:
         st.dataframe(hi5['PROVEEDOR'].unique())
     with col2:
@@ -475,38 +456,7 @@ with tab2:
         hi4=hi2
         st.header("Tipo de Abastecimiento")
         st.plotly_chart(crear_hist(hi5), key="instituto_hist_oferta")
- #   col1, col2, col3= st.columns(3) 
-        
-        
- #   with col1:
-  #      st.header("Canitdades bianual")
-   #     figq25 = visual(list(filtrar_inst(inst).columns)[0], datos_filtrados)
-    #    with st.container():
-     #       for i, fig25 in enumerate(figq25):
-      #          st.plotly_chart(fig25, key=f"fig25_{i}")
-       #     st.header("Importe bianual")
-        #    figm25 = visualMonto(list(filtrar_inst(inst).columns)[0], datos_filtrados)
- #       for j, fic25 in enumerate(figm25):
-  #          st.plotly_chart(fic25, key=f"fic25_{j}")
-   # with col2:
-    #    st.header("Cantidades 2025")
-     #   figq26 = visual(list(filtrar_inst(inst).columns)[1], datos_filtrados)
-      #  for k, fig26 in enumerate(figq26):
-       #     st.plotly_chart(fig26, key=f"fig26_{k}")
-#        st.header("Importe 2025")
- #       figm26 = visualMonto(list(filtrar_inst(inst).columns)[1], datos_filtrados)
-  #      for l, fic26 in enumerate(figm26):
-   #         st.plotly_chart(fic26, key=f"fic26_{l}")
-    #with col3:
-     #   st.header("Canitades 2026")
-      #  figqbi = visual(list(filtrar_inst(inst).columns)[2], datos_filtrados)
-       # for h, figbi in enumerate(figqbi):
-        #    st.plotly_chart(figbi, key=f"figbi_{h}")
-    #    st.header("Importe 2026")
-     #   figmbi = visualMonto(list(filtrar_inst(inst).columns)[2], datos_filtrados)
-      #  for g, ficbi in enumerate(figmbi):
-       #     st.plotly_chart(ficbi, key=f"ficbi_{g}")
-    # Incluir información general   
+
     hi4=hi2
     st.dataframe(hi5)
     
