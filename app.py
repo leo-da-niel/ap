@@ -440,7 +440,7 @@ with tab2:
     col1.metric("CLAVES ADJUDICADAS", f"{qclaves_hi}")
     col1.metric("IMPORTE TOTAL ADJUDICADO ($)", f"{"{:,.2f}".format(sum(hi5[name]))}")
     with col1:
-        st.header("Proveedores adjudicados a "+name)
+        st.header("Proveedores adjudicados")
         st.dataframe(hi5['PROVEEDOR'].unique())
     with col2:
         st.header(hi1T)
