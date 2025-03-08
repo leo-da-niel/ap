@@ -456,10 +456,10 @@ with tab2:
     prov_hi = hi5['PROVEEDOR'].unique()
         
     col1, col2, col3 = st.columns(3)
-    col1.metric("NÚMERO DE PROVEEDORES", f"{instf['PROVEEDOR'].nunique()}")
+    col1.metric("NÚMERO DE PROVEEDORES", f"{hi5['PROVEEDOR'].nunique()}")
     col1.metric("CLAVES ADJUDICADAS", f"{nclaves_unicas}")
     with col1:
-        st.dataframe(instf['PROVEEDOR'].unique())
+        st.dataframe(hi5['PROVEEDOR'].unique())
     with col2:
         st.header(hi1T)
         hi4=hi2
@@ -469,11 +469,12 @@ with tab2:
         st.plotly_chart(VvisualMonto("TOTAL", hi5), key=f"hi2T")
 
     with col3:
+        hi4=hi2
         st.header("Tipo de Clave")
-        st.plotly_chart(crear_pie(datos_filtrados), key="instituto_pie_oferta")
-        
+        st.plotly_chart(crear_pie(hi5), key="instituto_pie_oferta")
+        hi4=hi2
         st.header("Tipo de Abastecimiento")
-        st.plotly_chart(crear_hist(datos_filtrados), key="instituto_hist_oferta")
+        st.plotly_chart(crear_hist(hi5), key="instituto_hist_oferta")
  #   col1, col2, col3= st.columns(3) 
         
         
