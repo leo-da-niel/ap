@@ -306,7 +306,7 @@ with tab1:
         c_clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="resumen_clave")
         c_cl = [c_clave_input] if c_clave_input != "TODAS LAS CLAVES" else claves_unicas
     with col4:
-        periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="resumen_periodo")
+        cl_periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="resumen_periodo")
     # Filtrar datos
     datos_filtradosbi = grnzbitrooted[(grnzbitrooted['CLAVES'].isin(c_cl)) & (grnzbitrooted['CLAVES'].isin(c_abastecimiento)) & (grnzbitrooted['CLAVES'].isin(c_ty))]
     datos_filtrados25 = grnzrooted25[(grnzrooted25['CLAVES'].isin(c_cl)) & (grnzrooted25['CLAVES'].isin(c_abastecimiento)) & (grnzrooted25['CLAVES'].isin(c_ty))]
@@ -320,7 +320,7 @@ with tab1:
     datos_moon_25 = nzrooted2025[(nzrooted2025['CLAVES'].isin(c_cl)) & (nzrooted2025['CLAVES'].isin(c_abastecimiento)) & (nzrooted2025['CLAVES'].isin(c_ty))]
     datos_moon_26 = nzrooted2026[(nzrooted2026['CLAVES'].isin(c_cl)) & (nzrooted2026['CLAVES'].isin(c_abastecimiento)) & (nzrooted2026['CLAVES'].isin(c_ty))]
     
-    if periodo_input == "BIANUAL":
+    if cl_periodo_input == "BIANUAL":
         df1 = datos_filtradosbi
         df2 = datos_filbi
         df3 = datos_moon_bi
@@ -332,7 +332,7 @@ with tab1:
         prov_fil = datos_filbi['PROVEEDOR'].unique()
         
         
-    elif periodo_input == "2025":
+    elif cl_periodo_input == "2025":
         df1 = datos_filtrados25
         df2 = datos_fil25
         df3 = datos_moon_25
@@ -392,27 +392,27 @@ with tab2:
 # columnas dashboard
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
-        selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="instituto_abasto")
-        abastecimiento = abasto_options[selected_abasto]
+        hi_selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="instituto_abasto")
+        hi_abastecimiento = abasto_options[hi_selected_abasto]
     with col2:    
-        selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="instituto_type")
-        ty = type_options[selected_type]
+        hi_selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="instituto_type")
+        hi_ty = type_options[hi_selected_type]
     with col3:   
-        clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="instituto_clave")
-        cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
+        hi_clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="instituto_clave")
+        hi_cl = [hi_clave_input] if hi_clave_input != "TODAS LAS CLAVES" else claves_unicas
     with col4:
-        selected_instituto = st.selectbox("Ingrese el Instituto:", list(instituto_options.keys()), key="demanda_instituto")
-        inst = instituto_options[selected_instituto]
+        hi_selected_instituto = st.selectbox("Ingrese el Instituto:", list(instituto_options.keys()), key="demanda_instituto")
+        inst = instituto_options[hi_selected_instituto]
     with col5:
-        periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="instituto_periodo")
+        hi_periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="instituto_periodo")
       # Filtrar datos
 
-    if periodo_input == "BIANUAL":
+    if hi_periodo_input == "BIANUAL":
         hi1T = "CANTIDADES BIANUAL"
         hi2T = "IMPORTE BIANUAL"
         i = 2
         name = inst+"_25-26"
-    elif periodo_input == "2025":
+    elif hi_periodo_input == "2025":
         hi1T = "CANTIDADES 2025"
         hi2T = "IMPORTE 2025"
         i = 0
@@ -426,7 +426,7 @@ with tab2:
     hi2 = nonz(rooted(filtrar_inst(inst).iloc[:,[i]]))
     hi3 =nonz(rooted(calcular_monto(filtrar_inst(inst).iloc[:,[i]])))
     hi4 = hi2
-    hi5 = hi4[(hi4['CLAVES'].isin(cl)) & (hi4['CLAVES'].isin(abastecimiento)) & (hi4['CLAVES'].isin(ty))]
+    hi5 = hi4[(hi4['CLAVES'].isin(hi_cl)) & (hi4['CLAVES'].isin(hi_abastecimiento)) & (hi4['CLAVES'].isin(hi_ty))]
     
     qclaves_hi = hi5['CLAVES'].nunique()
     claves_hi = hi5['CLAVES'].unique()
@@ -464,13 +464,13 @@ with tab3:
     col1, col2, col3, col4, col5 = st.columns(5)
     with col1:
         p_selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="proveedor_abasto")
-        p_abastecimiento = abasto_options[selected_abasto]
+        p_abastecimiento = p_abasto_options[p_selected_abasto]
     with col2:    
         p_selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="proveedor_type")
-        p_ty = type_options[selected_type]
+        p_ty = p_type_options[p_selected_type]
     with col3:   
         p_clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="proveedor_clave")
-        p_cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
+        p_cl = [p_clave_input] if p_clave_input != "TODAS LAS CLAVES" else claves_unicas
     with col4:
         p_selected_proveedor = st.selectbox("Ingrese el Proveedor:", list(proveedor_options.keys()), key="adj_proveedor")
       #  p_inst = instituto_options[selected_instituto]            borrar linea
