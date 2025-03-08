@@ -443,10 +443,11 @@ with tab2:
 #        claves_hi = datos_filbi['CLAVES'].unique()
  #       qprov_hi = datos_fil26['PROVEEDOR'].nunique()
   #      prov_hi = datos_fil26['PROVEEDOR'].unique()
-    hi4=hi2
+    
     hi1 = grouping(nonz(rooted(filtrar_inst(inst).iloc[:,[i]])))
     hi2 = nonz(rooted(filtrar_inst(inst).iloc[:,[i]]))
     hi3 =nonz(rooted(calcular_monto(filtrar_inst(inst).iloc[:,[i]])))
+    hi4 = hi2
     hi5 = hi4[(hi4['CLAVES'].isin(cl)) & (hi4['CLAVES'].isin(abastecimiento)) & (hi4['CLAVES'].isin(ty))]
     
     qclaves_hi = hi5['CLAVES'].nunique()
