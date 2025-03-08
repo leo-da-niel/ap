@@ -146,9 +146,7 @@ def VvisualMonto(data_inst, data):
         text=data_top10[data_inst].astype(str),
         textposition="top center"
     ))
-    #fic = fig.update_traces(mode='markers+lines+text', text=data_top10[data_inst], textposition="top center")
     return fig
-    #return fic
 
 warnings.filterwarnings("ignore", category=FutureWarning, module="altair")
 def make_donut(input_response, input_text, input_color):
