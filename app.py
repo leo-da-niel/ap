@@ -295,30 +295,30 @@ with tab1:
 
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="resumen_abasto")
-        abastecimiento = abasto_options[selected_abasto]
+        c_selected_abasto = st.selectbox("Ingrese tipo de abastecimiento", list(abasto_options.keys()), key="resumen_abasto")
+        c_abastecimiento = abasto_options[c_selected_abasto]
     with col2:
-        selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="resumen_type")
-        ty = type_options[selected_type]
+        c_selected_type = st.selectbox("Ingrese el tipo de clave", list(type_options.keys()), key="resumen_type")
+        c_ty = type_options[c_selected_type]
 
     #col3, col4 = st.columns(2)
     with col3:
-        clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="resumen_clave")
-        cl = [clave_input] if clave_input != "TODAS LAS CLAVES" else claves_unicas
+        c_clave_input = st.selectbox("Ingrese la clave", list(clave_options.keys()), key="resumen_clave")
+        c_cl = [c_clave_input] if c_clave_input != "TODAS LAS CLAVES" else claves_unicas
     with col4:
         periodo_input = st.selectbox("Ingrese el periodo de adjudicación", list(periodo_options.keys()), key="resumen_periodo")
     # Filtrar datos
-    datos_filtradosbi = grnzbitrooted[(grnzbitrooted['CLAVES'].isin(cl)) & (grnzbitrooted['CLAVES'].isin(abastecimiento)) & (grnzbitrooted['CLAVES'].isin(ty))]
-    datos_filtrados25 = grnzrooted25[(grnzrooted25['CLAVES'].isin(cl)) & (grnzrooted25['CLAVES'].isin(abastecimiento)) & (grnzrooted25['CLAVES'].isin(ty))]
-    datos_filtrados26 = grnzrooted26[(grnzrooted26['CLAVES'].isin(cl)) & (grnzrooted26['CLAVES'].isin(abastecimiento)) & (grnzrooted26['CLAVES'].isin(ty))]
+    datos_filtradosbi = grnzbitrooted[(grnzbitrooted['CLAVES'].isin(c_cl)) & (grnzbitrooted['CLAVES'].isin(c_abastecimiento)) & (grnzbitrooted['CLAVES'].isin(c_ty))]
+    datos_filtrados25 = grnzrooted25[(grnzrooted25['CLAVES'].isin(c_cl)) & (grnzrooted25['CLAVES'].isin(c_abastecimiento)) & (grnzrooted25['CLAVES'].isin(c_ty))]
+    datos_filtrados26 = grnzrooted26[(grnzrooted26['CLAVES'].isin(c_cl)) & (grnzrooted26['CLAVES'].isin(c_abastecimiento)) & (grnzrooted26['CLAVES'].isin(c_ty))]
     
-    datos_filbi = nzbitrooted[(nzbitrooted['CLAVES'].isin(cl)) & (nzbitrooted['CLAVES'].isin(abastecimiento)) & (nzbitrooted['CLAVES'].isin(ty))]
-    datos_fil25 = nzrooted25[(nzrooted25['CLAVES'].isin(cl)) & (nzrooted25['CLAVES'].isin(abastecimiento)) & (nzrooted25['CLAVES'].isin(ty))]
-    datos_fil26 = nzrooted26[(nzrooted26['CLAVES'].isin(cl)) & (nzrooted26['CLAVES'].isin(abastecimiento)) & (nzrooted26['CLAVES'].isin(ty))]
+    datos_filbi = nzbitrooted[(nzbitrooted['CLAVES'].isin(c_cl)) & (nzbitrooted['CLAVES'].isin(c_abastecimiento)) & (nzbitrooted['CLAVES'].isin(c_ty))]
+    datos_fil25 = nzrooted25[(nzrooted25['CLAVES'].isin(c_cl)) & (nzrooted25['CLAVES'].isin(c_abastecimiento)) & (nzrooted25['CLAVES'].isin(c_ty))]
+    datos_fil26 = nzrooted26[(nzrooted26['CLAVES'].isin(c_cl)) & (nzrooted26['CLAVES'].isin(c_abastecimiento)) & (nzrooted26['CLAVES'].isin(c_ty))]
 
-    datos_moon_bi = nzbitmoonrooted[(nzbitmoonrooted['CLAVES'].isin(cl)) & (nzbitmoonrooted['CLAVES'].isin(abastecimiento)) & (nzbitmoonrooted['CLAVES'].isin(ty))]
-    datos_moon_25 = nzrooted2025[(nzrooted2025['CLAVES'].isin(cl)) & (nzrooted2025['CLAVES'].isin(abastecimiento)) & (nzrooted2025['CLAVES'].isin(ty))]
-    datos_moon_26 = nzrooted2026[(nzrooted2026['CLAVES'].isin(cl)) & (nzrooted2026['CLAVES'].isin(abastecimiento)) & (nzrooted2026['CLAVES'].isin(ty))]
+    datos_moon_bi = nzbitmoonrooted[(nzbitmoonrooted['CLAVES'].isin(c_cl)) & (nzbitmoonrooted['CLAVES'].isin(c_abastecimiento)) & (nzbitmoonrooted['CLAVES'].isin(c_ty))]
+    datos_moon_25 = nzrooted2025[(nzrooted2025['CLAVES'].isin(c_cl)) & (nzrooted2025['CLAVES'].isin(c_abastecimiento)) & (nzrooted2025['CLAVES'].isin(c_ty))]
+    datos_moon_26 = nzrooted2026[(nzrooted2026['CLAVES'].isin(c_cl)) & (nzrooted2026['CLAVES'].isin(c_abastecimiento)) & (nzrooted2026['CLAVES'].isin(c_ty))]
     
     if periodo_input == "BIANUAL":
         df1 = datos_filtradosbi
