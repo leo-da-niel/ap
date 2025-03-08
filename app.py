@@ -420,13 +420,6 @@ with tab2:
    # datos_moon_bi = nzbitmoonrooted[(nzbitmoonrooted['CLAVES'].isin(cl)) & (nzbitmoonrooted['CLAVES'].isin(abastecimiento)) & (nzbitmoonrooted['CLAVES'].isin(ty))]
 #    datos_moon_25 = nzrooted2025[(nzrooted2025['CLAVES'].isin(cl)) & (nzrooted2025['CLAVES'].isin(abastecimiento)) & (nzrooted2025['CLAVES'].isin(ty))]
  #   datos_moon_26 = nzrooted2026[(nzrooted2026['CLAVES'].isin(cl)) & (nzrooted2026['CLAVES'].isin(abastecimiento)) & (nzrooted2026['CLAVES'].isin(ty))]
-    
-
-    
-    hi1 = grouping(nonz(rooted(filtrar_inst(inst).iloc[:,[i]])))
-    hi2 = nonz(rooted(filtrar_inst(inst).iloc[:,[i]]))
-    hi3 =nonz(rooted(calcular_monto(filtrar_inst(inst).iloc[:,[i]])))
-    hi5 = hi4[(hi4['CLAVES'].isin(cl)) & (hi4['CLAVES'].isin(abastecimiento)) & (hi4['CLAVES'].isin(ty))]
 
     if periodo_input == "BIANUAL":
         hi1T = "CANTIDADES BIANUAL"
@@ -451,6 +444,11 @@ with tab2:
  #       qprov_hi = datos_fil26['PROVEEDOR'].nunique()
   #      prov_hi = datos_fil26['PROVEEDOR'].unique()
     hi4=hi2
+    hi1 = grouping(nonz(rooted(filtrar_inst(inst).iloc[:,[i]])))
+    hi2 = nonz(rooted(filtrar_inst(inst).iloc[:,[i]]))
+    hi3 =nonz(rooted(calcular_monto(filtrar_inst(inst).iloc[:,[i]])))
+    hi5 = hi4[(hi4['CLAVES'].isin(cl)) & (hi4['CLAVES'].isin(abastecimiento)) & (hi4['CLAVES'].isin(ty))]
+    
     qclaves_hi = hi5['CLAVES'].nunique()
     claves_hi = hi5['CLAVES'].unique()
     qprov_hi = hi5['PROVEEDOR'].nunique()
