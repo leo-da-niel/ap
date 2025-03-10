@@ -188,18 +188,20 @@ def make_donut(input_response, input_text, input_color):
     ).properties(width=130, height=130)
     return plot_bg + plot + text
 
+import plotly.express as px
+
 def cloud_bubbles_prov(data):
     tentop = tentop_prov(data)
     
-    factor = 50000  # Dividir por mil millones para reducir el tamaño
+    factor = 50000  # Factor para reducir el tamaño de los puntos
     tentop['IMPORTE_REDUCIDO'] = tentop['IMPORTE'] / factor
     
     fig = px.scatter(
         tentop,
         x='PROVEEDOR',
         y='CUENTA',
-        size='IMPORTE_REDUCIDO',
-        color='IMPORTE_REDUCIDO',
+        size='IMPORTE_REDUCIDO',  # Tamaño de los puntos basado en el valor reducido
+        color='IMPORTE',  # Color basado en el valor original
         hover_name='PROVEEDOR',
         size_max=60,
         color_continuous_scale='Viridis',
@@ -211,7 +213,7 @@ def cloud_bubbles_prov(data):
         yaxis_title='Cantidad de claves adjudicadas',
         coloraxis_colorbar=dict(
             title='IMPORTE TOTAL ($)',
-            tickformat=',.0f'
+            tickformat=',.0f'  # Formato de los valores en la barra de colores
         )
     )
     
